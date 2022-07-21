@@ -1,0 +1,56 @@
+{
+  "name": "omunga-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsnd --transpile-only  --respawn --ignore-watch node_modules  src/main.ts",
+    "typeorm": "tsnd ./node_modules/typeorm/cli.js",
+    "lint": "eslint . --ext .ts",
+    "test": "jest --watch --coverage",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OMUNGA/back-end.git"
+  },
+  "keywords": [
+    "omunga",
+    "plataforma",
+    "cda",
+    "angoDev",
+    "Dev'AO"
+  ],
+  "author": "Omunga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OMUNGA/back-end/issues"
+  },
+  "homepage": "https://github.com/OMUNGA/back-end#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@types/cors": "^2.8.12",
+    "husky": "^8.0.1"
+  },
+  "hooks": {
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+  },
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/typescript": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7",
+    "eslint": "^8.20.0",
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "prettier": "^2.7.1",
+    "ts-jest": "^28.0.7",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsc": "^2.0.4",
+    "typeorm": "^0.3.7",
+    "typescript": "^4.7.4"
+  }
+}
