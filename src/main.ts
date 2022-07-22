@@ -3,3 +3,4 @@ function main() {
 }
 
 console.log(main())
+console.log("App running...")
