@@ -11,13 +11,7 @@ describe("User unit tests", () => {
         }
 
         const user = new User(userProps,"");
-        expect(user.Props).toStrictEqual({
-            ...userProps,
-            _id: "",
-            phone:0,
-            bio:"",
-            photo:""
-        })
+        expect(user.Props.lastName).toBe("Afonso")
     })
 
     it("should change firstName None", () => {
