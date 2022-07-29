@@ -1,4 +1,4 @@
-name: ci-ebizno
+name: ci-omunga
 
 on:
   pull_request:
