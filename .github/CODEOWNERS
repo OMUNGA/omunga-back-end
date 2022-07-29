@@ -1,0 +1,4 @@
+*.go @Paulo-Lopes-Estevao
+*.yaml @Paulo-Lopes-Estevao
+.github/* @Paulo-Lopes-Estevao
+.github/ @Paulo-Lopes-Estevao
