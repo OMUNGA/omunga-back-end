@@ -16,6 +16,7 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       - run: yarn test 
+      - run: echo ${{ secrets.SONAR_TOKEN }}
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
