@@ -16,5 +16,4 @@ export interface OutputCreateUserDto {
   phone: number;
   bio: string;
   photo: string;
-  password: string;
 }
