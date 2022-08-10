@@ -1,5 +1,4 @@
 import UserFactory from 'adapter/users/rest/factory/user.factory';
-import ErrorsApp from 'domain/errors/errorsApp';
 import UserRepositoryInterface from 'domain/users/repository/user-repository.interface';
 import {
 	InputCreateUserDto,
@@ -13,7 +12,8 @@ export default class CreateUserUseCases {
         const alreadyUser = await this.userRepository.findyByEmail(input.email)
 
         if(alreadyUser){
-            throw new ErrorsApp("Usário já existe")
+					//  por enquanto depois irei substituir por uma class de erro personalisado
+            throw new Error("Este usuario ja existe")
         }
 
 		const user = UserFactory.createUser(input);
@@ -27,6 +27,7 @@ export default class CreateUserUseCases {
 			email: user.Props.email,
 			bio: user.Props.bio || '',
 			phone: user.Props.phone || 0,
+			password: user.Props.password || '',
 			photo: user.Props.photo || '',
 		};
 	}
