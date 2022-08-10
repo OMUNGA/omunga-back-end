@@ -1,4 +1,4 @@
-import { User, UserProps } from "domain/users/entities/user";
+import { User, UserProps } from "../entities/user";
 import { v4 as uuid } from "uuid";
 
 
