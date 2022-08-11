@@ -1,11 +1,11 @@
-import CreateUserUseCases from '../../../../../usecases/user/create/create.user.usecase';
+import CreateUserUseCases from '../../../../usecases/user/create/create.user.usecase';
 import {
 	Controller,
 	HttpRequest,
 	HttpResponse,
 	Ok,
 	serverError,
-} from '../../presenter/contracts';
+} from '../presenter/contracts';
 
 export class CreateUserControllers implements Controller {
 	constructor(private readonly createUserUseCases: CreateUserUseCases) {}
