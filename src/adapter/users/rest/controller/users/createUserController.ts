@@ -1,4 +1,4 @@
-import CreateUserUseCases from '../../../../../usecases/users/createUsers';
+import CreateUserUseCases from '../../../../../usecases/user/create/create.user.usecase';
 import {
 	Controller,
 	HttpRequest,

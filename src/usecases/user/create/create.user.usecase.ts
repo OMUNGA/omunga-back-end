@@ -1,9 +1,9 @@
-import UserFactory from "../../domain/users/factory/user.factory";
-import UserRepositoryInterface from "../../domain/users/repository/user-repository.interface";
-import { InputCreateUserDto, OutputCreateUserDto } from "./dtos/create-user-dto";
+import UserFactory from "../../../domain/users/factory/user.factory";
+import UserRepositoryInterface from "../../../domain/users/repository/user-repository.interface";
+import { InputCreateUserDto, OutputCreateUserDto } from "./create.user.dto";
 
 
-export default class CreateUserUseCases {
+export default class CreateUserUseCase {
 	constructor(private readonly userRepository: UserRepositoryInterface) {}
 
 	async execute(input: InputCreateUserDto): Promise<OutputCreateUserDto> {
