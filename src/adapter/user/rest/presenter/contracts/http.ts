@@ -9,7 +9,7 @@ export interface HttpRequest {
 }
 
 
-export const Ok = (data: any): HttpResponse => ({
+export const CREATED = (data: any): HttpResponse => ({
 	statusCode: 201,
 	data,
 });
