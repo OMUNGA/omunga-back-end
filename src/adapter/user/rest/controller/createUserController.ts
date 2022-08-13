@@ -1,13 +1,13 @@
 import CreateUserUseCases from '../../../../usecases/user/create/create.user.usecase';
 import {
-	Controller,
+	IController,
 	HttpRequest,
 	HttpResponse,
 	CREATED,
 	serverError,
 } from '../presenter/contracts';
 
-export class CreateUserController implements Controller {
+export class CreateUserController implements IController {
 	constructor(private readonly createUserUseCases: CreateUserUseCases) {}
 	async handle(httpRequest: HttpRequest): Promise<HttpResponse<HttpResponse>> {
 		try {

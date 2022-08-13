@@ -3,9 +3,10 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import 'express-async-errors';
+import router from 'main/routes/routes';
 
 
-const app = express();
+const app = router;
 
 app.use(cors());
 app.use(express.json());
