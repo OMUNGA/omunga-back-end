@@ -1,15 +1,21 @@
 import 'reflect-metadata';
 import 'dotenv/config';
-import cors from 'cors';
-import express from 'express';
 import 'express-async-errors';
-import router from 'main/routes/routes';
+import Router from '../../main/routes/router';
+import Middleware from '../../main/config/middleware/index';
+import express from 'express';
 
 
-const app = router;
+const app = express();
 
-app.use(cors());
-app.use(express.json());
+const middleware = Middleware
+const router = Router
+
+middleware.security(app)
+middleware.session(app)
+router.documentationAPI(app)
+router.routes(app)
+
 
 app.get('/', (req, res) => {
   return res.send('Omunga Api - Desenvolvimento: Omunga team 2022');
