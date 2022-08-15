@@ -1,18 +1,23 @@
 import express, { IRouter } from "express";
 import { IController } from "../presenter/contracts";
 
-export class UserRouter {
-    private route: express.IRouter;
-    private Icontroller: IController;
 
-    constructor(router: IRouter, Icontroller: IController) {
-        this.route = router;
-        this.Icontroller = Icontroller;
-    }
+export function UserRouter(router: IRouter, Icontroller: IController): express.Router {
+    /**
+     * @openapi
+     * /user:
+     *   post:
+     *     tags: [User]
+     *     summary: create User.
+     *     description: A create User!
+     *     responses:
+     *       201:
+     *         description: Returns a mysterious string.
+     */
+    router.post('/user', Icontroller.handle)
 
-    CreatedUser(): express.Router {
-        this.route.post('/user', this.Icontroller.handle)
-        return this.route
-    }
 
+
+    
+    return router
 }
