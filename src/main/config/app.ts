@@ -1,11 +1,13 @@
 import 'reflect-metadata';
 import 'dotenv/config';
 import 'express-async-errors';
-import Router from '../../main/routes/router';
-import Middleware from '../../main/config/middleware/index';
 import express from 'express';
 
+import Router from '../../main/routes/router';
+import Middleware from '../../main/config/middleware/index';
+import createConnection from '../../infra/database/connections'
 
+createConnection()
 const app = express();
 
 const middleware = Middleware
