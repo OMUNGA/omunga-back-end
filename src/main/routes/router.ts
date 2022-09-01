@@ -9,7 +9,7 @@ const userController = FactoryUserCreate();
 const userCreateRouter = UserRouter(router, userController)
 
 
-
+const BASEPATH = process.env.BASE_PATH;
 
 class Router {
 
@@ -32,12 +32,12 @@ class Router {
         };
     
         const swaggerSpec = swaggerJSDoc(options);
-        app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+        app.use(`${BASEPATH}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
       }
 
     public routes(app: express.Application): void {
 
-        app.use("/api", userCreateRouter)
+        app.use(`${BASEPATH}`, userCreateRouter)
 
     }
 }
