@@ -11,8 +11,8 @@ const postgres = {
   username: process.env.POSTGRES_DB_USERNAME,
   password: process.env.POSTGRES_DB_PASSWORD,
   database: process.env.POSTGRES_DB_DATABASE,
-  entities: [`./src/infra/database/typeorm/entities/*{.ts,.js}`],
-  migrations: [`./src/infra/database/typeorm/migrations/*{.ts,.js}`],
+  entities: [`.src/infra/database/typeorm/entities/*.ts`],
+  migrations: [`./src/infra/database/typeorm/migrations/*.ts`],
   cli: {
     migrationsDir: './src/infra/database/typeorm/migrations/',
   },

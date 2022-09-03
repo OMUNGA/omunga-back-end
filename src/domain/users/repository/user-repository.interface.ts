@@ -1,8 +1,8 @@
 import RepositoryInterface from '../../../domain/generics/repository/repository-interface';
-import { User } from '../entities/user';
+import { UserProps } from '../entities/user';
 
 export default interface UserRepositoryInterface
-	extends RepositoryInterface<User> {
+	extends RepositoryInterface<UserProps> {
 	Search(entity: string): Promise<void>;
-	findyByEmail(email: string): Promise<User>;
+	findyByEmail(email: string): Promise<Data>;
 }

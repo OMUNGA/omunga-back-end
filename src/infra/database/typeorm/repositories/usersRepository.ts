@@ -1,19 +1,36 @@
-import { getRepository, Repository } from 'typeorm'
-import { InputCreateUserDto } from 'usecases/user/create/create.user.dto'
-import { Users } from '../entities/user'
+import { UserProps } from 'domain/users/entities/user';
+import UserRepositoryInterface from 'domain/users/repository/user-repository.interface';
+import { getRepository, Repository } from 'typeorm';
+import { Users } from '../entities/user';
 
-export class UsersRepositories {
-  private repository: Repository<Users>
+export class UsersTypeormRepository implements UserRepositoryInterface {
+	private repository: Repository<Users>;
 
-  constructor () {
-    this.repository = getRepository(Users)
-  }
+	constructor() {
+		this.repository = getRepository(Users);
+	}
 
-  async create (data: InputCreateUserDto): Promise<void> {
-    const user = this.repository.create(data)
+	public async create(entity: UserProps): Promise<void> {
+		const user = this.repository.create(entity);
+		await this.repository.save(user);
+	}
 
-    await this.repository.save(user)
-  }
- 
-  
+	public async Search(entity: string): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+
+	public async findyByEmail(email: string): Promise<Data> {
+		const user = await this.repository.findOne({ where: { email } });
+		return user;
+	}
+
+	public async update(entity: UserProps): Promise<void> {
+		throw new Error('Method not implemented.');
+	}
+	public async find(id: string): Promise<UserProps> {
+		throw new Error('Method not implemented.');
+	}
+	public async findAll(): Promise<UserProps[]> {
+		return await this.repository.find();
+	}
 }

@@ -5,7 +5,7 @@ export default async (): Promise<Connection> => {
 
   return createConnection(
     Object.assign(defaultOptions, {
-      host: 'localhost'
+      host: process.env.POSTGRES_DB_HOST
     })
   )
 }
