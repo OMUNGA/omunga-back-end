@@ -16,7 +16,7 @@ export default class CreateUserUseCase {
 
 		const user = UserFactory.createUser(input);
 
-		await this.userRepository.create(user);
+		await this.userRepository.create(user.Props);
 
 		return {
 			id: user.Props._id || '',

@@ -6,11 +6,11 @@ services:
     container_name: database_omunga
     restart: always
     ports:
-      - 5432:5432
+      - "${DB_PORT}:${DB_PORT}"
     environment:
-      - POSTGRES_USER=Docker
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=omunga
+      - POSTGRES_USER=omunga
+      - POSTGRES_PASSWORD=pxoW3sFF2t3gArReSs8L
+      - POSTGRES_DB=database_omunga
     volumes:
       - pgdata:/data/postgres
     network_mode: host
@@ -18,13 +18,14 @@ services:
     build: .
     container_name: omunga_app
     ports:
-      - 3000:3000
+      - "${APP_PORT}:${APP_PORT}"
     restart: always
     command: "yarn dev"
     volumes:
       - .:/usr/app
     network_mode: host
-    
+    depends_on:
+      - database_omunga
 
 
 volumes:
