@@ -1,12 +1,15 @@
 import 'dotenv/config';
 import express from 'express';
-import 'reflect-metadata';
+import 'reflect-metadata'
 
 import Router from '../../main/routes/router';
 import Middleware from '../../main/config/middleware/index';
-import createConnection from '../../infra/database/connections'
+import { Connections } from './../../infra/database/connections';
 
-createConnection()
+
+
+Connections.initialize()
+
 const app = express();
 
 const middleware = Middleware
@@ -18,8 +21,10 @@ router.documentationAPI(app)
 router.routes(app)
 
 
+
 app.get('/', (req, res) => {
   return res.send('Omunga Api - Desenvolvimento: Omunga team 2022');
 });
+
 
 export { app };

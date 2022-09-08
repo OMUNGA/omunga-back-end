@@ -1,11 +1,19 @@
-import { Connection, createConnection, getConnectionOptions } from 'typeorm'
+import 'dotenv/config'
+import 'reflect-metadata'
+import { DataSource } from 'typeorm'
 
-export default async (): Promise<Connection> => {
-  const defaultOptions = await getConnectionOptions()
 
-  return createConnection(
-    Object.assign(defaultOptions, {
-      host: process.env.POSTGRES_DB_HOST
-    })
-  )
-}
+export const Connections = new DataSource({
+	type: 'postgres',
+	host:  'localhost',
+	port: 5432,
+	username: 'omunga',
+	password: 'pxoW3sFF2t3gArReSs8L',
+	database: 'omunga',
+	// entities: [`${__dirname}/infra/database/typeorm/entities/*.{ts,js}`],
+	entities: [`../../../src/infra/database/typeorm/entities/*.{ts,js}`],
+	// migrations: [`${__dirname}/nfra/database/typeorm/migrations/*.{ts,js}`],
+	migrations: [`../../../src/infra/database/typeorm/migrations/*.{ts,js}`],
+})
+
+  
