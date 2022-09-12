@@ -1,13 +1,18 @@
-import { UserProps } from 'domain/users/entities/user';
-import UserRepositoryInterface from 'domain/users/repository/user-repository.interface';
-import { getRepository, Repository } from 'typeorm';
+import { UserProps } from '../../../../domain/users/entities/user';
+import UserRepositoryInterface from '../../../../domain/users/repository/user-repository.interface';
+import { AppDataSource } from '../../../../infra/database/connections';
+import { Repository } from 'typeorm';
 import { Users } from '../entities/user';
 
 export class UsersTypeormRepository implements UserRepositoryInterface {
 	private repository: Repository<Users>;
 
 	constructor() {
-		this.repository = getRepository(Users);
+		this.repository = AppDataSource.getRepository(Users)
+	}
+	
+	findyByEmail(email: string): Promise<Data> {
+		throw new Error('Method not implemented.');
 	}
 
 	public async create(entity: UserProps): Promise<void> {
@@ -19,10 +24,7 @@ export class UsersTypeormRepository implements UserRepositoryInterface {
 		throw new Error('Method not implemented.');
 	}
 
-	public async findyByEmail(email: string): Promise<Data> {
-		const user = await this.repository.findOne({ where: { email } });
-		return user;
-	}
+
 
 	public async update(entity: UserProps): Promise<void> {
 		throw new Error('Method not implemented.');

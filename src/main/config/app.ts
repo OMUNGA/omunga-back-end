@@ -4,18 +4,18 @@ import 'reflect-metadata'
 
 import Router from '../../main/routes/router';
 import Middleware from '../../main/config/middleware/index';
-import { Connections } from './../../infra/database/connections';
+import { AppDataSource } from '../../infra/database/connections';
 
-
-
-Connections.initialize()
+AppDataSource.initialize().then(()=>{
+  console.log("Banco conectado")
+})
 
 const app = express();
 
 const middleware = Middleware
 const router = Router
 
-middleware.security(app)
+middleware.security(app)  
 middleware.session(app)
 router.documentationAPI(app)
 router.routes(app)

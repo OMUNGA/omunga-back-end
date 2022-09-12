@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd --transpile-only  --respawn --ignore-watch node_modules  src/main/server.ts",
+    "dev": "ts-node-dev --transpile-only  --respawn --ignore-watch node_modules ./src/main/server.ts",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/infra/database/connections.ts migration:generate ./src/infra/database/typeorm/migrations/default",
-		"migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
+    "typeorm": "typeorm-ts-node-commonjs -d ./src/infra/database/connections.ts migration:generate ./src/infra/database/typeorm/migrations/",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "lint": "eslint . --ext .ts",
     "test": "jest --coverage",
