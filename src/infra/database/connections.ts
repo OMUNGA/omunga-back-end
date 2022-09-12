@@ -12,4 +12,4 @@ export const AppDataSource =  new DataSource({
 	database: process.env.DB_NAME,
 	entities: [`${__dirname}/infra/database/typeorm/entities/*.{ts,js}`],
 	migrations: [`${__dirname}/nfra/database/typeorm/migrations/*.{ts,js}`],
-})
+}) 
