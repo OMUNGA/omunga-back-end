@@ -2,18 +2,20 @@ version: '3.7'
 
 services:
   database_omunga: 
-    image: postgres
+    image: postgres:9.4
     container_name: database_omunga
+    tty: true
     restart: always
     ports:
       - "${DB_PORT}:${DB_PORT}"
     environment:
-      - POSTGRES_USER=omunga
-      - POSTGRES_PASSWORD=pxoW3sFF2t3gArReSs8L
-      - POSTGRES_DB=database_omunga
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - pgdata:/data/postgres
-    network_mode: host
+    networks:
+      - omunga
   app:
     build: .
     container_name: omunga_app
@@ -21,12 +23,17 @@ services:
       - "${APP_PORT}:${APP_PORT}"
     restart: always
     command: "yarn dev"
+    env_file:
+      - .env
     volumes:
       - .:/usr/app
-    network_mode: host
+    networks:
+      - omunga
     depends_on:
       - database_omunga
 
+networks:
+  omunga: {}
 
 volumes:
   pgdata:
