@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, PrimaryColumn } from 'typeorm';
+import { Column, CreateDateColumn, PrimaryColumn, Entity } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
+@Entity('users')
 export class Users {
 	@PrimaryColumn()
 	readonly _id?: string;
