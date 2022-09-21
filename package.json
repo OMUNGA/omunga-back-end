@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd --transpile-only  --respawn --ignore-watch node_modules  src/main/server.ts",
-    "typeorm": "tsnd ./node_modules/typeorm/cli.js",
+    "dev": "ts-node-dev --transpile-only  --respawn --ignore-watch node_modules ./src/main/server.ts",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/infra/database/connections.ts migration:generate ./src/infra/database/typeorm/migrations/default",
+    "typeorm": "typeorm-ts-node-commonjs -d ./src/infra/database/connections.ts migration:generate ./src/infra/database/typeorm/migrations/",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "lint": "eslint . --ext .ts",
     "test": "jest --coverage",
@@ -74,7 +76,7 @@
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0",
     "tslint": "^6.1.3",
-    "typeorm": "0.2.37",
+    "typeorm": "^0.3.9",
     "typescript": "^4.7.4",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
