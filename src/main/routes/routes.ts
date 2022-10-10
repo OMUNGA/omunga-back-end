@@ -1,13 +1,7 @@
-import { UserRouter } from "adapter/user/rest/router/users.router";
-import express from "express";
-import { FactoryUserCreate } from "main/factory/user.factory";
+import { userRouter } from "../../adapter/user/rest/router/user.router";
+import { Router } from "express";
 
+const routes = Router()
+routes.use("/user", userRouter)
 
-const router = express();
-const userController = FactoryUserCreate();
-const userCreateRouter = new UserRouter(router, userController)
-
-
-router.use("/api", userCreateRouter.CreatedUser)
-
-export default router;
+export default routes

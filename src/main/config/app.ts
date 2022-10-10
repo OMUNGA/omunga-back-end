@@ -2,22 +2,30 @@ import 'dotenv/config';
 import express from 'express';
 import 'reflect-metadata';
 
-import Router from '../../main/routes/router';
 import Middleware from '../../main/config/middleware/index';
-import createConnection from '../../infra/database/connections'
+import {AppDataSource} from '../../infra/database/connections'
+import { setupRoutes } from './routes';
+import routes from '../routes/routes'
 
-createConnection()
+
+AppDataSource.initialize().then(()=>{
+  console.log("Banco de dados conectado!")
+})
+
 const app = express();
+app.use(routes)
 
-const middleware = Middleware
-const router = Router
+// console.log(setupRoutes(app))
 
-middleware.security(app)
-middleware.session(app)
-router.documentationAPI(app)
-router.routes(app)
+// const middleware = Middleware
+// const router = Router
 
+// middleware.security(app)
+// middleware.session(app)
+// router.documentationAPI(app)
+// router.routes(app)
 
+app.use(express.json())
 app.get('/', (req, res) => {
   return res.send('Omunga Api - Desenvolvimento: Omunga team 2022');
 });

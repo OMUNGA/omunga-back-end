@@ -29,6 +29,8 @@ export class User {
             photo: props.photo || ""
         };
         this.passwordEncrypt()
+
+        console.log(this._props)
     }
 
     get Props(): UserProps {
