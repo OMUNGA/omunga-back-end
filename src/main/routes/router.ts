@@ -37,7 +37,7 @@ class Router {
 
     public routes(app: express.Application): void {
 
-        app.use(`${BASEPATH}`, userCreateRouter)
+        app.use(`/create`, userCreateRouter)
 
     }
 }

@@ -1,8 +1,9 @@
-import express, { IRouter } from "express";
+import express, { Router } from "express";
+import { FactoryUserCreate } from "../../../../main/factory/user.factory";
 import { IController } from "../presenter/contracts";
 
 
-export function UserRouter(router: IRouter, Icontroller: IController): express.Router {
+export function UserRouter(router: Router, Icontroller: IController): express.Router {
     /**
      * @openapi
      * /user:
@@ -14,10 +15,9 @@ export function UserRouter(router: IRouter, Icontroller: IController): express.R
      *       201:
      *         description: Returns a mysterious string.
      */
-    router.post('/user', Icontroller.handle)
-
-
+    router.post('/usuario', FactoryUserCreate)
 
     
+
     return router
 }

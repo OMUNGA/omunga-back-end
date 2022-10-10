@@ -7,12 +7,7 @@ export default class CreateUserUseCase {
 	constructor(private readonly userRepository: UserRepositoryInterface) {}
 
 	async execute(input: InputCreateUserDto): Promise<OutputCreateUserDto> {
-        const alreadyUser = await this.userRepository.findyByEmail(input.email)
-
-        if(alreadyUser){
-					//  por enquanto depois irei substituir por uma class de erro personalisado
-            throw new Error("Este usuario ja existe")
-        }
+      console.log("Vindo do DTO",input)
 
 		const user = UserFactory.createUser(input);
 

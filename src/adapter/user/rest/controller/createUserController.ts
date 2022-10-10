@@ -11,7 +11,8 @@ export class CreateUserController implements IController {
 	constructor(private readonly createUserUseCases: CreateUserUseCases) {}
 	async handle(httpRequest: HttpRequest): Promise<HttpResponse<HttpResponse>> {
 		try {
-			const data = httpRequest.body;
+			const data = httpRequest.body
+			console.log(data)
 			await this.createUserUseCases.execute(data);
 			return CREATED(data);
 		} catch (error: any) {
