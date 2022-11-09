@@ -2,27 +2,54 @@
     🧑🏾‍💻
 </p>
 
+# OMUNGA
+## Angolan IT article Platform
 
-  <p align="center">Omunga App Easy to use to be able to write your content</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
+This is a project created with the main objective of encouraging the sharing of content by IT professionals in Angola.
 
+### objective
+Create an API that allows requests
+of users to publish articles, comments, likes, surveys.
 
 ## Description
 
-[Omunga](git+https://github.com/OMUNGA/back-end.git) Project github start
-Easy to use to be able to write your content
+We value good practices in the development of the solution.
+
+It is advisable to use the **Conventional Commits** practice, as this is the only way that the changes can be merged into a built-in hook that blocks commit messages that do not follow this practice. [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+Application developed in javascript language.
+
+We use some concepts for application development.
+
+Pattern implementations to solve typical and repetitive problems.
+
+Integrated SonarCloud in CI/CD pipeline is being used to review automated clean code checks.
+
+## Contributing
+
+For major changes, open a problem first to discuss what you would like to change.
+
+### Codification
+
+> Attention, do not write, change or delete anything in the code from the main branch (default), for any new functionality you must create a new branch 
+
+- To create a new branch run the command `git checkout -b <branch-name>`
+    - To switch from one branch to another existing in your local repository run `git checkout <branch-name>` without `-b`
+
+- Once you have finished coding on the new branch, push it to GitHub with the command `git push -u origin <branch-name>`
+    - After this step, open a pull-request for the main branch and wait for the Admin to analyze and merge the pull-request
+
+> Attention don't forget to test the code because the use of this practice is recurrent in the development because we have a tool that evaluates the code. (TDD)
+
+Omunga Components
+- User
+- Social Network
+- Follow
+- Followers
+- Post
+- Comment
+
+![alt](docs/img/Captura%20de%20ecr%C3%A3%202022-11-09%20113423.png)
 
 ## Installation
 
@@ -30,14 +57,14 @@ Easy to use to be able to write your content
 $ npm install or yarn install
 ```
 
-## Running the app with docker
+### Running the app with docker
   ```bash
 # development
 $ docker-compose up
 ```
 
 
-## Running the app 
+### Running the app 
 
 ```bash
 
@@ -48,7 +75,7 @@ $ npm run dev
 $ yarn dev
 ```
 
-## Test
+### Test
 
 ```bash
 # unit tests
@@ -58,21 +85,21 @@ $ npm run test
 $ npm run test:cov
 ```
 
-## Running the migrations
+### Running the migrations
   ```bash
 # development
 $ yarn migration:run
 
 ```
 
-## Create migration
+### Create migration
   ```bash
 # development
 $ yarn migration:create --name=name_migration
 
 ```
 
-## Revert Migration
+### Revert Migration
   ```bash
 # development
 $ yarn migration:revert
