@@ -49,7 +49,7 @@ Omunga Components
 - Post
 - Comment
 
-![alt](docs/img/Captura%20de%20ecr%C3%A3%202022-11-09%20113423.png)
+![alt](docs/img/Captura%20de%20ecr%C3%A3%202022-11-09%20113950.png)
 
 ## Installation
 
