@@ -4,8 +4,7 @@ import 'reflect-metadata';
 
 import Middleware from '../../main/config/middleware/index';
 import {AppDataSource} from '../../infra/database/connections'
-import { setupRoutes } from './routes';
-import routes from '../routes/routes'
+import DocumentationRouter from '../../../src/main/routes/router'
 
 
 AppDataSource.initialize().then(()=>{
@@ -13,17 +12,13 @@ AppDataSource.initialize().then(()=>{
 })
 
 const app = express();
-app.use(routes)
 
-// console.log(setupRoutes(app))
+const middleware = Middleware
+const router = DocumentationRouter
 
-// const middleware = Middleware
-// const router = Router
-
-// middleware.security(app)
-// middleware.session(app)
-// router.documentationAPI(app)
-// router.routes(app)
+middleware.security(app)
+middleware.session(app)
+router.documentationAPI(app)
 
 app.use(express.json())
 app.get('/', (req, res) => {
