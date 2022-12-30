@@ -9,3 +9,108 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  userID        String          @id @default(uuid())
+  first_name    String
+  last_name     String
+  email         String          @unique
+  phone         Int
+  password      String
+  bio           String
+  photo         String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  deletedAt     Boolean         @default(false)
+  socialNetwork SocialNetwork?
+  posts         Post[]
+  Follower      Followers[]
+  Following     Following[]
+  comment       Comment[]
+  postlike      PostLike[]
+  commentlike   CommentLike[]
+}
+
+model SocialNetwork {
+  socialnetworkID String   @id @default(uuid())
+  facebook        String
+  twitter         String
+  medium          String
+  linkedin        String
+  instagram       String
+  userID          String   @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       Boolean  @default(false)
+  user            User     @relation(fields: [userID], references: [userID])
+}
+
+model Following {
+  userfollowID String   @id @default(uuid())
+  userID       String
+  followingID  String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deletedAt    Boolean  @default(false)
+  user         User     @relation(fields: [userID], references: [userID])
+}
+
+model Followers {
+  userfollowID String   @id @default(uuid())
+  userID       String
+  followersID  String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deletedAt    Boolean  @default(false)
+  user         User     @relation(fields: [userID], references: [userID])
+}
+
+
+model Post {
+  postID    String     @id @default(uuid())
+  title     String
+  content   String
+  published Boolean?   @default(false)
+  userID    String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  deletedAt Boolean    @default(false)
+  comment   Comment[]
+  like      PostLike[]
+  user      User      @relation(fields: [userID], references: [userID])
+}
+
+model Comment {
+  commentID String        @id @default(uuid())
+  postID    String
+  userID    String
+  content   String
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  deletedAt Boolean       @default(false)
+  post      Post          @relation(fields: [postID], references: [postID])
+  user      User         @relation(fields: [userID], references: [userID])
+  like      CommentLike[]
+}
+
+model PostLike {
+  postlikeID String   @id @default(uuid())
+  postID     String
+  userID     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  deletedAt  Boolean  @default(false)
+  post       Post     @relation(fields: [postID], references: [postID])
+  user       User    @relation(fields: [userID], references: [userID])
+}
+
+model CommentLike {
+  commentlikeID String   @id @default(uuid())
+  CommentID     String
+  userID        String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  deletedAt     Boolean  @default(false)
+  comment       Comment  @relation(fields: [CommentID], references: [commentID])
+  user          User    @relation(fields: [userID], references: [userID])
+}
