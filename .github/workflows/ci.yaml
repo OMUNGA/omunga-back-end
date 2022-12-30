@@ -15,7 +15,7 @@ jobs:
           node-version: 16
           cache: 'yarn'
       - run: yarn install
-      - run: yarn test 
+      - run: yarn test:cov 
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
