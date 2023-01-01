@@ -4,14 +4,10 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 
 import { CommentModule } from './comment/comment.module';
-
-@Module({
-  imports: [PrismaModule, CommentModule],
-
 import { PostModule } from './post/post.module';
 
 @Module({
-  imports: [PrismaModule, PostModule],
+  imports: [PrismaModule, CommentModule, PostModule],
 
   controllers: [AppController],
   providers: [AppService],
