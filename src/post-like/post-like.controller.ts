@@ -19,16 +19,16 @@ export class PostLikeController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.postLikeService.findOne(+id);
+    return this.postLikeService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePostLikeDto: UpdatePostLikeDto) {
-    return this.postLikeService.update(+id, updatePostLikeDto);
+    return this.postLikeService.update(id, updatePostLikeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.postLikeService.remove(+id);
+    return this.postLikeService.remove(id);
   }
 }
