@@ -1,17 +1,6 @@
-import {
-  IsNotEmpty,
-  IsEmail,
-  IsNumber,
-  IsDate,
-  IsString,
-  IsUUID,
-} from 'class-validator';
+import { IsNotEmpty, IsEmail, IsNumber, IsString } from 'class-validator';
 
 export class CreateUserDTO {
-  @IsUUID()
-  @IsString()
-  userID?: string;
-
   @IsNotEmpty()
   @IsString()
   first_name: string;
@@ -40,14 +29,4 @@ export class CreateUserDTO {
   @IsNotEmpty()
   @IsString()
   photo: string;
-
-  @IsNotEmpty()
-  @IsDate()
-  createdAt: Date;
-
-  @IsNotEmpty()
-  @IsDate()
-  updatedAt: Date;
-
-  deletedAt: boolean;
 }
