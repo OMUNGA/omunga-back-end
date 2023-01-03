@@ -5,31 +5,33 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 
 @Injectable()
 export class CommentService {
-
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   create(createCommentDto: CreateCommentDto) {
     return this.prisma.comment.create({
-      data: createCommentDto
-    })
+      data: createCommentDto,
+    });
   }
 
   findAll() {
-    return this.prisma.comment.findMany({ where: { deletedAt: false } })
+    return this.prisma.comment.findMany({ where: { deletedAt: false } });
   }
 
   findOne(id: string) {
-    return this.prisma.comment.findUnique({ where: { commentID: id } })
+    return this.prisma.comment.findUnique({ where: { commentID: id } });
   }
 
   update(id: string, updateCommentDto: UpdateCommentDto) {
     return this.prisma.comment.update({
       where: { commentID: id },
-      data: updateCommentDto
+      data: updateCommentDto,
     });
   }
 
   remove(id: string) {
-    return this.prisma.comment.update({ where: { commentID: id }, data: { deletedAt: true } });
+    return this.prisma.comment.update({
+      where: { commentID: id },
+      data: { deletedAt: true },
+    });
   }
 }
