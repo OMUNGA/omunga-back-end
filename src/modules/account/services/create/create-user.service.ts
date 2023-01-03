@@ -7,7 +7,7 @@ export class CreateUserService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createUserDTO: CreateUserDTO) {
-    return this.prisma.comment.create({
+    return this.prisma.user.create({
       data: createUserDTO,
     });
   }
