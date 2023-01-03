@@ -18,6 +18,11 @@ export class PostLikeController {
   }
 
   @Get(':id')
+  findAllLikesOfThePost(@Param('id') id: string) {
+    return this.postLikeService.showAllTheLikesOfThePost(id);
+  }
+
+  @Get(':id')
   findOne(@Param('id') id: string) {
     return this.postLikeService.findOne(id);
   }
