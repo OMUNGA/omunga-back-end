@@ -1,1 +1,4 @@
-export class CreateCommentLikeDto {}
+export class CreateCommentLikeDto {
+    CommentID: string
+    userID: string
+}
