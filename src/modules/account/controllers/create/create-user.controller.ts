@@ -10,7 +10,9 @@ import {
 import { CreateUserDTO } from '../../dtos/Create-user.dto';
 import { CreateUserService } from '../../services/create/create-user.service';
 
-@Controller('api/v1/user')
+const baseURL = process.env.BASE_PATH;
+
+@Controller(`${baseURL}/user`)
 export class CreateUserController {
   constructor(private readonly createUserService: CreateUserService) {}
 

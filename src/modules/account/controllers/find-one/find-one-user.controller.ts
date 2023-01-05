@@ -1,7 +1,9 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { FindOneService } from '../../services/find-one/find-one-user.service';
 
-@Controller('api/v1/user')
+const baseURL = process.env.BASE_PATH;
+
+@Controller(`${baseURL}/user`)
 export class FindOneController {
   constructor(private findOneUserService: FindOneService) {}
 
