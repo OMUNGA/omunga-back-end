@@ -10,6 +10,11 @@ import { UpdateUserService } from './services/update/update-user.service';
 import { UpdateUserController } from './controllers/update/update-user.controller';
 import { FindOneController } from './controllers/find-one/find-one-user.controller';
 import { DeleteUserController } from './controllers/delete/delete-user.controller';
+import { LoginController } from './controllers/login/login.controller';
+import { LoginService } from './services/login/login.service';
+import { LocalStrategy } from './services/jwt-strategy/local-jwt.strategy.service';
+import { JwtStrategy } from './services/jwt-strategy/jwt.strategy.service';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   controllers: [
@@ -18,6 +23,7 @@ import { DeleteUserController } from './controllers/delete/delete-user.controlle
     FindOneController,
     DeleteUserController,
     UpdateUserController,
+    LoginController,
   ],
   providers: [
     CreateUserService,
@@ -25,7 +31,19 @@ import { DeleteUserController } from './controllers/delete/delete-user.controlle
     FindOneService,
     DeleteUserService,
     UpdateUserService,
+    LoginService,
+    LocalStrategy,
+    JwtStrategy,
   ],
-  imports: [PrismaModule],
+  imports: [
+    PrismaModule,
+    JwtModule.register({
+      privateKey: process.env.JWT_KEY,
+      secretOrPrivateKey: process.env.JWT_KEY,
+      signOptions: {
+        expiresIn: '2d',
+      },
+    }),
+  ],
 })
 export class UsersModule {}
