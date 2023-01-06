@@ -5,10 +5,17 @@ import { CommentModule } from './modules/comment/comment.module';
 import { PostModule } from './modules/post/post.module';
 import { PostLikeModule } from './modules/post-like/post-like.module';
 import { UsersModule } from './modules/account/users.module';
+import { SocialNetworkModule } from './modules/social-network/social-network.module';
 
 @Module({
-  imports: [PrismaModule, CommentModule, PostModule, CommentLikeModule,PostLikeModule,UsersModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    PrismaModule,
+    CommentModule,
+    PostModule,
+    CommentLikeModule,
+    PostLikeModule,
+    UsersModule,
+    SocialNetworkModule,
+  ],
 })
 export class AppModule {}
