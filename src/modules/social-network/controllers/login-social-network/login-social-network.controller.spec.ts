@@ -9,7 +9,9 @@ describe('LoginSocialNetworkController', () => {
       controllers: [LoginSocialNetworkController],
     }).compile();
 
-    controller = module.get<LoginSocialNetworkController>(LoginSocialNetworkController);
+    controller = module.get<LoginSocialNetworkController>(
+      LoginSocialNetworkController,
+    );
   });
 
   it('should be defined', () => {
