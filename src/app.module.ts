@@ -5,9 +5,10 @@ import { CommentModule } from './modules/comment/comment.module';
 import { PostModule } from './modules/post/post.module';
 import { PostLikeModule } from './modules/post-like/post-like.module';
 import { UsersModule } from './modules/account/users.module';
+import { FollowersModule } from './modules/followers/followers.module';
 
 @Module({
-  imports: [PrismaModule, CommentModule, PostModule, CommentLikeModule,PostLikeModule,UsersModule],
+  imports: [PrismaModule, CommentModule, PostModule, CommentLikeModule,PostLikeModule,UsersModule, FollowersModule],
   controllers: [AppController],
   providers: [AppService],
 })
