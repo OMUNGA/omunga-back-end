@@ -31,8 +31,5 @@ export class GithubStrategy extends PassportStrategy(Strategy) {
     };
 
     done(null, user);
-    console.log('Token', accessToken);
-    console.log(refrashToken);
-    console.log(user);
   }
 }
