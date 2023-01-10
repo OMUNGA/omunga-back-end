@@ -8,8 +8,14 @@ import { UsersModule } from './modules/account/users.module';
 import { FollowersModule } from './modules/followers/followers.module';
 
 @Module({
-  imports: [PrismaModule, CommentModule, PostModule, CommentLikeModule,PostLikeModule,UsersModule, FollowersModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    PrismaModule,
+    CommentModule,
+    PostModule,
+    CommentLikeModule,
+    PostLikeModule,
+    UsersModule,
+    FollowersModule,
+  ],
 })
 export class AppModule {}
