@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FindAllFollowersService } from './findAll-followers.service';
+import { FollowersService } from './followers.service';
 
 describe('ListallFollowersService', () => {
-  let service: FindAllFollowersService;
+  let service: FollowersService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [FindAllFollowersService],
+      providers: [FollowersService],
     }).compile();
 
-    service = module.get<FindAllFollowersService>(FindAllFollowersService);
+    service = module.get<FollowersService>(FollowersService);
   });
 
   it('should be defined', () => {

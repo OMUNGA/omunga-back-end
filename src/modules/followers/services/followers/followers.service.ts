@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class FindAllFollowersService {
+export class FollowersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll() {

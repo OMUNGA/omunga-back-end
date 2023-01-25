@@ -3,10 +3,10 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { AddFollowersDTO } from '../../dtos/add-follower.dto';
 
 @Injectable()
-export class CreateFollowersService {
+export class AddFollowerService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(followers: AddFollowersDTO) {
+  async follower(followers: AddFollowersDTO) {
     return this.prisma.followers.create({ data: followers });
   }
 }
