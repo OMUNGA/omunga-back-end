@@ -1,37 +1,31 @@
 import { Module } from '@nestjs/common';
-import { CreateFollowersService } from './services/create-followers/create-followers.service';
-import { CreateFollowersController } from './controllers/create-followers/create-followers.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
-import { JwtModule } from '@nestjs/jwt';
-import { FindallFollowersController } from './controllers/findAll-followers/findAll-followers.controller';
-import { FindAllFollowersService } from './services/findAll-followers/findAll-followers.service';
 import { RemoveFollowerService } from './services/remove/remove-followers.service';
 import { RemoveFollowersController } from './controllers/remove/remove-followers.controller';
 import { UpdateFollowersService } from './services/update/update-followers.service';
 import { UpdateFollowersController } from './controllers/update/update.controller';
+import { FollowersService } from './services/followers/followers.service';
+import { FollowersController } from './controllers/followers/followers.controller';
+import { AddFollowerService } from './services/Add-follower/Add-follower.service';
+import { AddFollowerController } from './controllers/Add-follower/Add-follower.controller';
+import { FollowingService } from './services/following/following.service';
+import { FollowingController } from './controllers/following/following.controller';
 
 @Module({
   providers: [
-    CreateFollowersService,
-    FindAllFollowersService,
+    AddFollowerService,
+    FollowersService,
     RemoveFollowerService,
     UpdateFollowersService,
+    FollowingService,
   ],
   controllers: [
-    CreateFollowersController,
-    FindallFollowersController,
+    AddFollowerController,
+    FollowersController,
     RemoveFollowersController,
     UpdateFollowersController,
+    FollowingController,
   ],
-  imports: [
-    PrismaModule,
-    JwtModule.register({
-      privateKey: process.env.JWT_KEY,
-      secretOrPrivateKey: process.env.JWT_KEY,
-      signOptions: {
-        expiresIn: '2d',
-      },
-    }),
-  ],
+  imports: [PrismaModule],
 })
 export class FollowersModule {}
