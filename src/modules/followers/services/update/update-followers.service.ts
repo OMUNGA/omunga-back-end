@@ -8,7 +8,7 @@ export class UpdateFollowersService {
 
   update(id: string, updateFollowers: UpdateFollowersDTO) {
     return this.prisma.followers.update({
-      where: { userfollowID: id },
+      where: { followersID: id },
       data: updateFollowers,
     });
   }

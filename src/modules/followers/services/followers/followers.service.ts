@@ -6,8 +6,13 @@ export class FollowersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll() {
-    return await this.prisma.followers.findMany({
+    const followers = await this.prisma.followers.findMany({
       where: { deletedAt: false },
     });
+    const countFollowers = await this.prisma.followers.count({
+      where: { deletedAt: false },
+    });
+
+    return { followers, countFollowers };
   }
 }

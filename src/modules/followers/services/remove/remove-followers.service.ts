@@ -7,7 +7,7 @@ export class RemoveFollowerService {
 
   remove(id: string) {
     return this.prisma.followers.update({
-      where: { userfollowID: id },
+      where: { followersID: id },
       data: { deletedAt: true },
     });
   }
