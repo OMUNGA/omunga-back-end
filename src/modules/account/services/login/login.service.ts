@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
@@ -22,15 +22,21 @@ export class LoginService {
     };
   }
 
-  async validateUser(data: LoginDTO) {
-    const user = await this.prisma.user.findUnique({
-      where: { email: data.email },
-    });
+  async validateUser({ email, password }: LoginDTO) {
+    try {
+      const user = await this.prisma.user.findFirst({
+        where: { email: email },
+      });
+      if (!user) {
+        throw new UnauthorizedException('Email ou palavra passe errada!');
+      }
+      const isPasswordValid = bcrypt.compareSync(password, user.password);
 
-    const isPasswordValid = bcrypt.compareSync(data.password, user.password);
+      if (!isPasswordValid) return null;
 
-    if (!isPasswordValid) return null;
-
-    return user;
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 }
