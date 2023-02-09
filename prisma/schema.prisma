@@ -24,8 +24,7 @@ model User {
   deletedAt     Boolean        @default(false)
   socialNetwork SocialNetwork?
   posts         Post[]
-  Follower      Followers[]
-  Following     Following[]
+  Follower      Follower[]
   comment       Comment[]
   postlike      PostLike[]
   commentlike   CommentLike[]
@@ -45,24 +44,14 @@ model SocialNetwork {
   user            User     @relation(fields: [userID], references: [userID])
 }
 
-model Following {
-  followingID  String   @id @default(uuid())
-  userID       String
-  userfollowID String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  deletedAt    Boolean  @default(false)
-  user         User     @relation(fields: [userID], references: [userID])
-}
-
-model Followers {
-  followersID  String   @id @default(uuid())
-  userID       String
-  userfollowID String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  deletedAt    Boolean  @default(false)
-  user         User     @relation(fields: [userID], references: [userID])
+model Follower {
+  id             String   @id @default(uuid())
+  userID         String
+  userTofollowID String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  deletedAt      Boolean  @default(false)
+  user           User     @relation(fields: [userID], references: [userID])
 }
 
 model Post {
