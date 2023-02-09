@@ -6,12 +6,12 @@ export class FollowingService {
   constructor(private readonly prisma: PrismaService) {}
 
   async ShowAllUserfollowing(id: string) {
-    return this.prisma.followers.count({
+    return this.prisma.follower.count({
       select: {
         userID: true,
       },
       where: {
-        userfollowID: id,
+        id: id,
         deletedAt: false,
       },
     });
