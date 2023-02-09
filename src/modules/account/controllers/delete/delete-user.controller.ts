@@ -7,9 +7,7 @@ import {
 } from '@nestjs/common';
 import { DeleteUserService } from '../../services/delete/delete-user.service';
 
-const baseURL = process.env.BASE_PATH;
-
-@Controller(`${baseURL}/user`)
+@Controller('user')
 export class DeleteUserController {
   constructor(private deleteUserService: DeleteUserService) {}
 
