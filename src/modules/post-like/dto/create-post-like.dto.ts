@@ -1,4 +1,4 @@
 export class CreatePostLikeDto {
-    postID: string
-    userID: string
+  postID: string;
+  userID: string;
 }
