@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { LoginDTO } from '../../dtos/Login.dto';
 
 @Injectable()
 export class LoginService {
@@ -21,10 +22,12 @@ export class LoginService {
     };
   }
 
-  async validateUser(email: string, password: string) {
-    const user = await this.prisma.user.findUnique({ where: { email: email } });
+  async validateUser(data: LoginDTO) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: data.email },
+    });
 
-    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    const isPasswordValid = bcrypt.compareSync(data.password, user.password);
 
     if (!isPasswordValid) return null;
 

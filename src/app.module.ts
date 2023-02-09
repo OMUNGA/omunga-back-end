@@ -5,7 +5,13 @@ import { CommentModule } from './modules/comment/comment.module';
 import { PostModule } from './modules/post/post.module';
 import { PostLikeModule } from './modules/post-like/post-like.module';
 import { UsersModule } from './modules/account/users.module';
+
 import { FollowersModule } from './modules/followers/followers.module';
+
+import { SocialNetworkModule } from './modules/social-network/social-network.module';
+
+import { PassportModule } from '@nestjs/passport';
+
 
 @Module({
   imports: [
@@ -15,7 +21,12 @@ import { FollowersModule } from './modules/followers/followers.module';
     CommentLikeModule,
     PostLikeModule,
     UsersModule,
+feature/followers
     FollowersModule,
+
+    SocialNetworkModule,
+    PassportModule.register({ session: true }),
+
   ],
 })
 export class AppModule {}
