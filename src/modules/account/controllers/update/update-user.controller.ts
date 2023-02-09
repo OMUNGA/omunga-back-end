@@ -2,9 +2,7 @@ import { Body, Controller, Param, Patch } from '@nestjs/common';
 import { UpdateUserService } from '../../services/update/update-user.service';
 import { UpdateUserDTO } from '../../dtos/Update-user.dto ';
 
-const baseURL = process.env.BASE_PATH;
-
-@Controller(`${baseURL}/user`)
+@Controller(`user`)
 export class UpdateUserController {
   constructor(private updateUserService: UpdateUserService) {}
 
