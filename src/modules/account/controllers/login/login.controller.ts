@@ -11,9 +11,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { LoginService } from '../../services/login/login.service';
 
-const baseURL = process.env.BASE_PATH;
-
-@Controller(`${baseURL}/auth`)
+@Controller('auth')
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
