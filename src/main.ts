@@ -4,14 +4,10 @@ import { AppModule } from './app.module';
 import { config } from './doc';
 import * as session from 'express-session';
 import * as passport from 'passport';
-import { HttpExceptionFilter } from './errors/http-exception.filter';
-import { ErrorsInterceptor } from './errors/errors.interceptor';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalInterceptors(new ErrorsInterceptor());
 
   app.useGlobalPipes(
     new ValidationPipe({
