@@ -1,4 +1,3 @@
-import { AddFollowersDTO } from '../../dtos/add-follower.dto';
 import {
   Body,
   Controller,
@@ -9,6 +8,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AddFollowerService } from '../../services/Add-follower/Add-follower.service';
+import { AddFollowerDTO } from '../../dtos/add-followers.dto';
 
 @Controller('follower')
 export class AddFollowerController {
@@ -17,7 +17,7 @@ export class AddFollowerController {
   @Post()
   @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() followrs: AddFollowersDTO) {
+  create(@Body() followrs: AddFollowerDTO) {
     return this.addFollowerService.follower(followrs);
   }
 }
