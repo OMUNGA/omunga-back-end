@@ -12,7 +12,6 @@ import { SocialNetworkModule } from './modules/social-network/social-network.mod
 
 import { PassportModule } from '@nestjs/passport';
 
-
 @Module({
   imports: [
     PrismaModule,
@@ -21,12 +20,10 @@ import { PassportModule } from '@nestjs/passport';
     CommentLikeModule,
     PostLikeModule,
     UsersModule,
-feature/followers
     FollowersModule,
 
     SocialNetworkModule,
     PassportModule.register({ session: true }),
-
   ],
 })
 export class AppModule {}
