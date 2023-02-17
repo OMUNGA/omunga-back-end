@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/prisma/prisma.module';
 import { CreateUserService } from './services/create/create-user.service';
 import { CreateUserController } from './controllers/create/create-user.controller';
 import { FindAllUserService } from './services/find-all-users/find-all-users.service';
@@ -15,6 +14,11 @@ import { LoginService } from './services/login/login.service';
 import { LocalStrategy } from './services/jwt-strategy/local-jwt.strategy.service';
 import { JwtStrategy } from './services/jwt-strategy/jwt.strategy.service';
 import { JwtModule } from '@nestjs/jwt';
+import { CreateUsersRepository } from './repositories/createUserRepository';
+import { PrismaCreateUserRepository } from './repositories/implementations/PrismaCreateUserRepository';
+import { PrismaModule } from 'src/prisma/prisma.module';
+import { ProfileController } from './controllers/profile/profile.controller';
+import { ProfileService } from './services/profile/profile.service';
 
 @Module({
   controllers: [
@@ -24,6 +28,7 @@ import { JwtModule } from '@nestjs/jwt';
     DeleteUserController,
     UpdateUserController,
     LoginController,
+    ProfileController,
   ],
   providers: [
     CreateUserService,
@@ -31,9 +36,15 @@ import { JwtModule } from '@nestjs/jwt';
     FindOneService,
     DeleteUserService,
     UpdateUserService,
+    ProfileService,
     LoginService,
     LocalStrategy,
     JwtStrategy,
+
+    {
+      provide: CreateUsersRepository,
+      useClass: PrismaCreateUserRepository,
+    },
   ],
   imports: [
     PrismaModule,
