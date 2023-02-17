@@ -1,19 +1,17 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
-import { LoginDTO } from '../../dtos/Login.dto';
+import { CreateUsersRepository } from '../../repositories/createUserRepository';
 
 @Injectable()
 export class LoginService {
   constructor(
     private jwtService: JwtService,
-    private readonly prisma: PrismaService,
+    private readonly userRepository: CreateUsersRepository,
   ) {}
 
   async login(user) {
     const payload = { sub: user.id, email: user.email };
-
     return {
       token: this.jwtService.sign(payload, {
         secret: process.env.JWT_KEY,
@@ -22,11 +20,10 @@ export class LoginService {
     };
   }
 
-  async validateUser({ email, password }: LoginDTO) {
+  async validateUser(email: string, password: string) {
     try {
-      const user = await this.prisma.user.findFirst({
-        where: { email: email },
-      });
+      const user = await this.userRepository.findByEmail(email);
+
       if (!user) {
         throw new UnauthorizedException('Email ou palavra passe errada!');
       }
