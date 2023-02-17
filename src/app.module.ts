@@ -9,19 +9,17 @@ import { UsersModule } from './modules/account/users.module';
 import { FollowersModule } from './modules/followers/followers.module';
 
 import { SocialNetworkModule } from './modules/social-network/social-network.module';
-
 import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
     PrismaModule,
+    UsersModule,
     CommentModule,
     PostModule,
     CommentLikeModule,
     PostLikeModule,
-    UsersModule,
     FollowersModule,
-
     SocialNetworkModule,
     PassportModule.register({ session: true }),
   ],
