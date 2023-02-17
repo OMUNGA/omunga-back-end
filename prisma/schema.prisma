@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,7 +8,7 @@ datasource db {
 }
 
 model User {
-  userID        String         @id @default(uuid())
+  id            String         @id @default(uuid())
   first_name    String
   last_name     String
   email         String         @unique
@@ -22,12 +19,28 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   deletedAt     Boolean        @default(false)
-  socialNetwork SocialNetwork?
-  posts         Post[]
-  Follower      Follower[]
-  comment       Comment[]
-  postlike      PostLike[]
   commentlike   CommentLike[]
+  comment       Comment[]
+  socialNetwork SocialNetwork?
+  postlike      PostLike[]
+  posts         Post[]
+  following     Follower[]     @relation(name: "following")
+  followers     Follower[]     @relation(name: "followers")
+
+  @@map("users")
+}
+
+model Follower {
+  id             String   @id @default(uuid())
+  userID         String
+  userTofollowID String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  deletedAt      Boolean  @default(false)
+  following      User     @relation(name: "following", fields: [userTofollowID], references: [id])
+  followersUser  User     @relation(name: "followers", fields: [userID], references: [id])
+
+  @@map("followers")
 }
 
 model SocialNetwork {
@@ -41,17 +54,9 @@ model SocialNetwork {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   deletedAt       Boolean  @default(false)
-  user            User     @relation(fields: [userID], references: [userID])
-}
+  user            User     @relation(fields: [userID], references: [id])
 
-model Follower {
-  id             String   @id @default(uuid())
-  userID         String
-  userTofollowID String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  deletedAt      Boolean  @default(false)
-  user           User     @relation(fields: [userID], references: [userID])
+  @@map("focialNetworks")
 }
 
 model Post {
@@ -65,7 +70,9 @@ model Post {
   deletedAt Boolean    @default(false)
   comment   Comment[]
   like      PostLike[]
-  user      User       @relation(fields: [userID], references: [userID])
+  user      User       @relation(fields: [userID], references: [id])
+
+  @@map("posts")
 }
 
 model Comment {
@@ -76,9 +83,11 @@ model Comment {
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   deletedAt Boolean       @default(false)
-  post      Post          @relation(fields: [postID], references: [postID])
-  user      User          @relation(fields: [userID], references: [userID])
   like      CommentLike[]
+  post      Post          @relation(fields: [postID], references: [postID])
+  user      User          @relation(fields: [userID], references: [id])
+
+  @@map("comments")
 }
 
 model PostLike {
@@ -89,7 +98,9 @@ model PostLike {
   updatedAt  DateTime @updatedAt
   deletedAt  Boolean  @default(false)
   post       Post     @relation(fields: [postID], references: [postID])
-  user       User     @relation(fields: [userID], references: [userID])
+  user       User     @relation(fields: [userID], references: [id])
+
+  @@map("postlikes")
 }
 
 model CommentLike {
@@ -100,5 +111,7 @@ model CommentLike {
   updatedAt     DateTime @updatedAt
   deletedAt     Boolean  @default(false)
   comment       Comment  @relation(fields: [CommentID], references: [commentID])
-  user          User     @relation(fields: [userID], references: [userID])
+  user          User     @relation(fields: [userID], references: [id])
+
+  @@map("commentLikes")
 }
