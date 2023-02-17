@@ -1,14 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateUsersRepository } from '../../repositories/createUserRepository';
 
 @Injectable()
 export class DeleteUserService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly userRepository: CreateUsersRepository) {}
 
   async remove(id: string) {
-    return this.prisma.user.update({
-      where: { userID: id },
-      data: { deletedAt: true },
-    });
+    try {
+      const user = await this.userRepository.findById(id);
+      if (!user) {
+        throw new NotFoundException('Ups, usuário não encontrado.');
+      }
+      return this.userRepository.remove({ id });
+    } catch (error) {
+      throw error;
+    }
   }
 }

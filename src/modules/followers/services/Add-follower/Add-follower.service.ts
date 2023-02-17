@@ -1,13 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../../../prisma/prisma.service';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AddFollowerDTO } from '../../dtos/add-followers.dto';
+import { FollowersRepository } from '../../repositories/followersRepositories';
+import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
 
 @Injectable()
 export class AddFollowerService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private followerRepo: FollowersRepository,
+    private userRepo: CreateUsersRepository,
+  ) {}
 
-  async follower(followerDTO: AddFollowerDTO) {
-    const followrs = await this.prisma.followers.create({ data: followerDTO });
-    return followrs;
+  async followUser(userId: string, data: AddFollowerDTO) {
+    try {
+      const user = await this.userRepo.findById(userId);
+      if (!user) {
+        throw new UnauthorizedException('Ups, precisa estar logado!');
+      }
+      const followrs = await this.followerRepo.followUser(userId, data);
+      return followrs;
+    } catch (error) {
+      throw error;
+    }
   }
 }

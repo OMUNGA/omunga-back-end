@@ -14,7 +14,7 @@ import { CreateUserService } from '../../services/create/create-user.service';
 export class CreateUserController {
   constructor(private readonly createUserService: CreateUserService) {}
 
-  @Post('create')
+  @Post('/create')
   @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createUserDTO: CreateUserDTO) {

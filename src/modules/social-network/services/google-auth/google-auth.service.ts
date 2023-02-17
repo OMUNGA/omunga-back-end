@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class GoogleAuthService {
@@ -7,7 +7,7 @@ export class GoogleAuthService {
 
   async googleLogin(req: any) {
     if (!req.user) {
-      return 'No user from google';
+      throw new NotFoundException('Ups, nenhum usuário encontrado do Google');
     }
     return {
       message: 'User info from google',

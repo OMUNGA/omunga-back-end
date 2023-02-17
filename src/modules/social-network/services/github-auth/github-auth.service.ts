@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class GithubAuthService {
@@ -7,7 +7,7 @@ export class GithubAuthService {
 
   async githubLogin(req: any) {
     if (!req.user) {
-      return 'No user from github';
+      throw new NotFoundException('Ups, nenhum usuário encontrado do github');
     }
     return {
       message: 'User info from github',

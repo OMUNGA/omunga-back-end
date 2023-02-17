@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateUsersRepository } from '../../repositories/createUserRepository';
 
 @Injectable()
 export class FindAllUserService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private userRepository: CreateUsersRepository) {}
 
   async findAll() {
-    return this.prisma.user.findMany({ where: { deletedAt: false } });
+    try {
+      return this.userRepository.findAll();
+    } catch (error) {
+      throw error;
+    }
   }
 }

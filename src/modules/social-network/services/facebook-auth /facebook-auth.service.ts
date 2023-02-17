@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class FacebookAuthService {
@@ -7,7 +7,7 @@ export class FacebookAuthService {
 
   async facebookLogin(req: any) {
     if (!req.user) {
-      return 'No user from Facebook';
+      throw new NotFoundException('Ups, nenhum usuário encontrado do facebook');
     }
     return {
       message: 'User info from Facebook',

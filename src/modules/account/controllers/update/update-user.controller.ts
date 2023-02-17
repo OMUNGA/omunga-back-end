@@ -1,7 +1,9 @@
-import { Body, Controller, Param, Patch } from '@nestjs/common';
+import { Body, Controller, Param, Patch, UseGuards } from '@nestjs/common';
 import { UpdateUserService } from '../../services/update/update-user.service';
 import { UpdateUserDTO } from '../../dtos/Update-user.dto ';
+import { AuthUserGuard } from '../../guards/auth.guard';
 
+@UseGuards(AuthUserGuard)
 @Controller(`user`)
 export class UpdateUserController {
   constructor(private updateUserService: UpdateUserService) {}

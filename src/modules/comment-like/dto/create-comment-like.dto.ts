@@ -1,4 +1,9 @@
+import { IsNotEmpty } from 'class-validator';
+
 export class CreateCommentLikeDto {
-    CommentID: string
-    userID: string
+  @IsNotEmpty()
+  CommentID: string;
+
+  @IsNotEmpty()
+  userID: string;
 }

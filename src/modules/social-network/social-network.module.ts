@@ -14,6 +14,9 @@ import { FacebookStrategy } from './Strategy/facebook.strategy.service';
 import { FacebookAuthController } from './controllers/facebook-auth /facebook-auth.controller';
 import { FacebookAuthService } from './services/facebook-auth /facebook-auth.service';
 
+import { PrismaCreateUserRepository } from '../account/repositories/implementations/PrismaCreateUserRepository';
+import { CreateUsersRepository } from '../account/repositories/createUserRepository';
+
 @Module({
   providers: [
     GoogleAuthService,
@@ -25,6 +28,10 @@ import { FacebookAuthService } from './services/facebook-auth /facebook-auth.ser
     GithubAuthService,
     FacebookStrategy,
     FacebookAuthService,
+    {
+      provide: CreateUsersRepository,
+      useClass: PrismaCreateUserRepository,
+    },
   ],
   controllers: [
     GoogleAuthController,
@@ -35,9 +42,8 @@ import { FacebookAuthService } from './services/facebook-auth /facebook-auth.ser
     PrismaModule,
     JwtModule.register({
       privateKey: process.env.JWT_KEY,
-      secretOrPrivateKey: process.env.JWT_KEY,
       signOptions: {
-        expiresIn: '2d',
+        expiresIn: '30d',
       },
     }),
   ],
