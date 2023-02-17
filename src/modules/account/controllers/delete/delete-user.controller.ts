@@ -4,9 +4,12 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import { DeleteUserService } from '../../services/delete/delete-user.service';
+import { AuthUserGuard } from '../../guards/auth.guard';
 
+@UseGuards(AuthUserGuard)
 @Controller('user')
 export class DeleteUserController {
   constructor(private deleteUserService: DeleteUserService) {}
