@@ -5,5 +5,5 @@ export class AddFollowerDTO {
   @IsString()
   @IsString()
   userIdToFollow: string;
-  userId: string;
+  // userId: string;
 }
