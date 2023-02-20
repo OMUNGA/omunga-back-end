@@ -1,9 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import { FindAllUserService } from '../../../../modules/account/services/find-all-users/find-all-users.service';
+import { FindAllCommentService } from '../../services/listAll/findAll-comment.service';
 
 @Controller('comments')
 export class FindAllCommentController {
-  constructor(private readonly commentService: FindAllUserService) {}
+  constructor(private readonly commentService: FindAllCommentService) {}
 
   @Get()
   findAll() {

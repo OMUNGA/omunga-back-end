@@ -10,7 +10,7 @@ export class showAllTheLikesPostLikeService {
     try {
       return this.postLikeRepo.showAllTheLikes(id);
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }

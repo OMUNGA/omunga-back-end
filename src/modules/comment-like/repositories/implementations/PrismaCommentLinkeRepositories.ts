@@ -7,8 +7,10 @@ export class PrismaCommentLikeRepository implements CommentLikesRepository {
   constructor(private prisma: PrismaService) {}
   async create(data: CreateCommentLikeDto): Promise<CommentLike> {
     const like = await this.prisma.commentLike.create({
-      data: data,
-      include: { comment: true },
+      data: {
+        CommentID: data.CommentID,
+        userID: data.userID,
+      },
     });
     return like;
   }

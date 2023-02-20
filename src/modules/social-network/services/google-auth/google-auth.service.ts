@@ -6,12 +6,16 @@ export class GoogleAuthService {
   constructor(private readonly primas: PrismaService) {}
 
   async googleLogin(req: any) {
-    if (!req.user) {
-      throw new NotFoundException('Ups, nenhum usuário encontrado do Google');
+    try {
+      if (!req.user) {
+        throw new NotFoundException('Ups, nenhum usuário encontrado do Google');
+      }
+      return {
+        message: 'User info from google',
+        user: req.user,
+      };
+    } catch (error) {
+      return { error: error.message };
     }
-    return {
-      message: 'User info from google',
-      user: req.user,
-    };
   }
 }

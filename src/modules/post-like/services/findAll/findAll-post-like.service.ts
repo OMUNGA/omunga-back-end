@@ -10,7 +10,7 @@ export class FindAllPostLikeService {
     try {
       return this.postlikeRepo.findAll();
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }

@@ -6,6 +6,10 @@ export class FindOneCommentService {
   constructor(private readonly commentRepo: CommentsRepository) {}
 
   async findOne(id: string) {
-    return this.commentRepo.findOne(id);
+    try {
+      return this.commentRepo.findOne(id);
+    } catch (error) {
+      return { error: error.message };
+    }
   }
 }

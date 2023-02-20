@@ -6,10 +6,14 @@ export class RemoveCommentService {
   constructor(private readonly commentRepo: CommentsRepository) {}
 
   async remove(id: string) {
-    const comment = await this.commentRepo.findOne(id);
-    if (!comment) {
-      throw new NotFoundException('Ups, comentário não encontrado');
+    try {
+      const comment = await this.commentRepo.findOne(id);
+      if (!comment) {
+        throw new NotFoundException('Ups, comentário não encontrado');
+      }
+      return this.commentRepo.remove(id);
+    } catch (error) {
+      return { error: error.message };
     }
-    return this.commentRepo.remove(id);
   }
 }

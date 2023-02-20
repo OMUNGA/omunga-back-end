@@ -10,7 +10,7 @@ export class CreatePostLikeService {
     try {
       return this.postlikeRepo.create(createPostLikeDto);
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }

@@ -7,7 +7,11 @@ export class CreateCommentService {
   constructor(private readonly commentRepo: CommentsRepository) {}
 
   async create(createCommentDto: CreateCommentDto) {
-    const comment = await this.commentRepo.create(createCommentDto);
-    return comment;
+    try {
+      const comment = await this.commentRepo.create(createCommentDto);
+      return comment;
+    } catch (error) {
+      return { error: error.message };
+    }
   }
 }

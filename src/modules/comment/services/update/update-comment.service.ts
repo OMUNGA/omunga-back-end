@@ -8,11 +8,15 @@ export class UpdateCommentService {
   constructor(private readonly commentRepo: CommentsRepository) {}
 
   async update(id: string, updateCommentDto: UpdateCommentDto) {
-    const comment = await this.commentRepo.findOne(id);
+    try {
+      const comment = await this.commentRepo.findOne(id);
 
-    if (!comment) {
-      throw new NotFoundException('Ups, comentário não encontrado!');
+      if (!comment) {
+        throw new NotFoundException('Ups, comentário não encontrado!');
+      }
+      return await this.commentRepo.update(id, updateCommentDto);
+    } catch (error) {
+      return { error: error.message };
     }
-    return await this.commentRepo.update(id, updateCommentDto);
   }
 }

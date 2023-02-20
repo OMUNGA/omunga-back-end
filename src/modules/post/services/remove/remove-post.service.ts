@@ -10,7 +10,7 @@ export class RemovePostService {
     try {
       return this.postRepo.remove(id);
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }

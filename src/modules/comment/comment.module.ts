@@ -7,7 +7,6 @@ import { RemoveCommentController } from './controllers/remove/remove-comment.con
 import { UpdateCommentController } from './controllers/update/update-comment.controller';
 import { CreateCommentService } from './services/create/create-comment.service';
 
-import { FindAllUserService } from '../account/services/find-all-users/find-all-users.service';
 import { UpdateCommentService } from './services/update/update-comment.service';
 import { RemoveCommentService } from './services/remove/remove-comment.service';
 import { CommentsRepository } from './repositories/CommentsRepositories';
@@ -15,7 +14,7 @@ import { prismaCommentsRepository } from './repositories/implementations/PrismaC
 import { CreateUsersRepository } from '../account/repositories/createUserRepository';
 import { PrismaCreateUserRepository } from '../account/repositories/implementations/PrismaCreateUserRepository';
 import { FindOneCommentService } from './services/findOne/findOne-comment.service';
-import { FindOneService } from '../account/services/find-one/find-one-user.service';
+import { FindAllCommentService } from './services/listAll/findAll-comment.service';
 
 @Module({
   controllers: [
@@ -28,10 +27,9 @@ import { FindOneService } from '../account/services/find-one/find-one-user.servi
   providers: [
     CreateCommentService,
     FindOneCommentService,
-    FindAllUserService,
+    FindAllCommentService,
     UpdateCommentService,
     RemoveCommentService,
-    FindOneService,
 
     {
       provide: CommentsRepository,
