@@ -10,7 +10,7 @@ export class RemovePostLikeService {
     try {
       return this.postLike.remove(id);
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }
