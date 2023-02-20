@@ -8,11 +8,7 @@ export class CreatePostDto {
   @IsNotEmpty()
   content: string;
 
-  @IsBoolean()
-  @IsNotEmpty()
   published?: boolean;
 
-  @IsString()
-  @IsNotEmpty()
   userID: string;
 }
