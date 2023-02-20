@@ -11,7 +11,7 @@ export class UpdatePostLikeService {
     try {
       return this.postLike.update(id, data);
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }
