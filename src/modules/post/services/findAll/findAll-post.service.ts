@@ -9,7 +9,7 @@ export class FindAllPostService {
     try {
       return this.postRepo.findAll();
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }
