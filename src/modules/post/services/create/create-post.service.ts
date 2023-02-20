@@ -20,9 +20,14 @@ export class CreatePostService {
     }
 
     try {
-      return this.postRepo.create(createPostDto);
+      return this.postRepo.create({
+        title: createPostDto.title,
+        content: createPostDto.content,
+        userID: createPostDto.userID,
+        published: true,
+      });
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }
