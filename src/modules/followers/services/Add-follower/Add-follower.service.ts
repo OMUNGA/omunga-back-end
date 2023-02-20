@@ -19,7 +19,7 @@ export class AddFollowerService {
       const followrs = await this.followerRepo.followUser(userId, data);
       return followrs;
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }
