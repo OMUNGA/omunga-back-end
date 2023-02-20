@@ -6,12 +6,16 @@ export class GithubAuthService {
   constructor(private readonly primas: PrismaService) {}
 
   async githubLogin(req: any) {
-    if (!req.user) {
-      throw new NotFoundException('Ups, nenhum usuário encontrado do github');
+    try {
+      if (!req.user) {
+        throw new NotFoundException('Ups, nenhum usuário encontrado do github');
+      }
+      return {
+        message: 'User info from github',
+        user: req.user,
+      };
+    } catch (error) {
+      return { error: error.message };
     }
-    return {
-      message: 'User info from github',
-      user: req.user,
-    };
   }
 }
