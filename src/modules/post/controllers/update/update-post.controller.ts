@@ -1,4 +1,12 @@
-import { Controller, Body, Patch, Param, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Body,
+  Patch,
+  Param,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { UpdatePostService } from '../../services/update/update-post.service';
 import { UpdatePostDto } from '../../dtos/update-post.dto';
 import { AuthUserGuard } from '../../../../modules/account/guards/auth.guard';
@@ -9,6 +17,7 @@ export class UpdatePostController {
   constructor(private readonly postService: UpdatePostService) {}
 
   @Patch(':id')
+  @UsePipes(ValidationPipe)
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postService.update(id, updatePostDto);
   }
