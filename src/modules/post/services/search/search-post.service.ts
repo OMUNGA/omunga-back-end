@@ -9,7 +9,7 @@ export class SearchPostService {
     try {
       await this.postRepo.searchPost(searchPost);
     } catch (error) {
-      throw error;
+      return { error: error.message };
     }
   }
 }
