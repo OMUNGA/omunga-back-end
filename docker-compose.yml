@@ -5,12 +5,12 @@ services:
       context: .
       target: development
     env_file:
-        - .env
+      - .env
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
     volumes:
       - .:/usr/src/app
-      - ./usr/src/app/node_modules
+      - /usr/src/app/node_modules
     command: npm run start:dev
     ports:
       - 3000:3000
