@@ -27,7 +27,7 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 
-COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node --from=development /usr/src/app/node_modules /usr/src/app/node_modules
 
 COPY --chown=node:node . .
 
@@ -37,7 +37,7 @@ RUN npm run build
 # Set NODE_ENV environment variable
 ENV NODE_ENV production
 
-RUN npm install --force
+RUN npm install 
 RUN npm ci --only=production && npm cache clean --force
 
 USER node
@@ -49,8 +49,9 @@ USER node
 FROM node:18-alpine As production
 
 # Copy the bundled code from the build stage to the production image
-COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+COPY --chown=node:node --from=development /usr/src/app/node_modules /usr/src/app/node_modules
+
+COPY --chown=node:node --from=build /usr/src/app/dist  /usr/src/app/dist
 
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]
