@@ -81,5 +81,5 @@ Nest is [MIT licensed](LICENSE).
 
 
 ## Faça parte da nossa comunidade no discord
-https://discord.gg/9RkXCnGD
+https://discord.gg/yxm9F6nc
 
