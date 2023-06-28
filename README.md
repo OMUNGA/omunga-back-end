@@ -26,6 +26,12 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Contribuição
+> Antes de abrir uma issue ou pull request, verifique o documentos de contribuição do projeto.
+
+Por favor leia [CONTRIBUTING.md](https://github.com/OMUNGA/omunga-back-end/blob/develop/CONTRIBUTING.md) 
+para detalhes sobre o nosso código de conduta, e o processo para submeter pedidos de pull.
+
 ## Installation
 
 ```bash
