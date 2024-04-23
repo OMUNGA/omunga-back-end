@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PostLikeRepository } from '../../repositories/postLikeRepositories';
+import { messages } from 'shared/errorsMessages';
 
 @Injectable()
 export class showAllTheLikesPostLikeService {
@@ -10,7 +11,7 @@ export class showAllTheLikesPostLikeService {
     try {
       return this.postLikeRepo.showAllTheLikes(id);
     } catch (error) {
-      return { error: error.message };
+      throw new Error(messages.InternalServerError);
     }
   }
 }

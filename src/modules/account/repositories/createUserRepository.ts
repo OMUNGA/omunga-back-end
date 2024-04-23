@@ -1,14 +1,14 @@
-import { User } from '@prisma/client';
 import { CreateUserDTO } from '../dtos/Create-user.dto';
 import { UpdateUserDTO } from '../dtos/Update-user.dto ';
-import { ProfileDTO } from '../dtos/profile.dto';
+import { ProfileOutput } from '../dtos/profile.dto';
+import { Users } from '../entities/user';
 
 export abstract class CreateUsersRepository {
-  abstract create(userDto: CreateUserDTO): Promise<User>;
-  abstract findByEmail(email: string): Promise<User>;
-  abstract findById(id: string): Promise<User>;
-  abstract remove({ id }: { id: string }): Promise<User>;
-  abstract findAll(): Promise<User[]>;
-  abstract update(id: string, data: UpdateUserDTO): Promise<User>;
-  abstract profile(userId: string): Promise<ProfileDTO>;
+  abstract create(userDto: CreateUserDTO): Promise<Users>;
+  abstract findByEmail(email: string): Promise<Users>;
+  abstract findById(id: string): Promise<Users>;
+  abstract remove({ id }: { id: string }): Promise<Users>;
+  abstract findAll(): Promise<Users[]>;
+  abstract update(data: UpdateUserDTO): Promise<Users>;
+  abstract profile(userId: string): Promise<ProfileOutput>;
 }

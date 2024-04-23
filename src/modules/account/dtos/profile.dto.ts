@@ -1,7 +1,15 @@
-import { Follower, User } from '@prisma/client';
+import { ObjectType, Field } from '@nestjs/graphql';
+import { Users } from '../entities/user';
+import { Followers } from 'src/modules/followers/entities/followers';
 
-export type ProfileDTO = {
-  user: User;
-  followers: Follower[];
-  following: Follower[];
-};
+@ObjectType()
+export class ProfileOutput {
+  @Field()
+  user: Users;
+
+  @Field(() => [Followers])
+  followers: Followers[];
+
+  @Field(() => [Followers]) 
+  following: Followers[];
+}

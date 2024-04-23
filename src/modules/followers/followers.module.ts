@@ -2,25 +2,31 @@ import { Module } from '@nestjs/common';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 import { AddFollowerService } from './services/Add-follower/Add-follower.service';
-import { AddFollowerController } from './controllers/Add-follower/Add-follower.controller';
 import { FollowingService } from './services/following/following.service';
-import { FollowingController } from './controllers/following/following.controller';
 import { FollowersRepository } from './repositories/followersRepositories';
 import { PrismaFollowersRepository } from './repositories/implementations/PrismaFollowersRepository';
-import { UnfollowUserController } from './controllers/UnfollowerUser/Unfollower.controller';
 import { UnFollowerService } from './services/unFollower/Unfollower.service';
-import { ShowMyFollowerController } from './controllers/ShowMyfollowers/showMyfollowers.controller';
-import { ShowMyFollowersService } from './services/ShowMyfollowers/showMyfollowers.service';
 import { CreateUsersRepository } from '../account/repositories/createUserRepository';
 import { PrismaCreateUserRepository } from '../account/repositories/implementations/PrismaCreateUserRepository';
+import { AddFollowerResolver } from './resolvers/Add-follower/Add-follower.resolver';
+import { GetFollowingResolver } from './resolvers/following/get-following.resolver';
+import { UnfollowUserResolver } from './resolvers/UnfollowerUser/Unfollower.resolver';
+import { GetFollowersService } from './services/ShowMyfollowers/getfollowers.service';
+import { GetFollowersResolver } from './resolvers/ShowMyfollowers/getfollowers.resolver';
 
 @Module({
   providers: [
     AddFollowerService,
-    ShowMyFollowersService,
+    GetFollowersService,
     UnFollowerService,
     FollowingService,
 
+
+    AddFollowerResolver,
+    GetFollowingResolver,
+    UnfollowUserResolver,
+    GetFollowersResolver,
+    
     {
       provide: FollowersRepository,
       useClass: PrismaFollowersRepository,
@@ -30,12 +36,7 @@ import { PrismaCreateUserRepository } from '../account/repositories/implementati
       useClass: PrismaCreateUserRepository,
     },
   ],
-  controllers: [
-    AddFollowerController,
-    ShowMyFollowerController,
-    UnfollowUserController,
-    FollowingController,
-  ],
+  controllers: [],
   imports: [PrismaModule],
 })
 export class FollowersModule {}

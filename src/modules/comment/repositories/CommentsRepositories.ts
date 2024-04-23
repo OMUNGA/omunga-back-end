@@ -1,11 +1,11 @@
-import { Comment } from '@prisma/client';
 import { UpdateCommentDto } from '../dto/update-comment.dto';
 import { CreateCommentDto } from '../dto/create-comment.dto';
+import { Comments } from '../entities/comment.entity';
 
 export abstract class CommentsRepository {
-  abstract create(data: CreateCommentDto): Promise<Comment>;
-  abstract findOne(id: string): Promise<Comment>;
-  abstract remove(id: string): Promise<void>;
-  abstract findAll(): Promise<Comment[]>;
-  abstract update(id: string, data: UpdateCommentDto): Promise<Comment>;
+  abstract create(data: CreateCommentDto): Promise<Comments>;
+  abstract findOne(id: string): Promise<Comments>;
+  abstract remove(id: string): Promise<Comments>;
+  abstract findAll(postID: string): Promise<Comments[]>;
+  abstract update(data: UpdateCommentDto): Promise<Comments>;
 }

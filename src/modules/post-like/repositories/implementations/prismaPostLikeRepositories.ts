@@ -1,48 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { PostLikeRepository } from '../postLikeRepositories';
-import { PostLike } from '@prisma/client';
 import { CreatePostLikeDto } from '../../dtos/create-post-like.dto';
 import { UpdatePostLikeDto } from '../../dtos/update-post-like.dto';
-import { PrismaService } from '../../../../prisma/prisma.service';
+import { PostLikes } from '../../entities/post-like.entity';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PrismaPostLikeRepository implements PostLikeRepository {
   constructor(private prisma: PrismaService) {}
-  async create(postLikeDTO: CreatePostLikeDto): Promise<void> {
-    await this.prisma.postLike.create({
+  async create(postLikeDTO: CreatePostLikeDto): Promise<PostLikes> {
+    const postLiked = await this.prisma.postLike.create({
       data: postLikeDTO,
     });
+
+    return postLiked
   }
-  async findAll(): Promise<PostLike[]> {
+  async findAll(): Promise<PostLikes[]> {
     return await this.prisma.postLike.findMany({ where: { deletedAt: false } });
   }
-  async showAllTheLikes(id: string) {
+  async showAllTheLikes(id: string): Promise<number> {
     return await this.prisma.postLike.count({
-      select: {
-        userID: true,
-      },
       where: {
         postID: id,
         deletedAt: false,
       },
     });
   }
-  async findOne(id: string): Promise<PostLike> {
+  async findOne(id: string): Promise<PostLikes> {
     return await this.prisma.postLike.findUnique({ where: { postlikeID: id } });
   }
   async update(
     id: string,
     updatePostLikeDto: UpdatePostLikeDto,
-  ): Promise<PostLike> {
+  ): Promise<PostLikes> {
     return await this.prisma.postLike.update({
       where: { postlikeID: id },
       data: updatePostLikeDto,
     });
   }
-  async remove(id: string): Promise<void> {
-    await this.prisma.postLike.update({
+  async remove(id: string): Promise<PostLikes> {
+   return await this.prisma.postLike.delete({
       where: { postlikeID: id },
-      data: { deletedAt: true },
     });
   }
 }

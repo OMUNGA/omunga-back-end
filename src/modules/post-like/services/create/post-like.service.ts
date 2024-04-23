@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PostLikeRepository } from '../../repositories/postLikeRepositories';
 import { CreatePostLikeDto } from '../../dtos/create-post-like.dto';
+import { messages } from 'shared/errorsMessages';
+import { PostLikes } from '../../entities/post-like.entity';
 
 @Injectable()
 export class CreatePostLikeService {
@@ -8,9 +10,10 @@ export class CreatePostLikeService {
 
   async create(createPostLikeDto: CreatePostLikeDto) {
     try {
-      return this.postlikeRepo.create(createPostLikeDto);
+      return await this.postlikeRepo.create(createPostLikeDto);
+     
     } catch (error) {
-      return { error: error.message };
+      throw new Error(messages.InternalServerError)
     }
   }
 }

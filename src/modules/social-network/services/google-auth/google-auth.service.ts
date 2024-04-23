@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../../../prisma/prisma.service';
+import { messages } from 'shared/errorsMessages';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class GoogleAuthService {
@@ -15,7 +16,7 @@ export class GoogleAuthService {
         user: req.user,
       };
     } catch (error) {
-      return { error: error.message };
+       throw new Error(messages.InternalServerError);
     }
   }
 }

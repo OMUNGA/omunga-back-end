@@ -1,17 +1,25 @@
+import { Field, InputType } from "@nestjs/graphql";
+
+@InputType()
 export class UpdateUserDTO {
+  @Field()
   userID?: string;
 
-  first_name: string;
+  @Field()
+  name: string;
 
-  last_name: string;
-
+  @Field()
+  username: string;
+  @Field()
   email: string;
 
-  phone: number;
+  @Field()
+  phone: string;
 
+  @Field()
   password: string;
 
+  @Field()
   bio: string;
 
-  photo: string;
 }

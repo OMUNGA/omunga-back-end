@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCommentLikeDto } from '../../dto/create-comment-like.dto';
 import { CommentLikesRepository } from '../../repositories/commentLikeRepositories';
 import { CommentsRepository } from '../../../../modules/comment/repositories/CommentsRepositories';
+import { messages } from 'shared/errorsMessages';
 
 @Injectable()
 export class CreateCommentLikeService {
@@ -10,7 +11,6 @@ export class CreateCommentLikeService {
     private commentRepo: CommentsRepository,
   ) {}
   async create(createCommentLikeDto: CreateCommentLikeDto) {
-    try {
       const findComment = await this.commentRepo.findOne(
         createCommentLikeDto.CommentID,
       );
@@ -19,12 +19,10 @@ export class CreateCommentLikeService {
         throw new NotFoundException('Ups, comentário não encontrado');
       }
 
-      const commentLike = await this.commentLikeRepo.create(
-        createCommentLikeDto,
-      );
+      const commentLike = await this.commentLikeRepo.create({
+        CommentID: createCommentLikeDto.CommentID,
+        userID:  createCommentLikeDto.userID
+      })
       return commentLike;
-    } catch (error) {
-      throw error;
-    }
   }
 }

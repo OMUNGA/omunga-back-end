@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
+import { messages } from 'shared/errorsMessages';
 
 @Injectable()
 export class FindOneService {
@@ -14,7 +15,7 @@ export class FindOneService {
       }
       return this.userRepository.findById(id);
     } catch (error) {
-      throw error;
+      throw new Error(messages.InternalServerError);
     }
   }
 }

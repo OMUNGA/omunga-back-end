@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PostRepository } from '../../repositories/postRepositories';
+import { messages } from 'shared/errorsMessages';
 
 @Injectable()
 export class RemovePostService {
@@ -10,7 +11,7 @@ export class RemovePostService {
     try {
       return this.postRepo.remove(id);
     } catch (error) {
-      return { error: error.message };
+       throw new Error(messages.InternalServerError);
     }
   }
 }

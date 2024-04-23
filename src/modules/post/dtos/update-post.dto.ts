@@ -1,13 +1,16 @@
-import { IsString } from 'class-validator';
+import { Field, InputType } from '@nestjs/graphql';
 
+@InputType()
 export class UpdatePostDto {
-  @IsString()
-  title?: string;
 
-  @IsString()
-  content?: string;
+  @Field({nullable: true})
+  title: string;
 
+
+  @Field({nullable: true})
+  content: string;
+
+  @Field({nullable: true})
   published?: boolean;
 
-  userID?: string;
 }
