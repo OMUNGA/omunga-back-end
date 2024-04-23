@@ -1,0 +1,218 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @extends on INTERFACE | OBJECT
+
+directive @external on FIELD_DEFINITION | OBJECT
+
+directive @key(fields: String!) on INTERFACE | OBJECT
+
+directive @provides(fields: String!) on FIELD_DEFINITION
+
+directive @requires(fields: String!) on FIELD_DEFINITION
+
+type CommentLikes {
+  CommentID: String!
+  commentlikeID: String!
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  updatedAt: DateTime!
+  userID: String!
+}
+
+type CommentResponse {
+  commentID: String!
+  content: String!
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  postID: String!
+  updatedAt: DateTime!
+  user: Users!
+  userID: String!
+}
+
+type Comments {
+  commentID: String!
+  content: String!
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  postID: String!
+  updatedAt: DateTime!
+  userID: String!
+}
+
+input CreateCommentDto {
+  content: String!
+  postID: String!
+  userID: String
+}
+
+input CreateCommentLikeDto {
+  CommentID: String!
+  userID: String
+}
+
+input CreatePostDto {
+  content: String!
+  published: Boolean
+  title: String!
+  userID: String
+}
+
+input CreatePostLikeDto {
+  postID: String!
+  userID: String
+}
+
+input CreateUserDTO {
+  bio: String!
+  email: String!
+  name: String!
+  password: String!
+  phone: String!
+  username: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input FollowerDTO {
+  userID: String
+  userIdToFollow: String!
+}
+
+type Followers {
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  id: String!
+  updatedAt: DateTime!
+  userID: String!
+  userTofollowID: String!
+}
+
+input LoginDTO {
+  email: String!
+  password: String!
+}
+
+type LoginOutput {
+  expiresIn: DateTime!
+  token: String!
+  user: Users!
+}
+
+type Mutation {
+  CreateComment(createCommentDto: CreateCommentDto!): CommentResponse!
+  CreatePostLike(createPostLikeDto: CreatePostLikeDto!): PostLikes!
+  LikeComment(CommentLikeDto: CreateCommentLikeDto!): CommentLikes!
+  createPost(data: CreatePostDto!): PostsOutput!
+  followUser(data: FollowerDTO!): Followers!
+  removeComment(id: String!): Comments!
+  removeCommentLike(commentLikeID: String!): CommentLikes!
+  removePostt(id: String!): Posts!
+  removePosttLike(id: String!): PostLikes!
+  removeUser(id: String!): UserOutput!
+  searchPost(searchPost: String!): Posts!
+  sigIn(data: LoginDTO!): LoginOutput!
+  signup(data: CreateUserDTO!): UserOutput!
+  unfollowUser(data: FollowerDTO!): String
+  updateComment(data: UpdateCommentDto!): CommentResponse!
+  updatePost(data: UpdatePostDto!, id: String!): Posts!
+}
+
+type PostLikes {
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  postID: String!
+  postlikeID: String!
+  updatedAt: DateTime!
+  userID: String
+}
+
+type Posts {
+  content: String!
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  postID: String!
+  published: Boolean
+  title: String!
+  updatedAt: DateTime!
+  userID: String
+}
+
+type PostsOutput {
+  comments: [Comments!]
+  content: String!
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  postID: String!
+  postlikes: [PostLikes!]
+  published: Boolean
+  title: String!
+  updatedAt: DateTime!
+  user: Users
+}
+
+type ProfileOutput {
+  followers: [Followers!]!
+  following: [Followers!]!
+  user: Users!
+}
+
+type Query {
+  FindAllPosts: [PostsOutput!]!
+  FindOneComment(id: String!): CommentResponse!
+  FindOnePost(id: String!): PostsOutput!
+  FindOneUser(id: String!): UserOutput!
+  GetFollowing(id: String!): Followers!
+  ProfileUser: ProfileOutput!
+  ShowPostAllPostLike(id: String!): Float!
+  findAllCommentLikes(commentID: String!): [CommentLikes!]!
+  findAllComments(postID: String!): [CommentResponse!]!
+  findAllUsers: [UserOutput!]!
+  getFollowers(id: String!): [Followers!]!
+}
+
+input UpdateCommentDto {
+  commentID: String!
+  content: String
+  userID: String
+}
+
+input UpdatePostDto {
+  content: String
+  published: Boolean
+  title: String
+}
+
+type UserOutput {
+  bio: String!
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  email: String!
+  followers: Float!
+  followings: Float!
+  id: String!
+  name: String!
+  phone: Float!
+  photo: String
+  updatedAt: DateTime!
+  username: String!
+}
+
+type Users {
+  bio: String!
+  createdAt: DateTime!
+  deletedAt: Boolean!
+  email: String!
+  id: String!
+  name: String!
+  password: String!
+  phone: String!
+  photo: String
+  updatedAt: DateTime!
+  username: String!
+}
