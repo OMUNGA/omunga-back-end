@@ -11,13 +11,13 @@ datasource db {
 
 model User {
   id            String         @id @default(uuid())
-  first_name    String
-  last_name     String
+  name          String
+  username      String
   email         String         @unique
-  phone         Int
+  phone         String
   password      String
   bio           String
-  photo         String
+  photo         String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   deletedAt     Boolean        @default(false)
@@ -26,21 +26,19 @@ model User {
   socialNetwork SocialNetwork?
   postlike      PostLike[]
   posts         Post[]
-  following     Follower[]     @relation(name: "following")
-  followers     Follower[]     @relation(name: "followers")
+  Follower      Follower[]
 
   @@map("users")
 }
 
 model Follower {
   id             String   @id @default(uuid())
-  userID         String
   userTofollowID String
+  userID         String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   deletedAt      Boolean  @default(false)
-  following      User     @relation(name: "following", fields: [userTofollowID], references: [id])
-  followersUser  User     @relation(name: "followers", fields: [userID], references: [id])
+  user           User     @relation(fields: [userID], references: [id])
 
   @@map("followers")
 }
@@ -70,24 +68,24 @@ model Post {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   deletedAt Boolean    @default(false)
-  comment   Comment[]
-  like      PostLike[]
   user      User       @relation(fields: [userID], references: [id])
+  comment   Comment[]
+  PostLike  PostLike[]
 
   @@map("posts")
 }
 
 model Comment {
-  commentID String        @id @default(uuid())
-  postID    String
-  userID    String
-  content   String
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  deletedAt Boolean       @default(false)
-  like      CommentLike[]
-  post      Post          @relation(fields: [postID], references: [postID])
-  user      User          @relation(fields: [userID], references: [id])
+  commentID   String        @id @default(uuid())
+  postID      String
+  userID      String
+  content     String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   Boolean       @default(false)
+  post        Post          @relation(fields: [postID], references: [postID])
+  user        User          @relation(fields: [userID], references: [id])
+  CommentLike CommentLike[]
 
   @@map("comments")
 }
@@ -99,8 +97,8 @@ model PostLike {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   deletedAt  Boolean  @default(false)
-  post       Post     @relation(fields: [postID], references: [postID])
-  user       User     @relation(fields: [userID], references: [id])
+  post       Post     @relation(fields: [postID], references: [postID], onDelete: Cascade)
+  user       User     @relation(fields: [userID], references: [id], onDelete: Cascade)
 
   @@map("postlikes")
 }
