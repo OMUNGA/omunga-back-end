@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { CommentsRepository } from '../../repositories/CommentsRepositories';
 import { UpdateCommentDto } from '../../dto/update-comment.dto';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class UpdateCommentService {

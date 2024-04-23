@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CommentLikesRepository } from '../../repositories/commentLikeRepositories';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class FindAllCommentLikeService {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PostRepository } from '../../repositories/postRepositories';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class RemovePostService {

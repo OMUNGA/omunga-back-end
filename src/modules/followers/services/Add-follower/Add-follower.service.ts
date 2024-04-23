@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { FollowerDTO } from '../../dtos/add-followers.dto';
 import { FollowersRepository } from '../../repositories/followersRepositories';
 import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
-import { messages } from 'shared/errorsMessages';
+import { messages } from './../../../../../shared/errorsMessages';
 
 @Injectable()
 export class AddFollowerService {

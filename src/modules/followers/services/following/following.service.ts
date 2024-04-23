@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUsersRepository } from 'src/modules/account/repositories/createUserRepository';
 import { FollowersRepository } from '../../repositories/followersRepositories';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class FollowingService {

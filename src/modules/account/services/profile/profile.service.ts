@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
 import { ProfileOutput } from '../../dtos/profile.dto';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class ProfileService {

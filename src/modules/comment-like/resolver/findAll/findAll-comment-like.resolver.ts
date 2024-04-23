@@ -1,7 +1,7 @@
 import { FindAllCommentLikeService } from '../../services/findAll/findAll-comment-like.service';
 import { CommentLikes } from '../../entities/comment-like.entity';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Resolver('comment-likes')
 export class FindAllCommentLikeResolver {

@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PostRepository } from '../../repositories/postRepositories';
 import { CreatePostDto } from '../../dtos/create-post.dto';
 import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class CreatePostService {

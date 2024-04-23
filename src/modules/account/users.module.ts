@@ -10,7 +10,7 @@ import { JwtStrategy } from './services/jwt-strategy/jwt.strategy.service';
 import { JwtModule } from '@nestjs/jwt';
 import { CreateUsersRepository } from './repositories/createUserRepository';
 import { PrismaCreateUserRepository } from './repositories/implementations/PrismaCreateUserRepository';
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaModule } from '../../prisma/prisma.module';
 import { ProfileService } from './services/profile/profile.service';
 import { CreateUserResolver } from './resolvers/create/create-user.resolver';
 import { FindAlllUsersResolver } from './resolvers/find-all-users/find-all-users.resolver';

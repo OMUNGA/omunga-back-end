@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
 import { LoginDTO, LoginOutput } from '../../dtos/Login.dto';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 import * as bcrypt from 'bcrypt';
 import { Users } from '../../entities/user';
 

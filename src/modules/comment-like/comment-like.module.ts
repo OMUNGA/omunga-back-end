@@ -9,7 +9,7 @@ import { prismaCommentsRepository } from '../comment/repositories/implementation
 import { CreateCommentLikeResolver } from './resolver/create/create-comment-like.resolver';
 import { FindAllCommentLikeResolver } from './resolver/findAll/findAll-comment-like.resolver';
 import { RemoveCommentLikeResolver } from './resolver/remove/Remove-comment-like.resolver';
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaModule } from '../../prisma/prisma.module';
 
 @Module({
   controllers: [],

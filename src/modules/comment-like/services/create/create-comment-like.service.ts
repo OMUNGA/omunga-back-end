@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCommentLikeDto } from '../../dto/create-comment-like.dto';
 import { CommentLikesRepository } from '../../repositories/commentLikeRepositories';
 import { CommentsRepository } from '../../../../modules/comment/repositories/CommentsRepositories';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class CreateCommentLikeService {

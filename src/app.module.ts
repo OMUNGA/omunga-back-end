@@ -13,10 +13,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { PrismaModule } from 'nestjs-prisma';
-import { APP_FILTER, APP_GUARD } from '@nestjs/core';
-import { HttpExceptionFilter } from './errors/http-exception.filter';
-import { GraphqlExceptionFilter } from 'shared/exceptions/graphqlExceptionFilter.filter';
-import { HttpErrorFilter } from 'shared/exceptions/httpErrorFilter.filter';
+
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 @Module({

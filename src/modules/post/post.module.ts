@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaModule } from '../../prisma/prisma.module';
 
 import { CreatePostService } from './services/create/create-post.service';
 import { UpdatePostService } from './services/update/update-post.service';

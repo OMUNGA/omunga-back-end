@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaModule } from '../../prisma/prisma.module';
 import { GoogleStrategy } from './Strategy/google.strategy.service';
 import { LoginService } from '../account/services/login/login.service';
 import { JwtStrategy } from '../account/services/jwt-strategy/jwt.strategy.service';

@@ -2,7 +2,7 @@ import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nes
 import { CreateUserDTO } from '../../dtos/Create-user.dto';
 import { hashSync } from 'bcrypt';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class CreateUserService {

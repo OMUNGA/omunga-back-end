@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PostLikeRepository } from '../../repositories/postLikeRepositories';
-import { messages } from 'shared/errorsMessages';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class RemovePostLikeService {
