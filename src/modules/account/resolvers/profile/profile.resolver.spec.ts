@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProfileController } from './profile.controller';
 import { ProfileService } from '../../services/profile/profile.service';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
 import { PrismaCreateUserRepository } from '../../repositories/implementations/PrismaCreateUserRepository';
 import { PrismaModule } from '../../../../prisma/prisma.module';
+import { ProfileUserResolver } from './profile.resolver';
 
-describe('ProfileController', () => {
-  let controller: ProfileController;
+describe('ProfileUserResolver', () => {
+  let controller: ProfileUserResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [ProfileController],
+      controllers: [ProfileUserResolver],
       providers: [
         ProfileService,
         {
@@ -21,7 +21,7 @@ describe('ProfileController', () => {
       imports: [PrismaModule],
     }).compile();
 
-    controller = module.get<ProfileController>(ProfileController);
+    controller = module.get<ProfileUserResolver>(ProfileUserResolver);
   });
 
   it('should be defined', () => {

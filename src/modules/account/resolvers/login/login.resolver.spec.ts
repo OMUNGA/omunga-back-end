@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LoginService } from '../../services/login/login.service';
 import { JwtService } from '@nestjs/jwt';
-import { LocalStrategy } from '../../services/jwt-strategy/local-jwt.strategy.service';
 import { PrismaModule } from '../../../../prisma/prisma.module';
 import { PrismaCreateUserRepository } from '../../repositories/implementations/PrismaCreateUserRepository';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
 import { LoginResolver } from './login.resolver';
+import { JwtStrategy } from '../../services/jwt-strategy/jwt.strategy.service';
 
 describe('LoginResolver', () => {
   let controller: LoginResolver;
@@ -16,7 +16,7 @@ describe('LoginResolver', () => {
       providers: [
         LoginService,
         JwtService,
-        LocalStrategy,
+        JwtStrategy,
         {
           provide: CreateUsersRepository,
           useClass: PrismaCreateUserRepository,

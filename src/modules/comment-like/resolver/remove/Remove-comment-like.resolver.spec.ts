@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RemoveCommentLikeController } from './Remove-comment-like.controller';
 import { RemoveCommentLikeService } from '../../services/remove/Remove-comment-like.service';
 import { CommentsRepository } from '../../../comment/repositories/CommentsRepositories';
 import { prismaCommentsRepository } from '../../../comment/repositories/implementations/PrismaCommentsRepositories';
 import { CommentLikesRepository } from '../../repositories/commentLikeRepositories';
 import { PrismaCommentLikeRepository } from '../../repositories/implementations/PrismaCommentLinkeRepositories';
 import { PrismaModule } from '../../../../prisma/prisma.module';
+import { RemoveCommentLikeResolver } from './Remove-comment-like.resolver';
 
-describe('RemoveCommentLikeController', () => {
-  let controller: RemoveCommentLikeController;
+describe('RemoveCommentLikeResolver', () => {
+  let controller: RemoveCommentLikeResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [RemoveCommentLikeController],
+      controllers: [RemoveCommentLikeResolver],
       providers: [
         RemoveCommentLikeService,
         {
@@ -27,8 +27,8 @@ describe('RemoveCommentLikeController', () => {
       imports: [PrismaModule],
     }).compile();
 
-    controller = module.get<RemoveCommentLikeController>(
-      RemoveCommentLikeController,
+    controller = module.get<RemoveCommentLikeResolver>(
+      RemoveCommentLikeResolver,
     );
   });
 
