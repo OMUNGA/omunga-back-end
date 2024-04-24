@@ -15,7 +15,7 @@ export class UserOutput {
   email: string;
 
   @Field()
-  phone: number;
+  phone: string;
 
   @Field()
   bio: string;
