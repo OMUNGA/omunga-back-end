@@ -3,7 +3,7 @@ import { PostLikeRepository } from '../postLikeRepositories';
 import { CreatePostLikeDto } from '../../dtos/create-post-like.dto';
 import { UpdatePostLikeDto } from '../../dtos/update-post-like.dto';
 import { PostLikes } from '../../entities/post-like.entity';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class PrismaPostLikeRepository implements PostLikeRepository {

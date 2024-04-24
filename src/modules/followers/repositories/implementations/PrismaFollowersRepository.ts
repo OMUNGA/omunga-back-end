@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { FollowersRepository } from '../followersRepositories';
 import { FollowerDTO } from '../../dtos/add-followers.dto';
 import { Followers } from '../../entities/followers';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class PrismaFollowersRepository implements FollowersRepository {

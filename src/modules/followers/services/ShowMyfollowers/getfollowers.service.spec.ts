@@ -4,15 +4,15 @@ import { CreateUsersRepository } from '../../../../modules/account/repositories/
 import { PrismaCreateUserRepository } from '../../../../modules/account/repositories/implementations/PrismaCreateUserRepository';
 import { FollowersRepository } from '../../repositories/followersRepositories';
 import { PrismaFollowersRepository } from '../../repositories/implementations/PrismaFollowersRepository';
-import { ShowMyFollowersService } from './showMyfollowers.service';
+import { GetFollowersService } from './getfollowers.service';
 
-describe('ListallFollowersService', () => {
-  let service: ShowMyFollowersService;
+describe('GetFollowersService', () => {
+  let service: GetFollowersService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        ShowMyFollowersService,
+        GetFollowersService,
         {
           provide: FollowersRepository,
           useClass: PrismaFollowersRepository,
@@ -25,7 +25,7 @@ describe('ListallFollowersService', () => {
       imports: [PrismaModule],
     }).compile();
 
-    service = module.get<ShowMyFollowersService>(ShowMyFollowersService);
+    service = module.get<GetFollowersService>(GetFollowersService);
   });
 
   it('should be defined', () => {

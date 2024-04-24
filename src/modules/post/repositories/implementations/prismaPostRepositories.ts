@@ -3,7 +3,7 @@ import { PostRepository } from '../postRepositories';
 import { CreatePostDto } from '../../dtos/create-post.dto';
 import { UpdatePostDto } from '../../dtos/update-post.dto';
 import { Posts } from '../../entities/post.entity';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class PrismaPostRepository implements PostRepository {

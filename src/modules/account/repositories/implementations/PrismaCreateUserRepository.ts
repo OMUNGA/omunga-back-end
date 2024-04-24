@@ -5,7 +5,7 @@ import { CreateUsersRepository } from '../createUserRepository';
 import { Injectable } from '@nestjs/common';
 import { ProfileOutput } from '../../dtos/profile.dto';
 import { Users } from '../../entities/user';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class PrismaCreateUserRepository implements CreateUsersRepository {

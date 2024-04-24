@@ -4,7 +4,7 @@ import { UpdateCommentDto } from '../../dto/update-comment.dto';
 import { CommentsRepository } from '../CommentsRepositories';
 import { Injectable } from '@nestjs/common';
 import { Comments } from '../../entities/comment.entity';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class prismaCommentsRepository implements CommentsRepository {
