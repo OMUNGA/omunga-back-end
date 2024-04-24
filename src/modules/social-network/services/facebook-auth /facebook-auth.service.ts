@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../../../prisma/prisma.service';
+import { PrismaService } from 'nestjs-prisma';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class FacebookAuthService {
@@ -17,7 +18,7 @@ export class FacebookAuthService {
         user: req.user,
       };
     } catch (error) {
-      return { error: error.message };
+       throw new Error(messages.InternalServerError);
     }
   }
 }

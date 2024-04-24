@@ -1,6 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { FollowersRepository } from '../../repositories/followersRepositories';
 import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
+import { FollowerDTO } from '../../dtos/add-followers.dto';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class UnFollowerService {
@@ -9,13 +11,13 @@ export class UnFollowerService {
     private userRepo: CreateUsersRepository,
   ) {}
 
-  async unFollower(userId: string, userTofollowID) {
+  async unFollower(data: FollowerDTO) {
     try {
-      const user = await this.userRepo.findById(userTofollowID);
+      const user = await this.userRepo.findById(data.userID);
       if (!user) {
-        throw new NotFoundException('Ups, usuário não encontrado!');
+        throw new UnauthorizedException(messages.Unauthenticated);
       }
-      return this.followerRepo.unfollowUser(userId, userTofollowID);
+      return this.followerRepo.unfollowUser(data);
     } catch (error) {
       throw error;
     }

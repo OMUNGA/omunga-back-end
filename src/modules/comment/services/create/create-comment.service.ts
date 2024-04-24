@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CommentsRepository } from '../../repositories/CommentsRepositories';
 import { CreateCommentDto } from '../../dto/create-comment.dto';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class CreateCommentService {
@@ -11,7 +12,7 @@ export class CreateCommentService {
       const comment = await this.commentRepo.create(createCommentDto);
       return comment;
     } catch (error) {
-      return { error: error.message };
+       throw new Error(messages.InternalServerError);
     }
   }
 }

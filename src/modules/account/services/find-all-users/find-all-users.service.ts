@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class FindAllUserService {
@@ -9,7 +10,7 @@ export class FindAllUserService {
     try {
       return this.userRepository.findAll();
     } catch (error) {
-      throw error;
+      throw new Error(messages.InternalServerError);
     }
   }
 }

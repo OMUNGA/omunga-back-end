@@ -1,40 +1,26 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/prisma/prisma.module';
-import { CreatePostLikeController } from './controllers/create/create-post-like.controller';
-import { UpdatePostLikeController } from './controllers/update/update-post-like.controller';
-import { FindAllPostLikeController } from './controllers/findAll/findAll-post-like.controller';
-import { ShowAllLikeOfPostLikeController } from './controllers/showAllLike/showAllLike-post-like.controller';
-import { FindOnePostLikeController } from './controllers/findOne/findOne-post-like.controller';
-import { RemovePostLikeController } from './controllers/remove/remove-post-like.controller';
-import { CreatePostLikeService } from './services/create/post-like.service';
-import { UpdatePostLikeService } from './services/update/update-post-like.service';
-import { FindOnePostLikeService } from './services/findOne/findOne-post-like.service';
-import { FindAllPostLikeService } from './services/findAll/findAll-post-like.service';
+import { PrismaModule } from '../../prisma/prisma.module';
 import { showAllTheLikesPostLikeService } from './services/showAllLike/showAllLike-post-like.service';
 import { RemovePostLikeService } from './services/remove/remove-post-like.service';
 import { PostLikeRepository } from './repositories/postLikeRepositories';
 import { PrismaPostLikeRepository } from './repositories/implementations/prismaPostLikeRepositories';
-import { FindAllPostService } from '../post/services/findAll/findAll-post.service';
 import { PostRepository } from '../post/repositories/postRepositories';
 import { PrismaPostRepository } from '../post/repositories/implementations/prismaPostRepositories';
+import { CreatePostLikeResolver } from './resolvers/create/create-post-like.resolver';
+import { ShowAllLikeOfPostLikeResolver } from './resolvers/showAllLike/showAllLike-post-like.resolver';
+import { RemovePostLikeResolver } from './resolvers/remove/remove-post-like.resolver';
+import { CreatePostLikeService } from './services/create/post-like.service';
 
 @Module({
-  controllers: [
-    CreatePostLikeController,
-    UpdatePostLikeController,
-    FindAllPostLikeController,
-    RemovePostLikeController,
-    ShowAllLikeOfPostLikeController,
-    FindOnePostLikeController,
-  ],
+  controllers: [],
   providers: [
     CreatePostLikeService,
-    UpdatePostLikeService,
-    FindOnePostLikeService,
-    FindAllPostLikeService,
     showAllTheLikesPostLikeService,
     RemovePostLikeService,
-    FindAllPostService,
+
+    CreatePostLikeResolver,
+    ShowAllLikeOfPostLikeResolver,
+    RemovePostLikeResolver,
 
     {
       provide: PostLikeRepository,

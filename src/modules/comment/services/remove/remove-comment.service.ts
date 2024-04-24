@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CommentsRepository } from '../../repositories/CommentsRepositories';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class RemoveCommentService {
@@ -13,7 +14,7 @@ export class RemoveCommentService {
       }
       return this.commentRepo.remove(id);
     } catch (error) {
-      return { error: error.message };
+       throw new Error(messages.InternalServerError);
     }
   }
 }

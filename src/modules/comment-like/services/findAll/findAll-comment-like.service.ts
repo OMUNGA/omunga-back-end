@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CommentLikesRepository } from '../../repositories/commentLikeRepositories';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class FindAllCommentLikeService {
   constructor(private commentLikeRepo: CommentLikesRepository) {}
-  async findAll() {
-    try {
-      const commentLiked = await this.commentLikeRepo.findAll();
-      return commentLiked;
-    } catch (error) {
-      throw error;
-    }
+  async findAllCommentlikes(commentLike: string) {
+    const commentLiked =
+      await this.commentLikeRepo.findAllCommentLikes(commentLike);
+    return commentLiked;
   }
 }

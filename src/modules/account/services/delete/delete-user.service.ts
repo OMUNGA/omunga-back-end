@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class DeleteUserService {
@@ -13,7 +14,7 @@ export class DeleteUserService {
       }
       return this.userRepository.remove({ id });
     } catch (error) {
-      throw error;
+      throw new Error(messages.InternalServerError);
     }
   }
 }

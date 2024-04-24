@@ -1,23 +1,31 @@
 import { CreateUserDTO } from '../../dtos/Create-user.dto';
-import { PrismaService } from '../../../../prisma/prisma.service';
 import { UpdateUserDTO } from '../../dtos/Update-user.dto ';
 import { User } from '@prisma/client';
 import { CreateUsersRepository } from '../createUserRepository';
 import { Injectable } from '@nestjs/common';
-import { ProfileDTO } from '../../dtos/profile.dto';
+import { ProfileOutput } from '../../dtos/profile.dto';
+import { Users } from '../../entities/user';
+import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class PrismaCreateUserRepository implements CreateUsersRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: CreateUserDTO): Promise<User> {
+  async create(data: CreateUserDTO): Promise<Users> {
     const user = await this.prisma.user.create({
-      data: data,
+      data: {
+        name: data.name,
+        email: data.email,
+        bio: data.bio,
+        phone: data.phone,
+        username: data.username,
+        password: data.password,
+      },
     });
 
     return user;
   }
-  async findByEmail(email: string): Promise<User> {
+  async findByEmail(email: string): Promise<Users> {
     const user = await this.prisma.user.findFirst({
       where: {
         email,
@@ -27,7 +35,7 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
     return user;
   }
 
-  async findById(id: string): Promise<User> {
+  async findById(id: string): Promise<Users> {
     const user = await this.prisma.user.findUnique({
       where: {
         id: id,
@@ -37,41 +45,40 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
     return user;
   }
 
-  async remove({ id }: { id: string }): Promise<User> {
+  async remove({ id }: { id: string }): Promise<Users> {
     return await this.prisma.user.delete({ where: { id: id } });
   }
-  async update(id: string, data: UpdateUserDTO): Promise<User> {
+  async update(data: UpdateUserDTO): Promise<Users> {
     return this.prisma.user.update({
-      where: { id: id },
+      where: { id: data.userID },
       data: {
-        first_name: data.first_name,
-        last_name: data.last_name,
+        name: data.name,
+        username: data.username,
         email: data.email,
         bio: data.bio,
         phone: data.phone,
         password: data.password,
-        photo: data.photo,
       },
     });
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<Users[]> {
     return this.prisma.user.findMany({ where: { deletedAt: false } });
   }
 
-  async profile(userId: string): Promise<ProfileDTO> {
+  async profile(userId: string): Promise<ProfileOutput> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
 
     const followers = await this.prisma.follower.findMany({
       where: { userTofollowID: userId },
-      include: { followersUser: true },
+      include: { user: true },
     });
 
     const following = await this.prisma.follower.findMany({
       where: { userID: userId },
-      include: { following: true },
+      include: { user: true },
     });
 
     return { user, followers, following };

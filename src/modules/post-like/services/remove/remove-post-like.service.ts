@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PostLikeRepository } from '../../repositories/postLikeRepositories';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class RemovePostLikeService {
@@ -10,7 +11,7 @@ export class RemovePostLikeService {
     try {
       return this.postLike.remove(id);
     } catch (error) {
-      return { error: error.message };
+      throw new Error(messages.InternalServerError);
     }
   }
 }

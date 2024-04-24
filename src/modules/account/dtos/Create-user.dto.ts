@@ -1,32 +1,38 @@
+import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsEmail, IsNumber, IsString } from 'class-validator';
 
+
+@InputType()
 export class CreateUserDTO {
   @IsNotEmpty()
   @IsString()
-  first_name: string;
+  @Field()
+  name: string;
 
   @IsString()
   @IsNotEmpty()
-  last_name: string;
+  @Field()
+  username: string;
 
   @IsNotEmpty()
   @IsString()
   @IsEmail()
+  @Field()
   email: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  phone: number;
+  @IsString()
+  @Field()
+  phone: string;
 
   @IsNotEmpty()
   @IsString()
+  @Field()
   password: string;
 
   @IsNotEmpty()
   @IsString()
+  @Field()
   bio: string;
 
-  @IsNotEmpty()
-  @IsString()
-  photo: string;
 }

@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PostRepository } from '../../repositories/postRepositories';
 import { CreatePostDto } from '../../dtos/create-post.dto';
 import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class CreatePostService {
@@ -14,9 +15,7 @@ export class CreatePostService {
     const isLogged = await this.userRepo.findById(createPostDto.userID);
 
     if (!isLogged) {
-      throw new UnauthorizedException(
-        'Ups, precisa fazer login para fazer o seu post...',
-      );
+      throw new UnauthorizedException(messages.Unauthenticated);
     }
 
     try {
@@ -24,10 +23,10 @@ export class CreatePostService {
         title: createPostDto.title,
         content: createPostDto.content,
         userID: createPostDto.userID,
-        published: true,
+        published: false,
       });
     } catch (error) {
-      return { error: error.message };
+      throw new Error(messages.InternalServerError);
     }
   }
 }

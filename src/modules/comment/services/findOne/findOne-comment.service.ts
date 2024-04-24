@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CommentsRepository } from '../../repositories/CommentsRepositories';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class FindOneCommentService {
@@ -9,7 +10,7 @@ export class FindOneCommentService {
     try {
       return this.commentRepo.findOne(id);
     } catch (error) {
-      return { error: error.message };
+       throw new Error(messages.InternalServerError);
     }
   }
 }

@@ -1,7 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AddFollowerDTO } from '../../dtos/add-followers.dto';
+import { FollowerDTO } from '../../dtos/add-followers.dto';
 import { FollowersRepository } from '../../repositories/followersRepositories';
 import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
+import { messages } from './../../../../../shared/errorsMessages';
 
 @Injectable()
 export class AddFollowerService {
@@ -10,16 +11,20 @@ export class AddFollowerService {
     private userRepo: CreateUsersRepository,
   ) {}
 
-  async followUser(userId: string, data: AddFollowerDTO) {
-    try {
-      const user = await this.userRepo.findById(userId);
-      if (!user) {
-        throw new UnauthorizedException('Ups, precisa estar logado!');
-      }
-      const followrs = await this.followerRepo.followUser(userId, data);
-      return followrs;
-    } catch (error) {
-      return { error: error.message };
+  async followUser(data: FollowerDTO) {
+    const existingFollower = await this.followerRepo.findOne(
+      data.userID,
+      data.userIdToFollow,
+    );
+    if (existingFollower) {
+      throw new UnauthorizedException(messages.AlreadyFollowing);
     }
+
+    const user = await this.userRepo.findById(data.userID);
+    if (!user) {
+      throw new UnauthorizedException(messages.NotFoundUser);
+    }
+    const followrs = await this.followerRepo.followUser(data);
+    return followrs;
   }
 }

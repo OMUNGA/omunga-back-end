@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PostRepository } from '../../repositories/postRepositories';
+import { messages } from '../../../../../shared/errorsMessages';
 
 @Injectable()
 export class FindAllPostService {
@@ -9,7 +10,7 @@ export class FindAllPostService {
     try {
       return this.postRepo.findAll();
     } catch (error) {
-      return { error: error.message };
+      throw new Error(messages.InternalServerError);
     }
   }
 }
