@@ -25,8 +25,7 @@ RUN yarn run build
 # Install production dependencies
 RUN yarn install --production
 
-# Switch back to root for running commands
-USER root
+
 
 # Copy Prisma schema
 COPY prisma/schema.prisma ./prisma/
