@@ -1,8 +1,8 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { Followers } from '../../entities/followers';
-import { CurrentUser } from 'src/modules/account/decorator/current-user.decorator';
-import { GqlAuthGuard } from 'src/modules/account/guards/jwt-auth.guard';
-import { Users } from 'src/modules/account/entities/user';
+import { CurrentUser } from '../../../../modules/account/decorator/current-user.decorator';
+import { GqlAuthGuard } from '../../../../modules/account/guards/jwt-auth.guard';
+import { Users } from '../../../../modules/account/entities/user';
 import { FollowerDTO } from '../../dtos/add-followers.dto';
 import { AddFollowerService } from '../../services/Add-follower/Add-follower.service';
 import { UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';

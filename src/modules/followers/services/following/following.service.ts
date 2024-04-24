@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUsersRepository } from 'src/modules/account/repositories/createUserRepository';
+import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
 import { FollowersRepository } from '../../repositories/followersRepositories';
 import { messages } from '../../../../../shared/errorsMessages';
 

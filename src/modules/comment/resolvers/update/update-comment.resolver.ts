@@ -2,10 +2,10 @@ import { UseGuards } from '@nestjs/common';
 import { UpdateCommentService } from '../../services/update/update-comment.service';
 import { UpdateCommentDto } from '../../dto/update-comment.dto';
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { CurrentUser } from 'src/modules/account/decorator/current-user.decorator';
-import { GqlAuthGuard } from 'src/modules/account/guards/jwt-auth.guard';
+import { CurrentUser } from '../../../../modules/account/decorator/current-user.decorator';
+import { GqlAuthGuard } from '../../../../modules/account/guards/jwt-auth.guard';
 import { CommentResponse } from '../../dto/create-comment.dto';
-import { Users } from 'src/modules/account/entities/user';
+import { Users } from '../../../../modules/account/entities/user';
 
 @Resolver('comment')
 export class UpdateCommentResolver {

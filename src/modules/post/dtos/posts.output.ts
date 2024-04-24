@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Users } from 'src/modules/account/entities/user';
-import { Comments } from 'src/modules/comment/entities/comment.entity';
-import { PostLikes } from 'src/modules/post-like/entities/post-like.entity';
+import { Users } from '../../../modules/account/entities/user';
+import { Comments } from '../../../modules/comment/entities/comment.entity';
+import { PostLikes } from '../../..//modules/post-like/entities/post-like.entity';
 
 @ObjectType()
 export class PostsOutput {

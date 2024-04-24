@@ -10,9 +10,9 @@ import { CreateCommentLikeService } from '../../services/create/create-comment-l
 import { CreateCommentLikeDto } from '../../dto/create-comment-like.dto';
 import { CommentLikes } from '../../entities/comment-like.entity';
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { CurrentUser } from 'src/modules/account/decorator/current-user.decorator';
-import { GqlAuthGuard } from 'src/modules/account/guards/jwt-auth.guard';
-import { Users } from 'src/modules/account/entities/user';
+import { CurrentUser } from '../../../../modules/account/decorator/current-user.decorator';
+import { GqlAuthGuard } from '../../../../modules/account/guards/jwt-auth.guard';
+import { Users } from '../../../../modules/account/entities/user';
 
 
 @Resolver('Comment')

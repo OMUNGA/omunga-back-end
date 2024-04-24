@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { RemovePostService } from '../../services/remove/remove-post.service';
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { GqlAuthGuard } from 'src/modules/account/guards/jwt-auth.guard';
+import { GqlAuthGuard } from '../../../../modules/account/guards/jwt-auth.guard';
 import { Posts } from '../../entities/post.entity';
 
 @UseGuards(GqlAuthGuard)

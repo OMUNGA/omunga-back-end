@@ -7,10 +7,10 @@ import { CreatePostService } from '../../services/create/create-post.service';
 import { CreatePostDto } from '../../dtos/create-post.dto';
 
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { GqlAuthGuard } from 'src/modules/account/guards/jwt-auth.guard';
-import { CurrentUser } from 'src/modules/account/decorator/current-user.decorator';
+import { GqlAuthGuard } from '../../../../modules/account/guards/jwt-auth.guard';
+import { CurrentUser } from '../../../../modules/account/decorator/current-user.decorator';
 import { PostsOutput } from '../../dtos/posts.output';
-import { Users } from 'src/modules/account/entities/user';
+import { Users } from '../../../../modules/account/entities/user';
 
 @UseGuards(GqlAuthGuard)
 @Resolver('Post')

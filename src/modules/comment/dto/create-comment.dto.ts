@@ -1,6 +1,6 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
-import { Users } from 'src/modules/account/entities/user';
+import { Users } from '../../../modules/account/entities/user';
 
 @InputType()
 export class CreateCommentDto {

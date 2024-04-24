@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Users } from 'src/modules/account/entities/user';
-import { Comments } from 'src/modules/comment/entities/comment.entity';
+import { Users } from '../../../modules/account/entities/user';
+import { Comments } from '../../../modules/comment/entities/comment.entity';
 
 @ObjectType()
 export class CommentLikeResponse {

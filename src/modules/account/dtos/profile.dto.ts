@@ -1,6 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Users } from '../entities/user';
-import { Followers } from 'src/modules/followers/entities/followers';
+import { Followers } from '../../..//modules/followers/entities/followers';
 
 @ObjectType()
 export class ProfileOutput {
