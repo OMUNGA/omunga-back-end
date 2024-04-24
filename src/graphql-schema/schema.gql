@@ -197,7 +197,7 @@ type UserOutput {
   followings: Float!
   id: String!
   name: String!
-  phone: Float!
+  phone: String!
   photo: String
   updatedAt: DateTime!
   username: String!
