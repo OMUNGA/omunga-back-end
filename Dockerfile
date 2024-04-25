@@ -1,4 +1,4 @@
-FROM node:18.17.0-alpine3.18 as development
+FROM node:20-alpine As development
 
 WORKDIR /src/app
 
@@ -18,7 +18,8 @@ COPY .. .
 RUN yarn run build
 
 
-FROM node:18.17.0-alpine3.18 as production
+FROM node:20-alpine As production
+
 COPY --from=development /app/node_modules ./node_modules
 COPY --from=development /app/package.json ./
 COPY --from=development /app/tsconfig.json ./
