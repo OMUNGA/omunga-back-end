@@ -17,7 +17,6 @@ USER node
 
 EXPOSE 8000
 
-
 ###################
 # BUILD FOR PRODUCTION
 ###################
@@ -27,7 +26,7 @@ FROM node:20-alpine AS build
 WORKDIR /usr/src/app
 
 COPY --chown=node:node package.json ./
-COPY --chown=node:node . .
+COPY --chown=node:node yarn.lock ./
 
 RUN yarn install
 RUN yarn build
@@ -47,6 +46,10 @@ WORKDIR /usr/src/app
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
+COPY --chown=node:node --from=build /usr/src/app/package.json ./
+
+# Instalação global do Prisma CLI
+RUN yarn global add prisma
 
 # Chamando o script para construir o Prisma
 RUN yarn build:prisma
