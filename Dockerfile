@@ -27,8 +27,8 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
-COPY --chown=node:node yarn.lock ./
-COPY --chown=node:node tsconfig.json ./ 
+COPY --chown=node:node tsconfig.json ./
+COPY --chown=node:node prisma ./prisma/  
 
 RUN yarn install
 RUN yarn build
