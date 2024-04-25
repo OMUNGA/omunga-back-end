@@ -30,4 +30,4 @@ RUN yarn install --production
 
 EXPOSE 8000
 
-CMD [ "node", "dist/main.js" ]
+CMD ["npm", "run", "start:prod"]
