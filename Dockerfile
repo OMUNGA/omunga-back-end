@@ -34,7 +34,6 @@ COPY --chown=node:node prisma ./prisma/
 COPY --chown=node:node . .
 
 RUN yarn install
-RUN yarn build
 
 ENV NODE_ENV production
 
@@ -53,6 +52,7 @@ COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
 COPY --chown=node:node --from=build /usr/src/app/package.json ./
 COPY --chown=node:node --from=build /usr/src/app/tsconfig.json ./
+RUN yarn build
 
 
 EXPOSE 8000
