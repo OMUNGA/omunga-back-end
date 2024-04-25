@@ -1,4 +1,4 @@
-FROM node:20-alpine As development
+FROM node:20-alpine AS development
 
 WORKDIR /src/app
 
@@ -10,24 +10,24 @@ COPY prisma/schema.prisma ./prisma/
 RUN yarn install
 
 RUN npx prisma generate
-# RUN npx prisma migrate dev --name luvulu-db  init -Y
-# RUN npx prisma migrate deploy
-# RUN npx prisma migrate deploy
-COPY .. .
+
+# Copia o código fonte
+COPY . .
 
 RUN yarn run build
 
+FROM node:20-alpine AS production
 
-FROM node:20-alpine As production
+WORKDIR /usr/src/app
 
-COPY --from=development /app/node_modules ./node_modules
-COPY --from=development /app/package.json ./
-COPY --from=development /app/tsconfig.json ./
-COPY --from=development /app/yarn.lock ./
-COPY --from=development /app/dist ./dist
+COPY --from=development /src/app/package.json ./
+COPY --from=development /src/app/yarn.lock ./
+COPY --from=development /src/app/tsconfig.json ./
+COPY --from=development /src/app/prisma ./prisma/
+COPY --from=development /src/app/dist ./dist
+
+RUN yarn install --production
 
 EXPOSE 8000
 
-CMD ["npm", "run", "start:prod"]
-
-#docker build -t borda-backend .
+CMD [ "node", "dist/main.js" ]
