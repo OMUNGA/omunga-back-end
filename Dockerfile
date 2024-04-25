@@ -8,14 +8,16 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package.json ./
 COPY prisma/schema.prisma ./prisma/
+COPY .. .
 
 RUN yarn install
-
-COPY --chown=node:node . .
+RUN yarn global add prisma
+RUN npx prisma migrate dev --name omunga init -Y
+RUN npx prisma generate
+RUN npx prisma db push
 
 USER node
 
-EXPOSE 8000
 
 ###################
 # BUILD FOR PRODUCTION
@@ -29,6 +31,7 @@ COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
 COPY --chown=node:node tsconfig.json ./
 COPY --chown=node:node prisma ./prisma/  
+COPY --chown=node:node . .
 
 RUN yarn install
 RUN yarn build
@@ -50,12 +53,6 @@ COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
 COPY --chown=node:node --from=build /usr/src/app/package.json ./
 COPY --chown=node:node --from=build /usr/src/app/tsconfig.json ./
-
-# Instalação global do Prisma CLI
-RUN yarn global add prisma
-
-# Chamando o script para construir o Prisma
-RUN yarn build:prisma
 
 # Wait for the database to become available
 RUN apk add --no-cache postgresql-client
