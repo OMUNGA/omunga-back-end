@@ -1,58 +1,32 @@
-###################
-# BUILD FOR LOCAL DEVELOPMENT
-###################
+FROM node:18.17.0-alpine3.18 as development
 
-FROM node:20-alpine As development
+WORKDIR /src/app
 
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install --force
-
-COPY . . 
-
-
-###################
-# BUILD FOR PRODUCTION
-###################
-
-FROM node:20-alpine As build
-
-WORKDIR /usr/src/app
-COPY package*.json ./
-
+COPY package.json package.json
+COPY tsconfig.json ./
+COPY yarn.lock yarn.lock
 COPY prisma/schema.prisma ./prisma/
-RUN npx prisma generate
 
-
-COPY  --from=development /usr/src/app/node_modules ./node_modules
-
-COPY . . 
-
-RUN npm run build
-
-ENV NODE_ENV production
-
-RUN npm ci --only=production && npm cache clean --force
-
-USER node
-
-###################
-# PRODUCTION
-###################
-
-FROM node:20-alpine As production
-
-COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY  --from=build /usr/src/app/dist ./dist
-COPY --from=build /usr/src/app/prisma ./prisma
+RUN yarn install
 
 RUN npx prisma generate
+# RUN npx prisma migrate dev --name luvulu-db  init -Y
+# RUN npx prisma migrate deploy
+# RUN npx prisma migrate deploy
+COPY .. .
+
+RUN yarn run build
+
+
+FROM node:18.17.0-alpine3.18 as production
+COPY --from=development /app/node_modules ./node_modules
+COPY --from=development /app/package.json ./
+COPY --from=development /app/tsconfig.json ./
+COPY --from=development /app/yarn.lock ./
+COPY --from=development /app/dist ./dist
 
 EXPOSE 8000
 
 CMD ["npm", "run", "start:prod"]
 
-
-
+#docker build -t borda-backend .
