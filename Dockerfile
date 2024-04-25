@@ -54,10 +54,6 @@ COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
 COPY --chown=node:node --from=build /usr/src/app/package.json ./
 COPY --chown=node:node --from=build /usr/src/app/tsconfig.json ./
 
-# Wait for the database to become available
-RUN apk add --no-cache postgresql-client
-RUN wget -q -O /usr/local/bin/wait-for-db.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
-    chmod +x /usr/local/bin/wait-for-db.sh
 
 EXPOSE 8000
-CMD ["sh", "-c", "wait-for-db.sh postgres:5432 -- node dist/main.js"]
+CMD ["node dist/main.js"]
