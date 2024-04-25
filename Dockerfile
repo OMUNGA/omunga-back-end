@@ -1,60 +1,33 @@
-###################
-# BUILD FOR LOCAL DEVELOPMENT
-###################
-
 FROM node:20-alpine AS development
 
-WORKDIR /usr/src/app
+WORKDIR /src/app
 
-COPY --chown=node:node package.json ./
+COPY package.json package.json
+COPY tsconfig.json ./
+COPY yarn.lock yarn.lock
 COPY prisma/schema.prisma ./prisma/
 
 RUN yarn install
 
-COPY --chown=node:node . .
+RUN npx prisma generate
 
-USER node
+# Copia o código fonte
+COPY . .
 
-EXPOSE 8000
-
-
-###################
-# BUILD FOR PRODUCTION
-###################
-
-FROM node:20-alpine AS build
-
-WORKDIR /usr/src/app
-
-COPY --chown=node:node package.json ./
-COPY --chown=node:node . .
-
-RUN yarn install
-RUN yarn build
-
-ENV NODE_ENV production
-
-USER node
-
-###################
-# PRODUCTION
-###################
+RUN yarn run build
 
 FROM node:20-alpine AS production
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /usr/src/app/dist ./dist
-COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
+COPY --from=development /src/app/package.json ./
+COPY --from=development /src/app/yarn.lock ./
+COPY --from=development /src/app/tsconfig.json ./
+COPY --from=development /src/app/prisma ./prisma/
+COPY --from=development /src/app/dist ./dist
 
-# Chamando o script para construir o Prisma
-RUN yarn build:prisma
-
-# Wait for the database to become available
-RUN apk add --no-cache postgresql-client
-RUN wget -q -O /usr/local/bin/wait-for-db.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
-    chmod +x /usr/local/bin/wait-for-db.sh
+RUN yarn install --production
 
 EXPOSE 8000
-CMD ["sh", "-c", "wait-for-db.sh postgres:5432 -- node dist/main.js"]
+
+CMD ["npm", "run", "start:prod"]
