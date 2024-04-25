@@ -24,6 +24,8 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 COPY prisma/schema.prisma ./prisma/
+RUN yarn prisma generate
+
 
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
@@ -46,8 +48,11 @@ FROM node:20-alpine As production
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --from=build /usr/src/app/prisma ./prisma
+RUN yarn prisma generate
+RUN yarn prisma db push
 
 EXPOSE 8000
 
-CMD ["yarn", "start:prod"]
+CMD ["yarn", "run", "start:prod"]
+
 
