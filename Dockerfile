@@ -9,8 +9,6 @@ COPY prisma/schema.prisma ./prisma/
 
 RUN yarn install
 
-RUN npx prisma generate
-
 # Copia o código fonte
 COPY . .
 
@@ -27,6 +25,7 @@ COPY --from=development /src/app/prisma ./prisma/
 COPY --from=development /src/app/dist ./dist
 
 RUN yarn install --production
+RUN npx prisma generate
 
 EXPOSE 8000
 
