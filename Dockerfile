@@ -6,13 +6,12 @@ FROM node:20-alpine As development
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node package*.json ./
+COPY package*.json ./
 
-RUN yarn install
+RUN npm install
 
-COPY --chown=node:node . .
+COPY . . 
 
-USER node
 
 ###################
 # BUILD FOR PRODUCTION
@@ -21,15 +20,15 @@ USER node
 FROM node:20-alpine As build
 
 WORKDIR /usr/src/app
+COPY package*.json ./
 
-COPY --chown=node:node package*.json ./
 COPY prisma/schema.prisma ./prisma/
 RUN npx prisma generate
 
 
-COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+COPY  --from=development /usr/src/app/node_modules ./node_modules
 
-COPY --chown=node:node . .
+COPY . . 
 
 RUN npm run build
 
@@ -45,9 +44,10 @@ USER node
 
 FROM node:20-alpine As production
 
-COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/node_modules ./node_modules
+COPY  --from=build /usr/src/app/dist ./dist
 COPY --from=build /usr/src/app/prisma ./prisma
+
 RUN npx prisma generate
 
 EXPOSE 8000
