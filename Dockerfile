@@ -33,7 +33,6 @@ COPY --chown=node:node . .
 
 RUN yarn install
 RUN yarn global add prisma
-RUN npx prisma migrate dev --name omunga init -Y
 RUN npx prisma generate
 RUN npx prisma db push
 RUN yarn build
