@@ -2,15 +2,15 @@
 # BUILD FOR LOCAL DEVELOPMENT
 ###################
 
-FROM node:20-alpine AS development
+FROM node:20-alpine As development
 
 WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
-COPY prisma/schema.prisma ./prisma/
-COPY --chown=node:node . .
 
 RUN yarn install
+
+COPY --chown=node:node . .
 
 USER node
 
@@ -18,14 +18,22 @@ USER node
 # BUILD FOR PRODUCTION
 ###################
 
-FROM development AS build
+FROM node:20-alpine As build
 
 WORKDIR /usr/src/app
 
-RUN yarn build
+COPY --chown=node:node package*.json ./
+COPY prisma/schema.prisma ./prisma/
 
-RUN rm -rf node_modules
-RUN yarn install --production
+COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+
+COPY --chown=node:node . .
+
+RUN npm run build
+
+ENV NODE_ENV production
+
+RUN npm ci --only=production && npm cache clean --force
 
 USER node
 
@@ -33,14 +41,13 @@ USER node
 # PRODUCTION
 ###################
 
-FROM node:20-alpine AS production
+FROM node:20-alpine As production
 
-WORKDIR /usr/src/app
-
-COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/dist ./dist
+COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --from=build /usr/src/app/prisma ./prisma
 
 EXPOSE 8000
 
 CMD ["yarn", "start:prod"]
+
