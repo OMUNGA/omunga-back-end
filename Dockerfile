@@ -27,8 +27,6 @@ COPY --from=development /src/app/dist ./dist
 RUN yarn install --production
 RUN npx prisma generate
 
-RUN yarn prisma db push
-
 EXPOSE 8000
 
 CMD ["npm", "run", "start:prod"]
