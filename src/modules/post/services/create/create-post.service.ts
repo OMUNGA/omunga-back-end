@@ -22,6 +22,8 @@ export class CreatePostService {
       return this.postRepo.create({
         title: createPostDto.title,
         content: createPostDto.content,
+        cover: createPostDto.cover ,
+        tags: createPostDto.tags,
         userID: createPostDto.userID,
         published: false,
       });

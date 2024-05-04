@@ -11,6 +11,12 @@ export class UpdatePostDto {
   content: string;
 
   @Field({nullable: true})
+  cover: string;
+
+  @Field(() => [String], {nullable: true})
+  tags: string[];
+
+  @Field({nullable: true})
   published?: boolean;
 
 }

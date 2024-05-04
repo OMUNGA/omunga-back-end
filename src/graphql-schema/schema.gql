@@ -55,7 +55,9 @@ input CreateCommentLikeDto {
 
 input CreatePostDto {
   content: String!
+  cover: String!
   published: Boolean
+  tags: [String!]!
   title: String!
   userID: String
 }
@@ -134,10 +136,12 @@ type PostLikes {
 
 type Posts {
   content: String!
+  cover: String!
   createdAt: DateTime!
   deletedAt: Boolean!
   postID: String!
   published: Boolean
+  tags: [String!]!
   title: String!
   updatedAt: DateTime!
   userID: String
@@ -146,11 +150,13 @@ type Posts {
 type PostsOutput {
   comments: [Comments!]
   content: String!
+  cover: String!
   createdAt: DateTime!
   deletedAt: Boolean!
   postID: String!
   postlikes: [PostLikes!]
   published: Boolean
+  tags: [String!]!
   title: String!
   updatedAt: DateTime!
   user: Users
@@ -184,7 +190,9 @@ input UpdateCommentDto {
 
 input UpdatePostDto {
   content: String
+  cover: String
   published: Boolean
+  tags: [String!]
   title: String
 }
 
