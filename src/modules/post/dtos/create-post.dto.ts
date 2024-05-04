@@ -13,6 +13,14 @@ export class CreatePostDto {
   @Field()
   content: string;
 
+  @IsString()
+  @IsNotEmpty()
+  @Field()
+  cover: string;
+
+  @Field(() => [String])
+  tags: string[];
+
   @Field({nullable: true})
   published?: boolean;
 

@@ -14,6 +14,12 @@ export class PostsOutput {
   @Field()
   content: string;
 
+  @Field()
+  cover: string;
+
+  @Field(() => [String])
+  tags: string[];
+
   @Field({nullable: true})
   published: boolean;
 
