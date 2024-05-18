@@ -1,4 +1,5 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { UserRole } from '@prisma/client';
 
 @ObjectType()
 export class UserOutput {
@@ -25,6 +26,9 @@ export class UserOutput {
 
   @Field()
   followers: number;
+
+  @Field({nullable: true})
+  role: UserRole;
 
   @Field()
   followings: number;

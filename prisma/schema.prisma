@@ -9,6 +9,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  ADMIN
+  MODERATOR
+  VERIFIED
+  PREMIUM
+  MEMBER
+}
+
 model User {
   id            String         @id @default(uuid())
   name          String
@@ -27,6 +35,7 @@ model User {
   postlike      PostLike[]
   posts         Post[]
   Follower      Follower[]
+  role          UserRole       @default(MEMBER)
 
   @@map("users")
 }
@@ -72,7 +81,7 @@ model Post {
   deletedAt Boolean    @default(false)
   user      User       @relation(fields: [userID], references: [id])
   comment   Comment[]
-  PostLike  PostLike[]
+  postLike  PostLike[]
 
   @@map("posts")
 }

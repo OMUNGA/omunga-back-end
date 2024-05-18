@@ -83,4 +83,12 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
 
     return { user, followers, following };
   }
+
+  async findByUsername(username: string): Promise<Users> {
+    const user = await this.prisma.user.findFirst({
+      where: { username: username },
+    });
+
+    return user;
+  }
 }

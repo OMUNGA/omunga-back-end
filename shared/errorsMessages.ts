@@ -4,5 +4,9 @@ export enum messages {
   NotFoundUser = 'Usuário não encontrado',
   InternalServerError = "Ocorreu um erro interno. Por favor, tente novamente mais tarde.",
   BadRequestError = "Ups, este usuário já existe!",
-  AlreadyFollowing = "Ups, você já esta seguindo este usuário"
+  AlreadyFollowing = "Ups, você já esta seguindo este usuário",
+  userNameAlreadyExists = "ops, nome do usuário já existe.",
+  userAldreadyExists = "ops, usuário já existe.",
+  InsufficientPermissions = "Permissões insuficientes para acessar este recurso.",
+  invalidEmail = 'Email inválido',
 }

@@ -6,12 +6,16 @@ import { Users } from '../../../../modules/account/entities/user';
 import { FollowerDTO } from '../../dtos/add-followers.dto';
 import { AddFollowerService } from '../../services/Add-follower/Add-follower.service';
 import { UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { UserRole } from '@prisma/client';
+import { Roles } from 'src/decorators/rules.decorators';
+import { GqlRolesGuard } from 'src/modules/account/guards/GqlRolesGuard.guard';
 
 @Resolver('follower')
 export class AddFollowerResolver {
   constructor(private readonly addFollowerService: AddFollowerService) {}
 
-  @UseGuards(GqlAuthGuard)
+  @UseGuards(GqlAuthGuard, GqlRolesGuard)
+  @Roles(UserRole.MEMBER)
   @Mutation(() => Followers)
   @UsePipes(ValidationPipe)
   async followUser(@Args('data') data: FollowerDTO, @CurrentUser() user: Users): Promise<Followers> {

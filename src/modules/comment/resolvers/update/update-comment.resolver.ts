@@ -6,12 +6,16 @@ import { CurrentUser } from '../../../../modules/account/decorator/current-user.
 import { GqlAuthGuard } from '../../../../modules/account/guards/jwt-auth.guard';
 import { CommentResponse } from '../../dto/create-comment.dto';
 import { Users } from '../../../../modules/account/entities/user';
+import { UserRole } from '@prisma/client';
+import { Roles } from 'src/decorators/rules.decorators';
+import { GqlRolesGuard } from 'src/modules/account/guards/GqlRolesGuard.guard';
 
 @Resolver('comment')
 export class UpdateCommentResolver {
   constructor(private readonly commentService: UpdateCommentService) {}
 
-  @UseGuards(GqlAuthGuard)
+  @UseGuards(GqlAuthGuard, GqlRolesGuard)
+  @Roles(UserRole.MEMBER)
   @Mutation(() => CommentResponse)
   async updateComment(
     @Args('data') updateCommentDto: UpdateCommentDto,

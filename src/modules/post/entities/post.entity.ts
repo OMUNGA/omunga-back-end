@@ -1,9 +1,11 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { Post } from "@prisma/client";
 import { IsString } from "class-validator";
+import { Users } from "src/modules/account/entities/user";
+import { Comments } from "src/modules/comment/entities/comment.entity";
+import { PostLikes } from "src/modules/post-like/entities/post-like.entity";
 
 @ObjectType()
-export class Posts implements Post {
+export class Posts  {
 
   @Field()
   postID: string;
@@ -26,6 +28,16 @@ export class Posts implements Post {
 
   @Field({nullable: true})
   userID: string;
+
+
+  @Field(() => Users, { nullable: true })
+  user?: Users;
+
+  @Field(() => [Comments], { nullable: true })
+  comment?: Comments[];
+
+  @Field(() => [PostLikes], { nullable: true })
+  postLike?: PostLikes[];
 
   @Field()
   createdAt: Date;

@@ -20,12 +20,17 @@ export class PostsOutput {
   @Field(() => [String])
   tags: string[];
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   published: boolean;
 
+@Field(() => Users, { nullable: true })
+  user?: Users;
 
-  @Field(() => Users, {nullable: true})
-  user: Users;
+  @Field(() => [Comments], { nullable: true })
+  comment?: Comments[];
+
+  @Field(() => [PostLikes], { nullable: true })
+  postLike?: PostLikes[];
 
   @Field()
   createdAt: Date;
@@ -36,9 +41,5 @@ export class PostsOutput {
   @Field()
   deletedAt: boolean;
 
-  @Field(() => [PostLikes], { nullable: true })
-  postlikes: PostLikes[];
 
-  @Field(() => [Comments], { nullable: true })
-  comments: Comments[];
 }
