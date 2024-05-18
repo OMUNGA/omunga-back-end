@@ -7,12 +7,16 @@ import { CurrentUser } from '../../../../modules/account/decorator/current-user.
 import { Followers } from '../../entities/followers';
 import { Users } from '../../../../modules/account/entities/user';
 import { GqlAuthGuard } from '../../../../modules/account/guards/jwt-auth.guard';
+import { UserRole } from '@prisma/client';
+import { Roles } from 'src/decorators/rules.decorators';
+import { GqlRolesGuard } from 'src/modules/account/guards/GqlRolesGuard.guard';
 
 @Resolver('follower')
 export class UnfollowUserResolver {
   constructor(private readonly unFollowerService: UnFollowerService) {}
 
-  @UseGuards(GqlAuthGuard)
+  @UseGuards(GqlAuthGuard, GqlRolesGuard)
+  @Roles(UserRole.MEMBER)
   @Mutation(() => String, { nullable: true })
   async unfollowUser(
     @Args('data') data: FollowerDTO,

@@ -1,5 +1,5 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { User } from '@prisma/client';
+import {  User, UserRole } from '@prisma/client';
 
 
 @ObjectType()
@@ -28,6 +28,9 @@ export class Users implements User {
   @Field({nullable: true})
   photo: string;
 
+  @Field({nullable: true})
+  role: UserRole;
+
   @Field()
   createdAt: Date;
 
@@ -36,4 +39,13 @@ export class Users implements User {
 
   @Field()
   deletedAt: boolean;
+}
+
+
+export enum UserRoles {
+  ADMIN = 'ADMIN',
+  MODERATOR = 'MODERATOR',
+  VERIFIED = 'VERIFIED',
+  PREMIUM = 'PREMIUM',
+  MEMBER = 'MEMBER',
 }

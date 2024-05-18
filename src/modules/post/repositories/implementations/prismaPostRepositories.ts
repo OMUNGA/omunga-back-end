@@ -18,7 +18,7 @@ export class PrismaPostRepository implements PostRepository {
   async findOne(id: string): Promise<Posts> {
     return this.prisma.post.findUnique({
       where: { postID: id, published: true },
-      include: { user: true, PostLike: true, comment: true },
+      include: { user: true, postLike: true, comment: true },
     });
   }
   async remove(id: string): Promise<void> {
@@ -27,15 +27,19 @@ export class PrismaPostRepository implements PostRepository {
       data: { published: false, deletedAt: true },
     });
   }
-  async findAll(): Promise<Posts[]> {
-    return this.prisma.post.findMany({
+  async  findAll(skip: number, take: number): Promise<Posts[]>{
+    const posts = await this.prisma.post.findMany({
+      skip,
+      take,
       where: { deletedAt: false, published: true },
       include: {
         user: true,
         comment: true,
-        PostLike: true
+        postLike: true
       }
     });
+
+    return posts
   }
   async update(id: string, data: UpdatePostDto): Promise<Posts> {
     return this.prisma.post.update({
@@ -56,5 +60,9 @@ export class PrismaPostRepository implements PostRepository {
         ],
       },
     });
+  }
+
+  async count(): Promise<number> {
+    return this.prisma.post.count();
   }
 }

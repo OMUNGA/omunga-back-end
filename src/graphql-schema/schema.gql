@@ -125,6 +125,18 @@ type Mutation {
   updatePost(data: UpdatePostDto!, id: String!): Posts!
 }
 
+type PaginatedPosts {
+  currentPage: Float!
+  posts: [PostsOutput!]!
+  totalPages: Float!
+  totalPosts: Float!
+}
+
+input PaginationInput {
+  limit: Int! = 10
+  page: Int! = 1
+}
+
 type PostLikes {
   createdAt: DateTime!
   deletedAt: Boolean!
@@ -135,26 +147,29 @@ type PostLikes {
 }
 
 type Posts {
+  comment: [Comments!]
   content: String!
   cover: String!
   createdAt: DateTime!
   deletedAt: Boolean!
   postID: String!
+  postLike: [PostLikes!]
   published: Boolean
   tags: [String!]!
   title: String!
   updatedAt: DateTime!
+  user: Users
   userID: String
 }
 
 type PostsOutput {
-  comments: [Comments!]
+  comment: [Comments!]
   content: String!
   cover: String!
   createdAt: DateTime!
   deletedAt: Boolean!
   postID: String!
-  postlikes: [PostLikes!]
+  postLike: [PostLikes!]
   published: Boolean
   tags: [String!]!
   title: String!
@@ -169,7 +184,7 @@ type ProfileOutput {
 }
 
 type Query {
-  FindAllPosts: [PostsOutput!]!
+  FindAllPosts(paginationInput: PaginationInput!): PaginatedPosts!
   FindOneComment(id: String!): CommentResponse!
   FindOnePost(id: String!): PostsOutput!
   FindOneUser(id: String!): UserOutput!
@@ -207,6 +222,7 @@ type UserOutput {
   name: String!
   phone: String!
   photo: String
+  role: String
   updatedAt: DateTime!
   username: String!
 }
@@ -221,6 +237,7 @@ type Users {
   password: String!
   phone: String!
   photo: String
+  role: String
   updatedAt: DateTime!
   username: String!
 }
