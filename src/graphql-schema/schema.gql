@@ -123,6 +123,7 @@ type Mutation {
   unfollowUser(data: FollowerDTO!): String
   updateComment(data: UpdateCommentDto!): CommentResponse!
   updatePost(data: UpdatePostDto!, id: String!): Posts!
+  updateUser(data: UpdateUserDTO!): Users!
 }
 
 type PaginatedPosts {
@@ -209,6 +210,15 @@ input UpdatePostDto {
   published: Boolean
   tags: [String!]
   title: String
+}
+
+input UpdateUserDTO {
+  bio: String
+  email: String
+  name: String
+  phone: String
+  userID: String
+  username: String
 }
 
 type UserOutput {

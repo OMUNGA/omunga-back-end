@@ -18,6 +18,7 @@ import { DeleteUserResolver } from './resolvers/delete/delete-user.resolver';
 import { FindOneUserResolver } from './resolvers/find-one/find-one-user.resolver';
 import { LoginResolver } from './resolvers/login/login.resolver';
 import { ProfileUserResolver } from './resolvers/profile/profile.resolver';
+import { UpdateUserResolver } from './resolvers/update/update-user.resolver';
 
 
 @Module({
@@ -50,7 +51,7 @@ import { ProfileUserResolver } from './resolvers/profile/profile.resolver';
     FindAlllUsersResolver,
     FindOneUserResolver,
     DeleteUserResolver,
-
+    UpdateUserResolver,
 
     {
       provide: CreateUsersRepository,
