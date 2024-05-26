@@ -21,4 +21,7 @@ export class UpdateUserDTO {
   @Field({nullable: true})
   bio: string;
 
+  @Field({nullable: true})
+  photo: string;
+
 }

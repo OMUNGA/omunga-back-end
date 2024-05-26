@@ -25,7 +25,7 @@ model User {
   phone         String
   password      String
   bio           String
-  photo         Bytes?
+  photo         String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   deletedAt     Boolean        @default(false)
@@ -72,7 +72,7 @@ model Post {
   postID      String     @id @default(uuid())
   title       String
   content     String
-  cover       Bytes
+  cover       String
   tags        String[]
   published   Boolean?   @default(false)
   userID      String

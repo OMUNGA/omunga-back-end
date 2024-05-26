@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { Post } from "@prisma/client";
+import { Post, PostLike } from "@prisma/client";
 import { IsString } from "class-validator";
 import { Users } from "src/modules/account/entities/user";
 import { Comments } from "src/modules/comment/entities/comment.entity";
@@ -33,7 +33,6 @@ export class Posts  {
   @Field({nullable: true})
   userID: string;
 
-
   @Field(() => Users, { nullable: true })
   user?: Users;
 
@@ -53,3 +52,4 @@ export class Posts  {
   deletedAt: boolean;
 
 }
+

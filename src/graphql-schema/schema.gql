@@ -221,6 +221,7 @@ input UpdateUserDTO {
   email: String
   name: String
   phone: String
+  photo: String
   userID: String
   username: String
 }
