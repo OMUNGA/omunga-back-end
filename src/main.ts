@@ -9,6 +9,7 @@ import { HttpErrorFilter } from 'shared/exceptions/httpErrorFilter.filter';
 import { HttpExceptionFilter } from './errors/http-exception.filter';
 import * as express from 'express';
 
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // ...
