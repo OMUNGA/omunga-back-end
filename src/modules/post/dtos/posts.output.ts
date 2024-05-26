@@ -14,6 +14,9 @@ export class PostsOutput {
   @Field()
   content: string;
 
+  @Field({ nullable: true })
+  description: string;
+
   @Field()
   cover: string;
 
@@ -23,7 +26,7 @@ export class PostsOutput {
   @Field({ nullable: true })
   published: boolean;
 
-@Field(() => Users, { nullable: true })
+  @Field(() => Users, { nullable: true })
   user?: Users;
 
   @Field(() => [Comments], { nullable: true })
@@ -40,6 +43,4 @@ export class PostsOutput {
 
   @Field()
   deletedAt: boolean;
-
-
 }

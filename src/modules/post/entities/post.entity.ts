@@ -1,4 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
+import { Post } from "@prisma/client";
 import { IsString } from "class-validator";
 import { Users } from "src/modules/account/entities/user";
 import { Comments } from "src/modules/comment/entities/comment.entity";
@@ -15,6 +16,9 @@ export class Posts  {
 
   @Field()
   content: string;
+
+  @Field()
+  description: string;
 
   @Field()
   cover: string;

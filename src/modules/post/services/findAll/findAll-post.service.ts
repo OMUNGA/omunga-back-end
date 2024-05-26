@@ -29,6 +29,7 @@ export class FindAllPostService {
         userID: post.userID,
         tags: post.tags,
         user: post.user,
+        description: post.description,
         comment: post.comment,
         postLike: post.postLike,
         published: post.published,
