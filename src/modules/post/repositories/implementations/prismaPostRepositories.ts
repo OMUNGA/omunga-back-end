@@ -10,7 +10,14 @@ export class PrismaPostRepository implements PostRepository {
   constructor(private prisma: PrismaService) { }
   async create(data: CreatePostDto): Promise<Posts> {
     const post = await this.prisma.post.create({
-      data: data,
+      data: {
+        title: data.title,
+        content: data.content,
+        description: data.description,
+        cover:  data.cover,
+        tags:  data.tags,
+        userID: data.userID
+      },
     });
 
     return post;

@@ -7,6 +7,8 @@ import { RateLimitExceptionFilter } from 'shared/exceptions/rateLimitExceptionFi
 import { GraphqlExceptionFilter } from 'shared/exceptions/graphqlExceptionFilter.filter';
 import { HttpErrorFilter } from 'shared/exceptions/httpErrorFilter.filter';
 import { HttpExceptionFilter } from './errors/http-exception.filter';
+import * as express from 'express';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +18,11 @@ async function bootstrap() {
     origin: '*',
     credentials: true,
   });
+
+  app.use(express.urlencoded({
+    limit: "50mb",
+    extended: true
+  }));
 
   app.use(
     helmet({
