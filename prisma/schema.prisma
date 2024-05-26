@@ -69,19 +69,20 @@ model SocialNetwork {
 }
 
 model Post {
-  postID    String     @id @default(uuid())
-  title     String
-  content   String
-  cover     String
-  tags      String[]
-  published Boolean?   @default(false)
-  userID    String
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  deletedAt Boolean    @default(false)
-  user      User       @relation(fields: [userID], references: [id])
-  comment   Comment[]
-  postLike  PostLike[]
+  postID      String     @id @default(uuid())
+  title       String
+  content     String
+  cover       String
+  tags        String[]
+  published   Boolean?   @default(false)
+  userID      String
+  description String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  deletedAt   Boolean    @default(false)
+  user        User       @relation(fields: [userID], references: [id])
+  comment     Comment[]
+  postLike    PostLike[]
 
   @@map("posts")
 }

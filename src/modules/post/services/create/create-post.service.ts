@@ -29,6 +29,7 @@ export class CreatePostService {
         content: createPostDto.content,
         cover: createPostDto.cover ,
         tags: createPostDto.tags,
+        description: createPostDto.description,
         userID: createPostDto.userID,
         published: false,
       });
