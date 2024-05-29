@@ -8,6 +8,7 @@ import { PrismaService } from '../../../../prisma/prisma.service';
 @Injectable()
 export class PrismaPostRepository implements PostRepository {
   constructor(private prisma: PrismaService) { }
+
   async create(data: CreatePostDto): Promise<Posts> {
     const post = await this.prisma.post.create({
       data: {
@@ -16,7 +17,8 @@ export class PrismaPostRepository implements PostRepository {
         description: data.description,
         cover:  data.cover,
         tags:  data.tags,
-        userID: data.userID
+        userID: data.userID,
+        published: data.published
       },
     });
 
@@ -71,5 +73,19 @@ export class PrismaPostRepository implements PostRepository {
 
   async count(): Promise<number> {
     return this.prisma.post.count();
+  }
+
+  async findByUserID(id: string, skip: number, take: number): Promise<Posts[]> {
+    const posts = await this.prisma.post.findMany({
+      skip,
+      take,
+      where: { deletedAt: false, published: true, userID: id },
+      include: {
+        user: true,
+        comment: true,
+        postLike: true
+      }
+    });
+    return posts
   }
 }

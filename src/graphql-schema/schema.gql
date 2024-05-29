@@ -192,6 +192,7 @@ type Query {
   FindOneComment(id: String!): CommentResponse!
   FindOnePost(id: String!): PostsOutput!
   FindOneUser(id: String!): UserOutput!
+  FindPostByUserID(paginationInput: PaginationInput!, userID: String!): PaginatedPosts!
   GetFollowing(id: String!): Followers!
   ProfileUser: ProfileOutput!
   ShowPostAllPostLike(id: String!): Float!

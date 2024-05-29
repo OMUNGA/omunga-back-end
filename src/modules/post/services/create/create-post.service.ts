@@ -31,7 +31,7 @@ export class CreatePostService {
         tags: createPostDto.tags,
         description: createPostDto.description,
         userID: createPostDto.userID,
-        published: false,
+        published: createPostDto.published,
       });
     } catch (error) {
       throw new Error(messages.InternalServerError);

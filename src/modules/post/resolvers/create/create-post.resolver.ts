@@ -11,7 +11,6 @@ import { GqlRolesGuard } from 'src/modules/account/guards/GqlRolesGuard.guard';
 import { UserRole } from '@prisma/client';
 import { Roles } from 'src/decorators/rules.decorators';
 
-@UseGuards(GqlAuthGuard)
 @Resolver('Post')
 export class CreatePostResolver {
   constructor(private readonly createPostService: CreatePostService) {}

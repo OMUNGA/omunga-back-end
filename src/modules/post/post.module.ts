@@ -17,6 +17,8 @@ import { FindOnePostResolver } from './resolvers/findOne/findOne-post.resolver';
 import { RemovePostResolver } from './resolvers/remove/remove-post.resolver';
 import { SearchPostResolver } from './resolvers/search/search-post.resolver';
 import { FindAllPostsResolver } from './resolvers/findAll/findAll-post.resolver';
+import { FindByUserIDPostsResolver } from './resolvers/findByUserId/findByUserID-post.resolver';
+import { FindbyUserIDPostService } from './services/findByUserID/findByUserId-post.service';
 
 @Module({
   controllers: [],
@@ -27,6 +29,7 @@ import { FindAllPostsResolver } from './resolvers/findAll/findAll-post.resolver'
     FindAllPostService,
     RemovePostService,
     SearchPostService,
+    FindbyUserIDPostService,
 
     CreatePostResolver,
     UpdatePostResolver,
@@ -34,6 +37,7 @@ import { FindAllPostsResolver } from './resolvers/findAll/findAll-post.resolver'
     FindAllPostsResolver,
     RemovePostResolver,
     SearchPostResolver,
+    FindByUserIDPostsResolver,
 
     {
       provide: PostRepository,
