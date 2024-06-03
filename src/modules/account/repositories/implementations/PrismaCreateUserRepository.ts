@@ -10,6 +10,7 @@ import { PrismaService } from '../../../../prisma/prisma.service';
 @Injectable()
 export class PrismaCreateUserRepository implements CreateUsersRepository {
   constructor(private readonly prisma: PrismaService) {}
+ 
 
   async create(data: CreateUserDTO): Promise<Users> {
     const user = await this.prisma.user.create({
@@ -90,5 +91,25 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
     });
 
     return user;
+  }
+
+  async search(username: string): Promise<Users[]> {
+    const user = await this.prisma.user.findMany({
+      where: {
+        OR: [
+          {
+            username: {contains: username}
+          },
+          {
+            name: {contains: username}
+          }
+        ]
+      },
+      include: {
+        posts: true
+      }
+    })
+
+    return user
   }
 }

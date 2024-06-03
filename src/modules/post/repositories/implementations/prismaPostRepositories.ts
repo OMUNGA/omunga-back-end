@@ -50,26 +50,81 @@ export class PrismaPostRepository implements PostRepository {
 
     return posts
   }
+
+  async  findUnpublishedPosts(skip: number, take: number, userID: string): Promise<Posts[]>{
+    const posts = await this.prisma.post.findMany({
+      skip,
+      take,
+      where: { deletedAt: false, published: false, userID: userID },
+      include: {
+        user: true,
+        comment: true,
+        postLike: true
+      }
+    });
+
+    return posts
+  }
+
+
   async update(id: string, data: UpdatePostDto): Promise<Posts> {
     return this.prisma.post.update({
       where: { postID: id },
       data: data,
     });
   }
-  async searchPost(searchPost: string): Promise<Posts[]> {
+  async searchPost(posttitle: string): Promise<Posts[]> {
     return this.prisma.post.findMany({
       where: {
         OR: [
           {
-            title: { contains: searchPost },
+            title: { contains: posttitle },
           },
           {
-            content: { contains: searchPost },
+            content: { contains: posttitle },
+          },
+          
+        ],
+        deletedAt: false,
+        published: true,
+      },
+      include: {
+        user: true,
+        comment: true,
+        postLike: true,
+      }
+    });
+  }
+
+  async findPostsByUserAndTitle(username: string, posttitle: string): Promise<Posts> {
+    return this.prisma.post.findFirst({
+      where: {
+        OR: [
+          {
+            AND: [
+              { title: posttitle },
+              { user: { username: username } },
+            ],
+          },
+          {
+            OR: [
+              { title: { contains: posttitle } },
+              { content: { contains: posttitle } },
+            ],
           },
         ],
+        deletedAt: false,
+        published: true,
+
+      },
+      include: {
+        user: true,
+        comment: true,
+        postLike: true,
       },
     });
   }
+  
 
   async count(): Promise<number> {
     return this.prisma.post.count();

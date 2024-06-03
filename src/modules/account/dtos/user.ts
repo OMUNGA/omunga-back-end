@@ -1,5 +1,5 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { UserRole } from '@prisma/client';
+import { Post, UserRole } from '@prisma/client';
 
 @ObjectType()
 export class UserOutput {
@@ -12,7 +12,7 @@ export class UserOutput {
   @Field()
   username: string;
 
-  @Field({})
+  @Field()
   email: string;
 
   @Field()

@@ -5,19 +5,20 @@ import { PostLikes } from '../../..//modules/post-like/entities/post-like.entity
 
 @ObjectType()
 export class PostsOutput {
-  @Field()
+
+  @Field({ nullable: true })
   postID: string;
 
-  @Field()
+  @Field({ nullable: true })
   title: string;
 
-  @Field()
+  @Field({ nullable: true })
   content: string;
 
   @Field({ nullable: true })
   description: string;
 
-  @Field()
+  @Field({ nullable: true })
   cover: string;
 
   @Field(() => [String])
@@ -35,12 +36,12 @@ export class PostsOutput {
   @Field(() => [PostLikes], { nullable: true })
   postLike?: PostLikes[];
 
-  @Field()
+  @Field({ nullable: true })
   createdAt: Date;
 
-  @Field()
+  @Field({ nullable: true })
   updatedAt: Date;
 
-  @Field()
+  @Field({ nullable: true })
   deletedAt: boolean;
 }

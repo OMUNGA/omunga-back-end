@@ -19,6 +19,8 @@ import { FindOneUserResolver } from './resolvers/find-one/find-one-user.resolver
 import { LoginResolver } from './resolvers/login/login.resolver';
 import { ProfileUserResolver } from './resolvers/profile/profile.resolver';
 import { UpdateUserResolver } from './resolvers/update/update-user.resolver';
+import { SearchUserService } from './services/search/search.service';
+import { SearchUsersResolver } from './resolvers/research/research-user.resolver';
 
 
 @Module({
@@ -42,6 +44,7 @@ import { UpdateUserResolver } from './resolvers/update/update-user.resolver';
     ProfileService,
     LoginService,
     JwtStrategy,
+    SearchUserService,
 
     //  Resolver
 
@@ -52,6 +55,7 @@ import { UpdateUserResolver } from './resolvers/update/update-user.resolver';
     FindOneUserResolver,
     DeleteUserResolver,
     UpdateUserResolver,
+    SearchUsersResolver,
 
     {
       provide: CreateUsersRepository,
