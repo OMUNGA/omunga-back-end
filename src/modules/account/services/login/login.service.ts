@@ -15,7 +15,12 @@ export class LoginService {
 
   async validateUser(data: LoginDTO): Promise<LoginOutput> {
     const user = await this.userRepository.findByEmail(data.email);
+    
     if (!user) {
+      throw new UnauthorizedException(messages.Unauthorized);
+    }
+    
+    if (user.deletedAt === true) {
       throw new UnauthorizedException(messages.Unauthorized);
     }
 
