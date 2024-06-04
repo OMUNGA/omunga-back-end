@@ -11,14 +11,14 @@ export class FindPostsByUserAndTitleService {
     private readonly userRepo: CreateUsersRepository,
   ) {}
 
-  async searchPost(username: string, posttitle: string): Promise<Posts> {
+  async searchPost(username: string, slug: string): Promise<Posts> {
     const userNameExists = await this.userRepo.findByUsername(username);
     if (!userNameExists) {
       throw new NotFoundException(messages.userNameNotfound);
     }
     const posts = await this.postRepo.findPostsByUserAndTitle(
       username,
-      posttitle,
+      slug,
     );
 
     if (!posts) {

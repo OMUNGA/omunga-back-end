@@ -6,14 +6,14 @@ import { messages } from '../../../../../shared/errorsMessages';
 export class FindOneService {
   constructor(private userRepository: CreateUsersRepository) {}
 
-  async findOne(id: string) {
+  async findOne(username: string) {
     try {
-      const user = await this.userRepository.findById(id);
+      const user = await this.userRepository.findByUsername(username);
 
       if (!user) {
         throw new NotFoundException('Ups, usuário não encontrado!');
       }
-      return this.userRepository.findById(id);
+      return this.userRepository.findByUsername(username);
     } catch (error) {
       throw new Error(messages.InternalServerError);
     }

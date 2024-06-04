@@ -11,10 +11,10 @@ export class FindPostsByUserAndTitleResolver {
   @Mutation(() => PostsOutput)
   async findPostsByUserAndTitle(
     @Args('userName') userName: string,
-    @Args('postTitle') postTitle: string
+    @Args('slug') slug: string
     
   ): Promise<Posts> {
-    const posts = await this.postService.searchPost(userName,postTitle);
+    const posts = await this.postService.searchPost(userName,slug);
     return posts
   }
 }

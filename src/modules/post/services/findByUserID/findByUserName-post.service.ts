@@ -7,18 +7,18 @@ import { PaginationInput } from '../../dtos/pagination-input';
 import { PostsOutput } from '../../dtos/posts.output';
 
 @Injectable()
-export class FindbyUserIDPostService {
+export class FindbyUserNamePostService {
   constructor(
     private readonly postRepo: PostRepository,
     private userRepo: CreateUsersRepository,
   ) {}
 
   async execute(
-    userID: string,
+    userName: string,
     paginationInput: PaginationInput,
   ): Promise<PaginatedPosts> {
     try {
-      const user = await this.userRepo.findById(userID);
+      const user = await this.userRepo.findByUsername(userName);
 
       if (!user) {
         throw new NotFoundException(messages.NotFoundUser);
@@ -28,7 +28,7 @@ export class FindbyUserIDPostService {
 
       const skip = (page - 1) * limit;
 
-      const posts = await this.postRepo.findByUserID(userID, skip, limit);
+      const posts = await this.postRepo.findByUserName(userName, skip, limit);
       const totalPosts = await this.postRepo.count();
 
       const totalPages = Math.ceil(totalPosts / limit); 
@@ -40,6 +40,7 @@ export class FindbyUserIDPostService {
         cover: post.cover,
         userID: post.userID,
         tags: post.tags,
+        slug: post.slug,
         user: post.user,
         description: post.description,
         comment: post.comment,

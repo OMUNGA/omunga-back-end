@@ -76,6 +76,7 @@ model Post {
   tags        String[]
   published   Boolean?   @default(false)
   userID      String
+  slug      String   @unique
   description String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt

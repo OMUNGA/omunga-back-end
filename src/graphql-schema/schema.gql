@@ -58,6 +58,7 @@ input CreatePostDto {
   cover: String!
   description: String!
   published: Boolean
+  slug: String
   tags: [String!]!
   title: String!
   userID: String
@@ -112,7 +113,7 @@ type Mutation {
   CreatePostLike(createPostLikeDto: CreatePostLikeDto!): PostLikes!
   LikeComment(CommentLikeDto: CreateCommentLikeDto!): CommentLikes!
   createPost(data: CreatePostDto!): PostsOutput!
-  findPostsByUserAndTitle(postTitle: String!, userName: String!): PostsOutput!
+  findPostsByUserAndTitle(slug: String!, userName: String!): PostsOutput!
   followUser(data: FollowerDTO!): Followers!
   removeComment(id: String!): Comments!
   removeCommentLike(commentLikeID: String!): CommentLikes!
@@ -159,6 +160,7 @@ type Posts {
   postID: String!
   postLike: [PostLikes!]
   published: Boolean
+  slug: String!
   tags: [String!]!
   title: String!
   updatedAt: DateTime!
@@ -176,6 +178,7 @@ type PostsOutput {
   postID: String
   postLike: [PostLikes!]
   published: Boolean
+  slug: String
   tags: [String!]!
   title: String
   updatedAt: DateTime
@@ -193,8 +196,8 @@ type Query {
   FindAllUnpublishedPosts(paginationInput: PaginationInput!): PaginatedPosts!
   FindOneComment(id: String!): CommentResponse!
   FindOnePost(id: String!): PostsOutput!
-  FindOneUser(id: String!): UserOutput!
-  FindPostByUserID(paginationInput: PaginationInput!, userID: String!): PaginatedPosts!
+  FindOneUser(userName: String!): UserOutput!
+  FindPostByUserID(paginationInput: PaginationInput!, userName: String!): PaginatedPosts!
   GetFollowing(id: String!): Followers!
   ProfileUser: ProfileOutput!
   ShowPostAllPostLike(id: String!): Float!
@@ -216,6 +219,7 @@ input UpdatePostDto {
   cover: String
   description: String
   published: Boolean
+  slug: String
   tags: [String!]
   title: String
 }

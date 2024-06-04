@@ -5,14 +5,14 @@ import { PrismaModule } from '../../../../prisma/prisma.module';
 import { CreateUsersRepository } from '../../../account/repositories/createUserRepository';
 import { PrismaPostRepository } from '../../repositories/implementations/prismaPostRepositories';
 import { PostRepository } from '../../repositories/postRepositories';
-import { FindByUserIDPostsResolver } from './findByUserID-post.resolver';
+import { FindByUserNamePostsResolver } from './findByUserName-post.resolver';
 
-describe('FindByUserIDPostsResolver', () => {
-  let controller: FindByUserIDPostsResolver;
+describe('FindByUserNamePostsResolver', () => {
+  let controller: FindByUserNamePostsResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [FindByUserIDPostsResolver],
+      controllers: [FindByUserNamePostsResolver],
       providers: [
         FindAllPostService,
         {
@@ -27,7 +27,7 @@ describe('FindByUserIDPostsResolver', () => {
       imports: [PrismaModule],
     }).compile();
 
-    controller = module.get<FindByUserIDPostsResolver>(FindByUserIDPostsResolver);
+    controller = module.get<FindByUserNamePostsResolver>(FindByUserNamePostsResolver);
   });
 
   it('should be defined', () => {

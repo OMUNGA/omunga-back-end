@@ -29,6 +29,7 @@ export class findUnpublishedPostsService {
         userID: post.userID,
         tags: post.tags,
         user: post.user,
+        slug: post.slug,
         description: post.description,
         comment: post.comment,
         postLike: post.postLike,

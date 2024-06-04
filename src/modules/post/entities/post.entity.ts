@@ -23,6 +23,9 @@ export class Posts  {
   @Field()
   cover: string;
 
+  @Field()
+  slug: string
+
   @IsString({ each: true })
   @Field(() => [String])
   tags: string[];

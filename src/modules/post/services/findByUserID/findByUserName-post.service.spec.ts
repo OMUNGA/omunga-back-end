@@ -4,15 +4,15 @@ import { PrismaCreateUserRepository } from '../../../account/repositories/implem
 import { PrismaPostRepository } from '../../repositories/implementations/prismaPostRepositories';
 import { PostRepository } from '../../repositories/postRepositories';
 import { PrismaModule } from '../../../../prisma/prisma.module';
-import { FindbyUserIDPostService } from './findByUserId-post.service';
+import { FindbyUserNamePostService } from './findByUserName-post.service';
 
-describe('FindbyUserIDPostService', () => {
-  let service: FindbyUserIDPostService;
+describe('FindbyUserNamePostService', () => {
+  let service: FindbyUserNamePostService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        FindbyUserIDPostService,
+        FindbyUserNamePostService,
         {
           provide: PostRepository,
           useClass: PrismaPostRepository,
@@ -25,7 +25,7 @@ describe('FindbyUserIDPostService', () => {
       imports: [PrismaModule],
     }).compile();
 
-    service = module.get<FindbyUserIDPostService>(FindbyUserIDPostService);
+    service = module.get<FindbyUserNamePostService>(FindbyUserNamePostService);
   });
 
   it('should be defined', () => {
