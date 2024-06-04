@@ -12,6 +12,9 @@ export class UpdatePostDto {
   cover: string;
 
   @Field({ nullable: true })
+  slug: string
+
+  @Field({ nullable: true })
   description: string;
 
   @Field(() => [String], { nullable: true })

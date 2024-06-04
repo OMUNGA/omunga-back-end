@@ -15,12 +15,13 @@ import { ProfileService } from './services/profile/profile.service';
 import { CreateUserResolver } from './resolvers/create/create-user.resolver';
 import { FindAlllUsersResolver } from './resolvers/find-all-users/find-all-users.resolver';
 import { DeleteUserResolver } from './resolvers/delete/delete-user.resolver';
-import { FindOneUserResolver } from './resolvers/find-one/find-one-user.resolver';
+
 import { LoginResolver } from './resolvers/login/login.resolver';
 import { ProfileUserResolver } from './resolvers/profile/profile.resolver';
 import { UpdateUserResolver } from './resolvers/update/update-user.resolver';
 import { SearchUserService } from './services/search/search.service';
 import { SearchUsersResolver } from './resolvers/research/research-user.resolver';
+import { FindOneUserResolver } from './resolvers/find-by-username/find-by-username.resolver';
 
 
 @Module({

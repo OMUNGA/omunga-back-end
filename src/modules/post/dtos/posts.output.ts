@@ -30,6 +30,9 @@ export class PostsOutput {
   @Field(() => Users, { nullable: true })
   user?: Users;
 
+  @Field({nullable: true})
+  slug: string;
+
   @Field(() => [Comments], { nullable: true })
   comment?: Comments[];
 

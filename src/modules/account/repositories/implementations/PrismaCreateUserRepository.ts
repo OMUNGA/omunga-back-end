@@ -36,10 +36,10 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
     return user;
   }
 
-  async findById(id: string): Promise<Users> {
-    const user = await this.prisma.user.findUnique({
+  async findById(userID: string): Promise<Users> {
+    const user = await this.prisma.user.findFirst({
       where: {
-        id: id,
+        id: userID,
       },
     });
 

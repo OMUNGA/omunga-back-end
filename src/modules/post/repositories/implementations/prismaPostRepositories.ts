@@ -7,7 +7,7 @@ import { PrismaService } from '../../../../prisma/prisma.service';
 
 @Injectable()
 export class PrismaPostRepository implements PostRepository {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(data: CreatePostDto): Promise<Posts> {
     const post = await this.prisma.post.create({
@@ -15,10 +15,11 @@ export class PrismaPostRepository implements PostRepository {
         title: data.title,
         content: data.content,
         description: data.description,
-        cover:  data.cover,
-        tags:  data.tags,
+        cover: data.cover,
+        tags: data.tags,
         userID: data.userID,
-        published: data.published
+        slug: data.slug,
+        published: data.published,
       },
     });
 
@@ -36,7 +37,7 @@ export class PrismaPostRepository implements PostRepository {
       data: { published: false, deletedAt: true },
     });
   }
-  async  findAll(skip: number, take: number): Promise<Posts[]>{
+  async findAll(skip: number, take: number): Promise<Posts[]> {
     const posts = await this.prisma.post.findMany({
       skip,
       take,
@@ -44,14 +45,18 @@ export class PrismaPostRepository implements PostRepository {
       include: {
         user: true,
         comment: true,
-        postLike: true
-      }
+        postLike: true,
+      },
     });
 
-    return posts
+    return posts;
   }
 
-  async  findUnpublishedPosts(skip: number, take: number, userID: string): Promise<Posts[]>{
+  async findUnpublishedPosts(
+    skip: number,
+    take: number,
+    userID: string,
+  ): Promise<Posts[]> {
     const posts = await this.prisma.post.findMany({
       skip,
       take,
@@ -59,13 +64,12 @@ export class PrismaPostRepository implements PostRepository {
       include: {
         user: true,
         comment: true,
-        postLike: true
-      }
+        postLike: true,
+      },
     });
 
-    return posts
+    return posts;
   }
-
 
   async update(id: string, data: UpdatePostDto): Promise<Posts> {
     return this.prisma.post.update({
@@ -83,7 +87,6 @@ export class PrismaPostRepository implements PostRepository {
           {
             content: { contains: posttitle },
           },
-          
         ],
         deletedAt: false,
         published: true,
@@ -92,30 +95,29 @@ export class PrismaPostRepository implements PostRepository {
         user: true,
         comment: true,
         postLike: true,
-      }
+      },
     });
   }
 
-  async findPostsByUserAndTitle(username: string, posttitle: string): Promise<Posts> {
+  async findPostsByUserAndTitle(
+    username: string,
+    slug: string,
+  ): Promise<Posts> {
     return this.prisma.post.findFirst({
       where: {
         OR: [
           {
-            AND: [
-              { title: posttitle },
-              { user: { username: username } },
-            ],
+            AND: [{ slug: slug }, { user: { username: username } }],
           },
           {
             OR: [
-              { title: { contains: posttitle } },
-              { content: { contains: posttitle } },
+              { title: { contains: slug } },
+              { content: { contains: slug } },
             ],
           },
         ],
         deletedAt: false,
         published: true,
-
       },
       include: {
         user: true,
@@ -124,23 +126,30 @@ export class PrismaPostRepository implements PostRepository {
       },
     });
   }
-  
 
   async count(): Promise<number> {
     return this.prisma.post.count();
   }
 
-  async findByUserID(id: string, skip: number, take: number): Promise<Posts[]> {
+  async findByUserName(
+    userName: string,
+    skip: number,
+    take: number,
+  ): Promise<Posts[]> {
     const posts = await this.prisma.post.findMany({
       skip,
       take,
-      where: { deletedAt: false, published: true, userID: id },
+      where: {
+        deletedAt: false,
+        published: true,
+        user: { username: userName },
+      },
       include: {
         user: true,
         comment: true,
-        postLike: true
-      }
+        postLike: true,
+      },
     });
-    return posts
+    return posts;
   }
 }

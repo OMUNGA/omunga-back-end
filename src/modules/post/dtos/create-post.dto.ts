@@ -18,6 +18,9 @@ export class CreatePostDto {
   @Field()
   description: string;
 
+  @Field({nullable: true})
+  slug: string
+
   @IsString()
   @IsNotEmpty()
   @Field()

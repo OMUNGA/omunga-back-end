@@ -3,7 +3,7 @@ import { FindOneService } from '../../services/find-one/find-one-user.service';
 import { CreateUsersRepository } from '../../repositories/createUserRepository';
 import { PrismaCreateUserRepository } from '../../repositories/implementations/PrismaCreateUserRepository';
 import { PrismaModule } from '../../../../prisma/prisma.module';
-import { FindOneUserResolver } from './find-one-user.resolver';
+import { FindOneUserResolver } from './find-by-username.resolver';
 
 describe('FindOneUserResolver', () => {
   let controller: FindOneUserResolver;

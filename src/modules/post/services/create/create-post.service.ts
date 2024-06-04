@@ -4,6 +4,7 @@ import { CreatePostDto } from '../../dtos/create-post.dto';
 import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
 import { messages } from '../../../../../shared/errorsMessages';
 import { UserRole } from '@prisma/client';
+import { SlugTitle } from 'src/utils/utils';
 
 @Injectable()
 export class CreatePostService {
@@ -13,13 +14,14 @@ export class CreatePostService {
   ) {}
 
   async create(createPostDto: CreatePostDto) {
-    const isLogged = await this.userRepo.findById(createPostDto.userID);
+    const user = await this.userRepo.findById(createPostDto.userID);
+    const slug = SlugTitle(createPostDto.title);
 
-    if (!isLogged) {
-      throw new UnauthorizedException(messages.Unauthenticated);
+    if (!user) {
+      throw new UnauthorizedException(messages.NotFoundUser);
     }
 
-    if (!isLogged || isLogged.role !== UserRole.MEMBER) {
+    if (!user || user.role !== UserRole.MEMBER) {
       throw new UnauthorizedException(messages.InsufficientPermissions);
     }
 
@@ -27,8 +29,9 @@ export class CreatePostService {
       return this.postRepo.create({
         title: createPostDto.title,
         content: createPostDto.content,
-        cover: createPostDto.cover ,
+        cover: createPostDto.cover,
         tags: createPostDto.tags,
+        slug: slug,
         description: createPostDto.description,
         userID: createPostDto.userID,
         published: createPostDto.published,

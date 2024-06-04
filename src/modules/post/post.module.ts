@@ -17,12 +17,13 @@ import { FindOnePostResolver } from './resolvers/findOne/findOne-post.resolver';
 import { RemovePostResolver } from './resolvers/remove/remove-post.resolver';
 import { SearchPostResolver } from './resolvers/search/search-post.resolver';
 import { FindAllPostsResolver } from './resolvers/findAll/findAll-post.resolver';
-import { FindByUserIDPostsResolver } from './resolvers/findByUserId/findByUserID-post.resolver';
-import { FindbyUserIDPostService } from './services/findByUserID/findByUserId-post.service';
+
 import { findUnpublishedPostsService } from './services/findUnpublishedPosts/find-unpublished-posts.service';
 import { findUnpublishedPostsResolver } from './resolvers/findUnpublishedPosts/find-unpublished-posts.resolver';
 import { FindPostsByUserAndTitleResolver } from './resolvers/findPostsByUserAndTitle/find-posts-by-user-and-title.resolver';
 import { FindPostsByUserAndTitleService } from './services/findPostsByUserAndTitle/find-posts-by-user-and-title.service';
+import { FindByUserNamePostsResolver } from './resolvers/findByUserId/findByUserName-post.resolver';
+import { FindbyUserNamePostService } from './services/findByUserID/findByUserName-post.service';
 
 @Module({
   controllers: [],
@@ -33,7 +34,7 @@ import { FindPostsByUserAndTitleService } from './services/findPostsByUserAndTit
     FindAllPostService,
     RemovePostService,
     SearchPostService,
-    FindbyUserIDPostService,
+    FindbyUserNamePostService,
     findUnpublishedPostsService,
     FindPostsByUserAndTitleService,
 
@@ -43,7 +44,7 @@ import { FindPostsByUserAndTitleService } from './services/findPostsByUserAndTit
     FindAllPostsResolver,
     RemovePostResolver,
     SearchPostResolver,
-    FindByUserIDPostsResolver,
+    FindByUserNamePostsResolver,
     findUnpublishedPostsResolver,
     FindPostsByUserAndTitleResolver,
 
