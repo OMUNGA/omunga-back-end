@@ -12,15 +12,15 @@ export class FindAllPostService {
   async findAll(paginationInput: PaginationInput): Promise<PaginatedPosts> {
     try {
       const { page, limit } = paginationInput;
-  
+
       const skip = (page - 1) * limit;
-  
+
       const posts = await this.postRepo.findAll(skip, limit);
-  
+
       const totalPosts = await this.postRepo.count();
-  
+
       const totalPages = Math.ceil(totalPosts / limit);
-  
+
       const postsOutput: PostsOutput[] = posts.map((post) => ({
         postID: post.postID,
         title: post.title,
@@ -38,18 +38,17 @@ export class FindAllPostService {
         updatedAt: post.updatedAt,
         deletedAt: post.deletedAt,
       }));
-  
+
       const paginatedPosts: PaginatedPosts = {
         posts: postsOutput,
         totalPages,
         totalPosts,
         currentPage: page,
       };
-  
+
       return paginatedPosts;
     } catch (error) {
       throw new Error(messages.InternalServerError);
     }
   }
-  
 }
