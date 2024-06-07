@@ -27,7 +27,7 @@ export class PrismaPostRepository implements PostRepository {
   }
   async findOne(id: string): Promise<Posts> {
     return this.prisma.post.findUnique({
-      where: { postID: id, published: false },
+      where: { postID: id },
       include: { user: true, postLike: true, comment: true },
     });
   }
@@ -117,7 +117,6 @@ export class PrismaPostRepository implements PostRepository {
           },
         ],
         deletedAt: false,
-        published: true,
       },
       include: {
         user: true,
