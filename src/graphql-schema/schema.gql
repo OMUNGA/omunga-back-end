@@ -83,6 +83,12 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input FindPostInput {
+  isAuthenticated: Boolean
+  slug: String!
+  userName: String!
+}
+
 input FollowerDTO {
   userID: String
   userIdToFollow: String!
@@ -113,7 +119,7 @@ type Mutation {
   CreatePostLike(createPostLikeDto: CreatePostLikeDto!): PostLikes!
   LikeComment(CommentLikeDto: CreateCommentLikeDto!): CommentLikes!
   createPost(data: CreatePostDto!): PostsOutput!
-  findPostsByUserAndTitle(slug: String!, userName: String!): PostsOutput!
+  findPostsByUserAndTitle(data: FindPostInput!): PostsOutput!
   followUser(data: FollowerDTO!): Followers!
   removeComment(id: String!): Comments!
   removeCommentLike(commentLikeID: String!): CommentLikes!

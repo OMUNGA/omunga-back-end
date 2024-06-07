@@ -1,4 +1,6 @@
 import { CreatePostDto } from '../dtos/create-post.dto';
+import { FindPostInput } from '../dtos/find-post-output';
+
 import { UpdatePostDto } from '../dtos/update-post.dto';
 import { Posts } from '../entities/post.entity';
 
@@ -11,6 +13,7 @@ export abstract class PostRepository {
   abstract findUnpublishedPosts(skip: number, take: number, userID: string): Promise<Posts[]>
   abstract update(id: string, data: UpdatePostDto): Promise<Posts>;
   abstract searchPost(posttitle: string): Promise<Posts[]>;
-  abstract findPostsByUserAndTitle(username: string, slug: string): Promise<Posts>;
+  abstract findPostsByUserAndTitle( data: FindPostInput): Promise<Posts>;
+  abstract findUnpublishedPostsByUserAndTitle(data: FindPostInput): Promise<Posts>;
   abstract count(): Promise<number>;
 }
