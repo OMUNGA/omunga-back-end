@@ -4,6 +4,8 @@ import { CreatePostDto } from '../../dtos/create-post.dto';
 import { UpdatePostDto } from '../../dtos/update-post.dto';
 import { Posts } from '../../entities/post.entity';
 import { PrismaService } from '../../../../prisma/prisma.service';
+import { FindPostInput } from '../../dtos/find-post-output';
+
 
 @Injectable()
 export class PrismaPostRepository implements PostRepository {
@@ -27,7 +29,7 @@ export class PrismaPostRepository implements PostRepository {
   }
   async findOne(id: string): Promise<Posts> {
     return this.prisma.post.findUnique({
-      where: { postID: id },
+      where: { postID: id, },
       include: { user: true, postLike: true, comment: true },
     });
   }
@@ -100,19 +102,45 @@ export class PrismaPostRepository implements PostRepository {
   }
 
   async findPostsByUserAndTitle(
-    username: string,
-    slug: string,
+  data: FindPostInput
   ): Promise<Posts> {
     return this.prisma.post.findFirst({
       where: {
         OR: [
           {
-            AND: [{ slug: slug }, { user: { username: username } }],
+            AND: [{ slug: data.slug }, { user: { username: data.userName } }],
           },
           {
             OR: [
-              { title: { contains: slug } },
-              { content: { contains: slug } },
+              { title: { contains: data.slug } },
+              { content: { contains: data.slug } },
+            ],
+          },
+        ],
+        deletedAt: false,
+        published: true
+      },
+      include: {
+        user: true,
+        comment: true,
+        postLike: true,
+      },
+    });
+  }
+
+  async findUnpublishedPostsByUserAndTitle(
+    data: FindPostInput
+  ): Promise<Posts> {
+    return this.prisma.post.findFirst({
+      where: {
+        OR: [
+          {
+            AND: [{ slug: data.slug }, { user: { username: data.userName } }],
+          },
+          {
+            OR: [
+              { title: { contains: data.slug } },
+              { content: { contains: data.slug } },
             ],
           },
         ],
