@@ -5,7 +5,6 @@ import { Posts } from '../../entities/post.entity';
 import { CreateUsersRepository } from 'src/modules/account/repositories/createUserRepository';
 import { FindPostInput } from '../../dtos/find-post-output';
 
-
 @Injectable()
 export class FindPostsByUserAndTitleService {
   constructor(
@@ -19,21 +18,12 @@ export class FindPostsByUserAndTitleService {
       throw new NotFoundException(messages.userNameNotfound);
     }
 
-    let posts: Posts
+    let posts: Posts;
     if (data.isAuthenticated) {
-      posts = await this.postRepo.findPostsByUserAndTitle(data)
       posts = await this.postRepo.findUnpublishedPostsByUserAndTitle(data);
-
     } else {
       posts = await this.postRepo.findPostsByUserAndTitle(data);
     }
-
-
-
-    // const posts = await this.postRepo.findPostsByUserAndTitle(
-    //   data.userName,
-    //   data.slug,
-    // );
 
     if (!posts) {
       throw new NotFoundException(messages.postNotfound);

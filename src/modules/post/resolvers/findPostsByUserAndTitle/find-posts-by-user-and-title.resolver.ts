@@ -24,10 +24,9 @@ export class FindPostsByUserAndTitleResolver {
     @CurrentUser() user: Users,
   ): Promise<Posts> {
     const isAuthenticated = !!user;
-    console.log("logado", isAuthenticated)
     const searchUsername = isAuthenticated ? (data.userName || user.username) : data.userName;
     data.userName  = searchUsername
-
+    data.isAuthenticated = isAuthenticated
     const posts = await this.postService.searchPost(data);
     return posts;
   }

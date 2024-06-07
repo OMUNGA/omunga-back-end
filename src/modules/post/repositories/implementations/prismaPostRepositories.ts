@@ -145,7 +145,6 @@ export class PrismaPostRepository implements PostRepository {
           },
         ],
         deletedAt: false,
-        published: false
       },
       include: {
         user: true,
