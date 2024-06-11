@@ -24,6 +24,9 @@ export class UserOutput {
   @Field({ nullable: true })
   photo: string;
 
+  @Field({ nullable: true })
+  cover: string;
+
   @Field()
   followers: number;
 
