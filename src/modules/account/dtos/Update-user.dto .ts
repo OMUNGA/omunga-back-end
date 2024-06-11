@@ -17,6 +17,8 @@ export class UpdateUserDTO {
   @Field({nullable: true})
   phone: string;
 
+  @Field({nullable: true})
+  cover: string;
 
   @Field({nullable: true})
   bio: string;

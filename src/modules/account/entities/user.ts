@@ -29,6 +29,9 @@ export class Users implements User {
   photo: string;
 
   @Field({nullable: true})
+  cover: string;
+
+  @Field({nullable: true})
   role: UserRole;
 
   @Field()
