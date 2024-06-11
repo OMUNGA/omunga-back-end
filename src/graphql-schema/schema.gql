@@ -243,6 +243,7 @@ input UpdateUserDTO {
 
 type UserOutput {
   bio: String!
+  cover: String
   createdAt: DateTime!
   deletedAt: Boolean!
   email: String!
