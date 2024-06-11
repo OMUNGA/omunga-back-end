@@ -232,6 +232,7 @@ input UpdatePostDto {
 
 input UpdateUserDTO {
   bio: String
+  cover: String
   email: String
   name: String
   phone: String
@@ -258,6 +259,7 @@ type UserOutput {
 
 type Users {
   bio: String!
+  cover: String
   createdAt: DateTime!
   deletedAt: Boolean!
   email: String!

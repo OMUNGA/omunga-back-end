@@ -58,6 +58,7 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
         email: data.email,
         bio: data.bio,
         phone: data.phone,
+        cover: data.cover,
         photo: data.photo
       },
     });

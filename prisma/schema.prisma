@@ -26,6 +26,7 @@ model User {
   password      String
   bio           String
   photo         String?
+  cover         String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   deletedAt     Boolean        @default(false)
@@ -76,7 +77,7 @@ model Post {
   tags        String[]
   published   Boolean?   @default(false)
   userID      String
-  slug      String   @unique
+  slug        String     @unique
   description String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
