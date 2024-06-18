@@ -10,6 +10,7 @@ export class SearchPostService {
   async searchPost(posttitle: string): Promise<Posts[]> {
     try {
       const posts = await this.postRepo.searchPost(posttitle);
+      
       return posts;
     } catch (error) {
       throw new Error(messages.InternalServerError);

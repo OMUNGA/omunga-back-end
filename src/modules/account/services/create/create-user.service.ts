@@ -36,8 +36,6 @@ export class CreateUserService {
       name: createUserDTO.name,
       username: createUserDTO.username,
       email: createUserDTO.email,
-      bio: createUserDTO.bio,
-      phone: createUserDTO.phone,
       password: passwordHas,
     });
   }

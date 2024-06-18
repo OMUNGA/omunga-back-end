@@ -1,6 +1,5 @@
 import { CreateUserDTO } from '../../dtos/Create-user.dto';
 import { UpdateUserDTO } from '../../dtos/Update-user.dto ';
-import { User } from '@prisma/client';
 import { CreateUsersRepository } from '../createUserRepository';
 import { Injectable } from '@nestjs/common';
 import { ProfileOutput } from '../../dtos/profile.dto';
@@ -17,8 +16,6 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
       data: {
         name: data.name,
         email: data.email,
-        bio: data.bio,
-        phone: data.phone,
         username: data.username,
         password: data.password,
       },
@@ -59,7 +56,9 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
         bio: data.bio,
         phone: data.phone,
         cover: data.cover,
-        photo: data.photo
+        photo: data.photo,
+        address: data.address,
+        socialMedia: data.socialMedia
       },
     });
   }

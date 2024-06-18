@@ -34,6 +34,12 @@ export class Users implements User {
   @Field({nullable: true})
   role: UserRole;
 
+  @Field({nullable: true})
+  address: string;
+
+  @Field(() => [String], { nullable: true })
+  socialMedia: string[];
+
   @Field()
   createdAt: Date;
 

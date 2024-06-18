@@ -22,11 +22,13 @@ model User {
   name          String
   username      String
   email         String         @unique
-  phone         String
+  phone         String?
   password      String
-  bio           String
+  bio           String?
   photo         String?
   cover         String?
+  address       String?
+  socialMedia   String[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   deletedAt     Boolean        @default(false)
@@ -78,7 +80,7 @@ model Post {
   published   Boolean?   @default(false)
   userID      String
   slug        String     @unique
-  description String
+  description String?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   deletedAt   Boolean    @default(false)
