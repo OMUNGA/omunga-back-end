@@ -84,10 +84,10 @@ export class PrismaPostRepository implements PostRepository {
       where: {
         OR: [
           {
-            title: { contains: posttitle },
+            title: { contains: posttitle, mode: 'insensitive' }, 
           },
           {
-            content: { contains: posttitle },
+            content: { contains: posttitle, mode: 'insensitive' },
           },
         ],
         deletedAt: false,

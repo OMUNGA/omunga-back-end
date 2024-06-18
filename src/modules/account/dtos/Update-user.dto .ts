@@ -6,24 +6,30 @@ export class UpdateUserDTO {
   userID?: string;
 
   @Field({nullable: true})
-  name: string;
+  name?: string;
 
   @Field({nullable: true})
-  username: string;
+  username?: string;
 
   @Field({nullable: true})
-  email: string;
+  email?: string;
 
   @Field({nullable: true})
-  phone: string;
+  phone?: string;
 
   @Field({nullable: true})
-  cover: string;
+  cover?: string;
 
   @Field({nullable: true})
-  bio: string;
+  bio?: string;
 
   @Field({nullable: true})
-  photo: string;
+  photo?: string;
+
+  @Field({nullable: true})
+  address?: string;
+
+  @Field(() => [String], { nullable: true })
+  socialMedia?: string[];
 
 }

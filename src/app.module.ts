@@ -22,7 +22,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
       driver: ApolloFederationDriver,
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema/schema.gql'),
       sortSchema: true,
-      playground: false,
+      playground: true,
       // context: ({ req, res }) => ({ req, res }),
 
       useFactory: (config: ConfigService) => ({ 

@@ -13,10 +13,8 @@ export class CreatePostDto {
   @Field()
   content: string;
   
-  @IsString()
-  @IsNotEmpty()
-  @Field()
-  description: string;
+  @Field({nullable: true})
+  description?: string;
 
   @Field({nullable: true})
   slug: string
