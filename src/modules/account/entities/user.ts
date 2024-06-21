@@ -7,22 +7,22 @@ export class Users implements User {
   @Field()
   id: string;
 
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   username: string;
 
-  @Field({})
+  @Field({ nullable: true })
   email: string;
 
-  @Field()
+  @Field({ nullable: true })
   phone: string;
 
   @Field()
   password: string;
 
-  @Field()
+  @Field({ nullable: true })
   bio: string;
 
   @Field({nullable: true})
