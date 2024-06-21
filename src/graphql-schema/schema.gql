@@ -242,36 +242,36 @@ input UpdateUserDTO {
 }
 
 type UserOutput {
-  bio: String!
+  bio: String
   cover: String
   createdAt: DateTime!
   deletedAt: Boolean!
-  email: String!
+  email: String
   followers: Float!
   followings: Float!
   id: String!
-  name: String!
-  phone: String!
+  name: String
+  phone: String
   photo: String
   role: String
   updatedAt: DateTime!
-  username: String!
+  username: String
 }
 
 type Users {
   address: String
-  bio: String!
+  bio: String
   cover: String
   createdAt: DateTime!
   deletedAt: Boolean!
-  email: String!
+  email: String
   id: String!
-  name: String!
+  name: String
   password: String!
-  phone: String!
+  phone: String
   photo: String
   role: String
   socialMedia: [String!]
   updatedAt: DateTime!
-  username: String!
+  username: String
 }

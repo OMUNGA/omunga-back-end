@@ -15,7 +15,6 @@ export class ProfileUserResolver {
   async ProfileUser(
     @CurrentUser() user: Users,
   ): Promise<ProfileOutput> {
-    console.log("usuario logado", user.id)
     return await this.patientService.profile(user.id);
   }
 }
