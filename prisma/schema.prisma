@@ -39,6 +39,7 @@ model User {
   posts         Post[]
   Follower      Follower[]
   role          UserRole       @default(MEMBER)
+  CommentReply  CommentReply[]
 
   @@map("users")
 }
@@ -92,18 +93,33 @@ model Post {
 }
 
 model Comment {
-  commentID   String        @id @default(uuid())
-  postID      String
-  userID      String
-  content     String
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  deletedAt   Boolean       @default(false)
-  post        Post          @relation(fields: [postID], references: [postID])
-  user        User          @relation(fields: [userID], references: [id])
-  CommentLike CommentLike[]
+  commentID    String         @id @default(uuid())
+  postID       String
+  userID       String
+  content      String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  deletedAt    DateTime
+  post         Post           @relation(fields: [postID], references: [postID])
+  user         User           @relation(fields: [userID], references: [id])
+  CommentLike  CommentLike[]
+  CommentReply CommentReply[]
 
   @@map("comments")
+}
+
+model CommentReply {
+  id        String    @id @default(uuid())
+  commentID String
+  userID    String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  comment   Comment   @relation(fields: [commentID], references: [commentID])
+  user      User      @relation(fields: [userID], references: [id])
+
+  @@map("commentReplies")
 }
 
 model PostLike {

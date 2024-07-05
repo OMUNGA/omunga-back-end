@@ -21,6 +21,16 @@ type CommentLikes {
   userID: String!
 }
 
+type CommentReplyResponse {
+  commentID: String!
+  content: String!
+  createdAt: DateTime!
+  id: String!
+  updatedAt: DateTime!
+  user: Users!
+  userID: String!
+}
+
 type CommentResponse {
   commentID: String!
   content: String!
@@ -40,12 +50,6 @@ type Comments {
   postID: String!
   updatedAt: DateTime!
   userID: String!
-}
-
-input CreateCommentDto {
-  content: String!
-  postID: String!
-  userID: String
 }
 
 input CreateCommentLikeDto {
@@ -113,13 +117,13 @@ type LoginOutput {
 }
 
 type Mutation {
-  CreateComment(createCommentDto: CreateCommentDto!): CommentResponse!
+  CreateComment(createReply: ReplyCommentDTO!): CommentReplyResponse!
   CreatePostLike(createPostLikeDto: CreatePostLikeDto!): PostLikes!
   LikeComment(CommentLikeDto: CreateCommentLikeDto!): CommentLikes!
   createPost(data: CreatePostDto!): PostsOutput!
   findPostsByUserAndTitle(data: FindPostInput!): PostsOutput!
   followUser(data: FollowerDTO!): Followers!
-  removeComment(id: String!): Comments!
+  removeComment(id: String!): commentReply!
   removeCommentLike(commentLikeID: String!): CommentLikes!
   removePostt(id: String!): Posts!
   removePosttLike(id: String!): PostLikes!
@@ -129,6 +133,7 @@ type Mutation {
   signup(data: CreateUserDTO!): UserOutput!
   unfollowUser(data: FollowerDTO!): String
   updateComment(data: UpdateCommentDto!): CommentResponse!
+  updateCommentReply(data: UpdateReplyCommentDTO!): CommentReplyResponse!
   updatePost(data: UpdatePostDto!, id: String!): Posts!
   updateUser(data: UpdateUserDTO!): Users!
 }
@@ -199,6 +204,7 @@ type Query {
   FindAllPosts(paginationInput: PaginationInput!): PaginatedPosts!
   FindAllUnpublishedPosts(paginationInput: PaginationInput!): PaginatedPosts!
   FindOneComment(id: String!): CommentResponse!
+  FindOneCommentReply(id: String!): CommentReplyResponse!
   FindOnePost(id: String!): PostsOutput!
   FindOneUser(userName: String!): UserOutput!
   FindPostByUserID(paginationInput: PaginationInput!, userName: String!): PaginatedPosts!
@@ -206,10 +212,17 @@ type Query {
   ProfileUser: ProfileOutput!
   ShowPostAllPostLike(id: String!): Float!
   findAllCommentLikes(commentID: String!): [CommentLikes!]!
+  findAllCommentReply(commentID: String!): [CommentReplyResponse!]!
   findAllComments(postID: String!): [CommentResponse!]!
   findAllUsers: [UserOutput!]!
   getFollowers(id: String!): [Followers!]!
   searchUsers(searchInput: String!): [UserOutput!]!
+}
+
+input ReplyCommentDTO {
+  commentID: String!
+  content: String!
+  userID: String
 }
 
 input UpdateCommentDto {
@@ -226,6 +239,12 @@ input UpdatePostDto {
   slug: String
   tags: [String!]
   title: String
+}
+
+input UpdateReplyCommentDTO {
+  commentID: String
+  content: String
+  userID: String
 }
 
 input UpdateUserDTO {
@@ -274,4 +293,14 @@ type Users {
   socialMedia: [String!]
   updatedAt: DateTime!
   username: String
+}
+
+type commentReply {
+  commentID: String!
+  content: String!
+  createdAt: DateTime!
+  deletedAt: DateTime
+  id: String!
+  updatedAt: DateTime!
+  userID: String!
 }

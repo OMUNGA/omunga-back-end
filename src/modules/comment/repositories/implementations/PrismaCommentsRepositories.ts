@@ -1,4 +1,4 @@
-import { Comment } from '@prisma/client';
+import { Comment, CommentReply } from '@prisma/client';
 import { CreateCommentDto } from '../../dto/create-comment.dto';
 import { UpdateCommentDto } from '../../dto/update-comment.dto';
 import { CommentsRepository } from '../CommentsRepositories';
@@ -13,6 +13,9 @@ export class prismaCommentsRepository implements CommentsRepository {
   async create(data: CreateCommentDto): Promise<Comments> {
     const comment = await this.prisma.comment.create({
       data: data,
+      include:{
+        user: true
+      }
     });
 
     return comment;
@@ -52,4 +55,7 @@ export class prismaCommentsRepository implements CommentsRepository {
       data: data,
     });
   }
+
+
+
 }
