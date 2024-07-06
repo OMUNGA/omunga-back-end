@@ -21,28 +21,28 @@ export class CreateCommentDto {
 
 @ObjectType()
 export class CommentResponse {
-  @Field()
+  @Field({nullable: true})
   commentID: string;
   
-  @Field()
+  @Field({nullable: true})
   postID: string;
 
-  @Field()
+  @Field({nullable: true})
   userID: string;
 
-  @Field()
+  @Field({nullable: true})
   content: string;
 
-  @Field()
+  @Field({nullable: true})
   createdAt: Date;
 
-  @Field()
+  @Field({nullable: true})
   updatedAt: Date;
 
-  @Field()
-  deletedAt: boolean;
+  @Field({nullable: true})
+  deletedAt: Date;
 
-  @Field()
+  @Field({nullable: true})
   user: Users;
 
 }

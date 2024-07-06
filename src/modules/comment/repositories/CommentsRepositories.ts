@@ -1,5 +1,5 @@
-import { UpdateCommentDto } from '../dto/update-comment.dto';
 import { CreateCommentDto } from '../dto/create-comment.dto';
+import { UpdateCommentDto } from '../dto/update-comment.dto';
 import { Comments } from '../entities/comment.entity';
 
 export abstract class CommentsRepository {

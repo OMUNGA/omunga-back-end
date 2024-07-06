@@ -15,6 +15,7 @@ import { join } from 'path';
 import { PrismaModule } from 'nestjs-prisma';
 
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { CommentReplyModule } from './modules/comment-reply/commentReply.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     CommentLikeModule,
     PostLikeModule,
     FollowersModule,
+    CommentReplyModule,
     PassportModule.register({ session: true }),
   ],
 

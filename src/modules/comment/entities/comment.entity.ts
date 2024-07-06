@@ -22,5 +22,5 @@ export class Comments implements Comment {
   updatedAt: Date;
 
   @Field()
-  deletedAt: boolean;
+  deletedAt: Date;
 }

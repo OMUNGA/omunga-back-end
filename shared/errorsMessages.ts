@@ -10,5 +10,6 @@ export enum messages {
   userAldreadyExists = "ops, usuário já existe.",
   InsufficientPermissions = "Permissões insuficientes para acessar este recurso.",
   invalidEmail = 'Email inválido',
-  postNotfound = 'Artigo não encontrado'
+  postNotfound = 'Artigo não encontrado',
+  commentNotFound ="Comentário não encontrado."
 }

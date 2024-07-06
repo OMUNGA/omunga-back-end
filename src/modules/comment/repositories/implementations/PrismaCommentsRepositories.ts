@@ -1,4 +1,4 @@
-import { Comment } from '@prisma/client';
+import { Comment, CommentReply } from '@prisma/client';
 import { CreateCommentDto } from '../../dto/create-comment.dto';
 import { UpdateCommentDto } from '../../dto/update-comment.dto';
 import { CommentsRepository } from '../CommentsRepositories';
@@ -12,7 +12,14 @@ export class prismaCommentsRepository implements CommentsRepository {
 
   async create(data: CreateCommentDto): Promise<Comments> {
     const comment = await this.prisma.comment.create({
-      data: data,
+      data: {
+        content: data.content,
+        postID: data.postID,
+        userID: data.userID,
+      },
+      include:{
+        user: true
+      }
     });
 
     return comment;
@@ -31,15 +38,16 @@ export class prismaCommentsRepository implements CommentsRepository {
     return comment;
   }
   async remove(id: string): Promise<Comments> {
-   return await this.prisma.comment.update({
-      where: { commentID: id },
-      data: { deletedAt: true },
-    });
+   return await this.prisma.comment.delete({
+    where: {
+      commentID: id
+    }
+   })
   }
 
   async findAll(postID: string): Promise<Comments[]> {
     return await this.prisma.comment.findMany({
-      where: { postID: postID, deletedAt: false},
+      where: { postID: postID},
       include: {
         user: true,
       },
@@ -52,4 +60,5 @@ export class prismaCommentsRepository implements CommentsRepository {
       data: data,
     });
   }
+
 }
