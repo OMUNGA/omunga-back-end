@@ -11,12 +11,12 @@ import { commentReply } from '../../entities/comment-reply.entity';
 @UseGuards(GqlAuthGuard)
 @Resolver()
 export class RemoveCommentReplyResolver {
-  constructor(private removeCommentReply: RemoveCommentReplyService) {}
+  constructor(private removeCommentReplySer: RemoveCommentReplyService) {}
 
   @UseGuards(GqlAuthGuard, GqlRolesGuard)
   @Roles(UserRole.MEMBER)
   @Mutation(() => commentReply)
-  async removeComment(@Args('id', { type: () => String }) id: string) {
-    return await this.removeCommentReply.remove(id);
+  async removeCommentReply(@Args('id', { type: () => String }) id: string) {
+    return await this.removeCommentReplySer.remove(id);
   }
 }

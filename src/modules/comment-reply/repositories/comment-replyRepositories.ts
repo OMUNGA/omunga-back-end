@@ -1,5 +1,5 @@
 import { ReplyCommentDTO } from "../dto/reply-comment.dto";
-import { UpdateReplyCommentDTO } from "../dto/update-comment.dto";
+import { UpdateReplyCommentDTO } from "../dto/update-comment-reply.dto";
 import { commentReply } from "../entities/comment-reply.entity";
 
 

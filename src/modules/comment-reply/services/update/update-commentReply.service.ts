@@ -1,8 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { messages } from '../../../../../shared/errorsMessages';
 import { CommentReplyRepository } from '../../repositories/comment-replyRepositories';
-import { UpdateReplyCommentDTO } from '../../dto/update-comment.dto';
+import { UpdateReplyCommentDTO } from '../../dto/update-comment-reply.dto';
 
 @Injectable()
 export class UpdateCommentReplyService {

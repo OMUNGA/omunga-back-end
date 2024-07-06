@@ -99,7 +99,7 @@ model Comment {
   content      String
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
-  deletedAt    DateTime
+  deletedAt    DateTime?
   post         Post           @relation(fields: [postID], references: [postID])
   user         User           @relation(fields: [userID], references: [id])
   CommentLike  CommentLike[]

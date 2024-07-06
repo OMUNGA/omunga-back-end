@@ -32,24 +32,30 @@ type CommentReplyResponse {
 }
 
 type CommentResponse {
-  commentID: String!
-  content: String!
-  createdAt: DateTime!
-  deletedAt: Boolean!
-  postID: String!
-  updatedAt: DateTime!
-  user: Users!
-  userID: String!
+  commentID: String
+  content: String
+  createdAt: DateTime
+  deletedAt: DateTime
+  postID: String
+  updatedAt: DateTime
+  user: Users
+  userID: String
 }
 
 type Comments {
   commentID: String!
   content: String!
   createdAt: DateTime!
-  deletedAt: Boolean!
+  deletedAt: DateTime!
   postID: String!
   updatedAt: DateTime!
   userID: String!
+}
+
+input CreateCommentDto {
+  content: String!
+  postID: String!
+  userID: String
 }
 
 input CreateCommentLikeDto {
@@ -117,14 +123,16 @@ type LoginOutput {
 }
 
 type Mutation {
-  CreateComment(createReply: ReplyCommentDTO!): CommentReplyResponse!
+  CreateComment(createCommentDto: CreateCommentDto!): CommentResponse!
+  CreateCommentReply(createReply: ReplyCommentDTO!): CommentReplyResponse!
   CreatePostLike(createPostLikeDto: CreatePostLikeDto!): PostLikes!
   LikeComment(CommentLikeDto: CreateCommentLikeDto!): CommentLikes!
   createPost(data: CreatePostDto!): PostsOutput!
   findPostsByUserAndTitle(data: FindPostInput!): PostsOutput!
   followUser(data: FollowerDTO!): Followers!
-  removeComment(id: String!): commentReply!
+  removeComment(id: String!): Comments!
   removeCommentLike(commentLikeID: String!): CommentLikes!
+  removeCommentReply(id: String!): commentReply!
   removePostt(id: String!): Posts!
   removePosttLike(id: String!): PostLikes!
   removeUser(id: String!): UserOutput!
@@ -244,6 +252,7 @@ input UpdatePostDto {
 input UpdateReplyCommentDTO {
   commentID: String
   content: String
+  id: String
   userID: String
 }
 

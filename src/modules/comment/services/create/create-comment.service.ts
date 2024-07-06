@@ -12,7 +12,7 @@ export class CreateCommentService {
       const comment = await this.commentRepo.create(createCommentDto);
       return comment;
     } catch (error) {
-       throw new Error(messages.InternalServerError);
+      //  throw new Error(messages.InternalServerError);
     }
   }
 }
