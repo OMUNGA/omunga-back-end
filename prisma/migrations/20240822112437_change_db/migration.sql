@@ -3,20 +3,20 @@ CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'MODERATOR', 'VERIFIED', 'PREMIUM', 'ME
 
 -- CreateTable
 CREATE TABLE "users" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "username" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "phone" TEXT,
-    "password" TEXT NOT NULL,
-    "bio" TEXT,
-    "photo" TEXT,
-    "cover" TEXT,
-    "address" TEXT,
-    "socialMedia" TEXT[],
+    "id" STRING NOT NULL,
+    "name" STRING NOT NULL,
+    "username" STRING NOT NULL,
+    "email" STRING NOT NULL,
+    "phone" STRING,
+    "password" STRING NOT NULL,
+    "bio" STRING,
+    "photo" STRING,
+    "cover" STRING,
+    "address" STRING,
+    "socialMedia" STRING[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "deletedAt" BOOLEAN NOT NULL DEFAULT false,
+    "deletedAt" BOOL NOT NULL DEFAULT false,
     "role" "UserRole" NOT NULL DEFAULT 'MEMBER',
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
@@ -24,83 +24,96 @@ CREATE TABLE "users" (
 
 -- CreateTable
 CREATE TABLE "followers" (
-    "id" TEXT NOT NULL,
-    "userTofollowID" TEXT NOT NULL,
-    "userID" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "userTofollowID" STRING NOT NULL,
+    "userID" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "deletedAt" BOOLEAN NOT NULL DEFAULT false,
+    "deletedAt" BOOL NOT NULL DEFAULT false,
 
     CONSTRAINT "followers_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "focialNetworks" (
-    "socialnetworkID" TEXT NOT NULL,
-    "facebook" TEXT NOT NULL,
-    "twitter" TEXT NOT NULL,
-    "medium" TEXT NOT NULL,
-    "linkedin" TEXT NOT NULL,
-    "instagram" TEXT NOT NULL,
-    "userID" TEXT NOT NULL,
+    "socialnetworkID" STRING NOT NULL,
+    "facebook" STRING NOT NULL,
+    "twitter" STRING NOT NULL,
+    "medium" STRING NOT NULL,
+    "linkedin" STRING NOT NULL,
+    "instagram" STRING NOT NULL,
+    "userID" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "deletedAt" BOOLEAN NOT NULL DEFAULT false,
+    "deletedAt" BOOL NOT NULL DEFAULT false,
 
     CONSTRAINT "focialNetworks_pkey" PRIMARY KEY ("socialnetworkID")
 );
 
 -- CreateTable
 CREATE TABLE "posts" (
-    "postID" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
-    "cover" TEXT NOT NULL,
-    "tags" TEXT[],
-    "published" BOOLEAN DEFAULT false,
-    "userID" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
-    "description" TEXT,
+    "postID" STRING NOT NULL,
+    "title" STRING NOT NULL,
+    "content" STRING NOT NULL,
+    "cover" STRING NOT NULL,
+    "tags" STRING[],
+    "published" BOOL DEFAULT false,
+    "userID" STRING NOT NULL,
+    "slug" STRING NOT NULL,
+    "description" STRING,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "deletedAt" BOOLEAN NOT NULL DEFAULT false,
+    "deletedAt" BOOL NOT NULL DEFAULT false,
 
     CONSTRAINT "posts_pkey" PRIMARY KEY ("postID")
 );
 
 -- CreateTable
 CREATE TABLE "comments" (
-    "commentID" TEXT NOT NULL,
-    "postID" TEXT NOT NULL,
-    "userID" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
+    "commentID" STRING NOT NULL,
+    "postID" STRING NOT NULL,
+    "userID" STRING NOT NULL,
+    "content" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "deletedAt" BOOLEAN NOT NULL DEFAULT false,
+    "deletedAt" TIMESTAMP(3),
 
     CONSTRAINT "comments_pkey" PRIMARY KEY ("commentID")
 );
 
 -- CreateTable
-CREATE TABLE "postlikes" (
-    "postlikeID" TEXT NOT NULL,
-    "postID" TEXT NOT NULL,
-    "userID" TEXT NOT NULL,
+CREATE TABLE "commentReplies" (
+    "id" STRING NOT NULL,
+    "commentID" STRING NOT NULL,
+    "userID" STRING NOT NULL,
+    "content" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "deletedAt" BOOLEAN NOT NULL DEFAULT false,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "commentReplies_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "postlikes" (
+    "postlikeID" STRING NOT NULL,
+    "postID" STRING NOT NULL,
+    "userID" STRING NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "deletedAt" BOOL NOT NULL DEFAULT false,
 
     CONSTRAINT "postlikes_pkey" PRIMARY KEY ("postlikeID")
 );
 
 -- CreateTable
 CREATE TABLE "commentLikes" (
-    "commentlikeID" TEXT NOT NULL,
-    "CommentID" TEXT NOT NULL,
-    "userID" TEXT NOT NULL,
+    "commentlikeID" STRING NOT NULL,
+    "CommentID" STRING NOT NULL,
+    "userID" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "deletedAt" BOOLEAN NOT NULL DEFAULT false,
+    "deletedAt" BOOL NOT NULL DEFAULT false,
 
     CONSTRAINT "commentLikes_pkey" PRIMARY KEY ("commentlikeID")
 );
@@ -128,6 +141,12 @@ ALTER TABLE "comments" ADD CONSTRAINT "comments_postID_fkey" FOREIGN KEY ("postI
 
 -- AddForeignKey
 ALTER TABLE "comments" ADD CONSTRAINT "comments_userID_fkey" FOREIGN KEY ("userID") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "commentReplies" ADD CONSTRAINT "commentReplies_commentID_fkey" FOREIGN KEY ("commentID") REFERENCES "comments"("commentID") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "commentReplies" ADD CONSTRAINT "commentReplies_userID_fkey" FOREIGN KEY ("userID") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "postlikes" ADD CONSTRAINT "postlikes_postID_fkey" FOREIGN KEY ("postID") REFERENCES "posts"("postID") ON DELETE CASCADE ON UPDATE CASCADE;
