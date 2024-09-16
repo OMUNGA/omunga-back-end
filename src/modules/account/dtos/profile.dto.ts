@@ -10,6 +10,5 @@ export class ProfileOutput {
   @Field(() => [Followers])
   followers: Followers[];
 
-  @Field(() => [Followers]) 
-  following: Followers[];
+
 }

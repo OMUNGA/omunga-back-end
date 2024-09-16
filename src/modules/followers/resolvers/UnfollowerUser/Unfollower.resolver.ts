@@ -22,7 +22,6 @@ export class UnfollowUserResolver {
     @Args('data') data: FollowerDTO,
     @CurrentUser() user: Users,
   ) {
-    data.userID = user.id;
-    await this.unFollowerService.unFollower(data);
+    await this.unFollowerService.unFollower(user.id, data.userToFollowId);
   }
 }

@@ -1,16 +1,16 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Follower } from '@prisma/client';
+import { Follow } from '@prisma/client';
 
 @ObjectType()
-export class Followers implements Follower {
+export class Followers implements Follow {
   @Field()
   id: string;
 
   @Field()
-  userTofollowID: string;
+  followerId: string;
 
   @Field()
-  userID: string;
+  followingId: string;
 
   @Field()
   createdAt: Date;
@@ -19,6 +19,6 @@ export class Followers implements Follower {
   updatedAt: Date;
 
   @Field()
-  deletedAt: boolean;
+  deletedAt: Date;
 
 }

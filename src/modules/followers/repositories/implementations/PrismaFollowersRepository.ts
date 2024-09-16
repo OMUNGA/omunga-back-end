@@ -1,54 +1,102 @@
 import { Injectable } from '@nestjs/common';
 import { FollowersRepository } from '../followersRepositories';
 import { FollowerDTO } from '../../dtos/add-followers.dto';
-import { Followers } from '../../entities/followers';
 import { PrismaService } from '../../../../prisma/prisma.service';
+import { Followers } from '../../entities/followers';
+import { FollowersResult, FollowingResult } from '../../dtos/follow-output';
 
 @Injectable()
 export class PrismaFollowersRepository implements FollowersRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async followUser(data: FollowerDTO): Promise<Followers> {
-    return await this.prisma.follower.create({
+
+  async followUser(userID: string, data: FollowerDTO): Promise<Followers> {
+    const follower = await this.prisma.follow.create({
       data: {
-        userID: data.userID,
-        userTofollowID: data.userIdToFollow,
+        followerId: userID,
+        followingId: data.userToFollowId,
       },
     });
+
+    return follower;
+    
   }
-  async unfollowUser(data: FollowerDTO): Promise<void> {
-    await this.prisma.follower.deleteMany({
+
+  async unfollowUser( followID: string): Promise<{ msg: string }> {
+    await this.prisma.follow.deleteMany({
       where: {
-        userID: data.userID,
-        userTofollowID: data.userIdToFollow,
+       id: followID
       },
     });
+    return { msg: 'User unfollowed successfully' };
+    
   }
   
 
-  async getFollowers(userId: string): Promise<Followers[]> {
-    const followers = await this.prisma.follower.findMany({
-      where: { userID: userId },
+  async getFollowers(userId: string): Promise<FollowersResult[]> {
+    const followers = await this.prisma.follow.findMany({
+      where: { followingId: userId }, 
+      select: {
+        id: true,
+        createdAt: true,
+        deletedAt: true,
+        followerId: true,
+        followingId: true,
+        updatedAt: true,
+        followerUser: {
+          select: {
+            id: true,
+            username: true,
+            name: true,
+            photo: true,
+          },
+        },
+      },
     });
     return followers;
   }
 
-  async getFollowing(userId: string): Promise<Followers[]> {
-    return await this.prisma.follower.findMany({
+  async getAllFollowing(username: string): Promise<FollowingResult[]> {
+    const followings = await this.prisma.follow.findMany({
       where: {
-        userID: userId,
+        followerUser: {
+          username: {
+            equals: username,
+            mode: 'insensitive',
+          },
+        },
+      },
+      select: {
+        id: true,
+        createdAt: true,
+        deletedAt: true,
+        followerId: true,
+        followingId: true,
+        updatedAt: true,
+        followingUser: {
+          select: {
+            id: true,
+            username: true,
+            photo: true,
+            name: true,
+          },
+        },
       },
     });
+
+    return followings
+
   }
 
-  async findOne(userId: string, userIdToFollow: string): Promise<Followers> {
-    const follwer = await this.prisma.follower.findFirst({
+  async findOne(currentUser: string,userToUnfollow: string,): Promise<Followers> {
+    const follower =  await this.prisma.follow.findFirst({
       where: {
-        userID: userId,
-        userTofollowID: userIdToFollow,
+        followerId: currentUser,
+        followingId: userToUnfollow,
       },
     });
 
-    return follwer;
+    return follower
+
   }
 }

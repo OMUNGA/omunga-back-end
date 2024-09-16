@@ -19,7 +19,6 @@ export class AddFollowerResolver {
   @Mutation(() => Followers)
   @UsePipes(ValidationPipe)
   async followUser(@Args('data') data: FollowerDTO, @CurrentUser() user: Users): Promise<Followers> {
-    data.userID = user.id;
-    return await this.addFollowerService.followUser(data);
+    return await this.addFollowerService.followUser(user.id, data);
   }
 }
