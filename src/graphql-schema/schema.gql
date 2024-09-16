@@ -98,17 +98,40 @@ input FindPostInput {
 }
 
 input FollowerDTO {
-  userID: String
-  userIdToFollow: String!
+  userToFollowId: String!
+}
+
+type FollowerUser {
+  id: String!
+  name: String!
+  photo: String!
+  username: String!
 }
 
 type Followers {
   createdAt: DateTime!
-  deletedAt: Boolean!
+  deletedAt: DateTime!
+  followerId: String!
+  followingId: String!
   id: String!
   updatedAt: DateTime!
-  userID: String!
-  userTofollowID: String!
+}
+
+type FollowersResult {
+  followerUser: FollowerUser!
+  id: String!
+}
+
+type FollowingResult {
+  followingUser: FollowingUser!
+  id: String!
+}
+
+type FollowingUser {
+  id: String!
+  name: String!
+  photo: String!
+  username: String!
 }
 
 input LoginDTO {
@@ -204,7 +227,6 @@ type PostsOutput {
 
 type ProfileOutput {
   followers: [Followers!]!
-  following: [Followers!]!
   user: Users!
 }
 
@@ -216,14 +238,14 @@ type Query {
   FindOnePost(id: String!): PostsOutput!
   FindOneUser(userName: String!): UserOutput!
   FindPostByUserID(paginationInput: PaginationInput!, userName: String!): PaginatedPosts!
-  GetFollowing(id: String!): Followers!
+  GetFollowing(username: String!): [FollowingResult!]!
   ProfileUser: ProfileOutput!
   ShowPostAllPostLike(id: String!): Float!
   findAllCommentLikes(commentID: String!): [CommentLikes!]!
   findAllCommentReply(commentID: String!): [CommentReplyResponse!]!
   findAllComments(postID: String!): [CommentResponse!]!
   findAllUsers: [UserOutput!]!
-  getFollowers(id: String!): [Followers!]!
+  getFollowers(userID: String!): [FollowersResult!]!
   searchUsers(searchInput: String!): [UserOutput!]!
 }
 

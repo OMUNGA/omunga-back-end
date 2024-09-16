@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { FollowersRepository } from '../../repositories/followersRepositories';
 import { CreateUsersRepository } from '../../../../modules/account/repositories/createUserRepository';
 import { messages } from '../../../../../shared/errorsMessages';
-import { Followers } from '../../entities/followers';
+import { FollowersResult } from '../../dtos/follow-output';
 
 @Injectable()
 export class GetFollowersService {
@@ -11,7 +11,7 @@ export class GetFollowersService {
     private userRepo: CreateUsersRepository,
   ) {}
 
-  async getFollowers(userId: string): Promise<Followers[]> {
+  async getFollowers(userId: string): Promise<FollowersResult[]> {
       const user = await this.userRepo.findById(userId);
 
       if (!user) {

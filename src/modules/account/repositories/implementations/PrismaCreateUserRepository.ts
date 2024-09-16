@@ -21,6 +21,8 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
       },
     });
 
+    
+
     return user;
   }
   async findByEmail(email: string): Promise<Users> {
@@ -72,17 +74,17 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
       where: { id: userId },
     });
 
-    const followers = await this.prisma.follower.findMany({
-      where: { userTofollowID: userId },
-      include: { user: true },
+    const followers = await this.prisma.follow.findMany({
+      where: { followerId: userId },
+      include: { followingUser: true },
     });
 
-    const following = await this.prisma.follower.findMany({
-      where: { userID: userId },
-      include: { user: true },
+    const following = await this.prisma.follow.findMany({
+      where: { followingId: userId },
+      include: { followingUser: true },
     });
 
-    return { user, followers, following };
+    return { user, followers };
   }
 
   async findByUsername(username: string): Promise<Users> {

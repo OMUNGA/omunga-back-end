@@ -11,5 +11,6 @@ export enum messages {
   InsufficientPermissions = "Permissões insuficientes para acessar este recurso.",
   invalidEmail = 'Email inválido',
   postNotfound = 'Artigo não encontrado',
-  commentNotFound ="Comentário não encontrado."
+  commentNotFound ="Comentário não encontrado.",
+  userNotFound = "Usuário não encontrado"
 }

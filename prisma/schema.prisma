@@ -5,7 +5,7 @@ generator client {
 }
 
 datasource db {
-  provider = "cockroachdb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -18,41 +18,48 @@ enum UserRole {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  name          String
-  username      String
-  email         String         @unique
-  phone         String?
-  password      String
-  bio           String?
-  photo         String?
-  cover         String?
-  address       String?
-  socialMedia   String[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  deletedAt     Boolean        @default(false)
-  commentlike   CommentLike[]
-  comment       Comment[]
-  socialNetwork SocialNetwork?
-  postlike      PostLike[]
-  posts         Post[]
-  Follower      Follower[]
-  role          UserRole       @default(MEMBER)
+  id          String    @id @default(uuid())
+  name        String
+  username    String
+  email       String    @unique
+  phone       String?
+  password    String
+  bio         String?
+  photo       String?
+  cover       String?
+  address     String?
+  socialMedia String[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  role        UserRole  @default(MEMBER)
+  deletedAt   Boolean   @default(false)
+  posts       Post[]
+  comments    Comment[]
+
+  followers     Follow[]       @relation("FollowingUser")
+  followings    Follow[]       @relation("FollowerUser")
+  SocialNetwork SocialNetwork?
   CommentReply  CommentReply[]
+  PostLike      PostLike[]
+  CommentLike   CommentLike[]
 
   @@map("users")
 }
 
-model Follower {
-  id             String   @id @default(uuid())
-  userTofollowID String
-  userID         String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  deletedAt      Boolean  @default(false)
-  user           User     @relation(fields: [userID], references: [id])
+model Follow {
+  id String @id @default(uuid())
 
+  followerId   String
+  followerUser User   @relation("FollowerUser", fields: [followerId], references: [id], onDelete: Cascade)
+
+  followingId   String
+  followingUser User   @relation("FollowingUser", fields: [followingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  @@unique([followerId, followingId])
   @@map("followers")
 }
 

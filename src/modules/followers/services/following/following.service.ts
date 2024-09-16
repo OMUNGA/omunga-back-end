@@ -10,13 +10,13 @@ export class FollowingService {
     private userRepo: CreateUsersRepository,
    ) {}
 
-  async getFollowing(userID: string) {
+  async getFollowing(username: string) {
     try {
-      const user = await this.userRepo.findById(userID);
+      const user = await this.userRepo.findByUsername(username);
       if (!user) {
         throw new UnauthorizedException(messages.Unauthenticated);
       }
-      const following = await this.followerRepo.getFollowing(userID);
+      const following = await this.followerRepo.getAllFollowing(username);
       return following;
     } catch (error) {
       throw error;

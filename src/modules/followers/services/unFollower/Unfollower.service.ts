@@ -11,13 +11,14 @@ export class UnFollowerService {
     private userRepo: CreateUsersRepository,
   ) {}
 
-  async unFollower(data: FollowerDTO) {
+  async unFollower( currentUser: string, userToUnfollow: string,) {
     try {
-      const user = await this.userRepo.findById(data.userID);
-      if (!user) {
+      const followId = await this.followerRepo.findOne(currentUser, userToUnfollow)
+
+      if (!followId) {
         throw new UnauthorizedException(messages.Unauthenticated);
       }
-      return this.followerRepo.unfollowUser(data);
+      return this.followerRepo.unfollowUser(followId.id);
     } catch (error) {
       throw error;
     }
