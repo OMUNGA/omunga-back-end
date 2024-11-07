@@ -297,8 +297,8 @@ type UserOutput {
   createdAt: DateTime!
   deletedAt: Boolean!
   email: String
-  followers: Float!
-  followings: Float!
+  followers: Float
+  followings: Float
   id: String!
   name: String
   phone: String
