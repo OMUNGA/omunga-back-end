@@ -9,7 +9,6 @@ import { PrismaService } from '../../../../prisma/prisma.service';
 @Injectable()
 export class PrismaCreateUserRepository implements CreateUsersRepository {
   constructor(private readonly prisma: PrismaService) {}
- 
 
   async create(data: CreateUserDTO): Promise<Users> {
     const user = await this.prisma.user.create({
@@ -20,8 +19,6 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
         password: data.password,
       },
     });
-
-    
 
     return user;
   }
@@ -60,7 +57,7 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
         cover: data.cover,
         photo: data.photo,
         address: data.address,
-        socialMedia: data.socialMedia
+        socialMedia: data.socialMedia,
       },
     });
   }
@@ -100,18 +97,18 @@ export class PrismaCreateUserRepository implements CreateUsersRepository {
       where: {
         OR: [
           {
-            username: {contains: username}
+            username: { contains: username },
           },
           {
-            name: {contains: username}
-          }
-        ]
+            name: { contains: username },
+          },
+        ],
       },
       include: {
-        posts: true
-      }
-    })
+        posts: true,
+      },
+    });
 
-    return user
+    return user;
   }
 }

@@ -27,13 +27,13 @@ export class UserOutput {
   @Field({ nullable: true })
   cover: string;
 
-  @Field()
+  @Field({ nullable: true })
   followers: number;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   role: UserRole;
 
-  @Field()
+  @Field({ nullable: true })
   followings: number;
 
   @Field()
